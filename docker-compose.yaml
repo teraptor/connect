@@ -1,0 +1,7 @@
+version: '3'
+services:
+  frontend:
+    image: vuejs
+    ports:
+      - "8080:8080"
+    restart: always
