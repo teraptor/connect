@@ -7,7 +7,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: import('../views/BenchView.vue'),
+      component: import('../views/DefaultView.vue'),
       meta: {
         layout: 'Default',
       },
