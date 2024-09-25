@@ -1,9 +1,18 @@
+<script>
+  import TagsInput from "./components/TagsInput.vue";
+  export default {
+    components: {
+      TagsInput
+    }
+  }
+</script>
 <template>
-    <v-app id="app">
+    <!-- <TagsInput /> -->
+    <!-- <v-app id="app"> -->
       <!-- Add this line: you don't need to import TheAppLayout
          because it is already registered as explained earlier  -->
       <TheAppLayout />
-    </v-app>
+    <!-- </v-app> -->
   </template>
   
   <style scoped>

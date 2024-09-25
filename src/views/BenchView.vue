@@ -1086,6 +1086,7 @@ let candidate = [
         "cv": null,
         "company": "Cosysoft"
     },
+    
 ];
 
 

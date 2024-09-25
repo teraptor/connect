@@ -19,7 +19,7 @@ const router = createRouter({
       name: 'bench',
       component: BenchView,
       meta: {
-        layout: 'Default',
+        layout: 'App',
       },
     },
   ]
