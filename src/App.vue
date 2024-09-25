@@ -1,8 +1,8 @@
 <script>
-  import TagsInput from "./components/TagsInput.vue";
+  // import TagsInput from "/components/TagsInput.vue";
   export default {
     components: {
-      TagsInput
+      // TagsInput
     }
   }
 </script>
