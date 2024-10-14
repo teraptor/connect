@@ -7,11 +7,11 @@ import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/reset.css';
 import { registerLayouts } from './layouts/register';
 
-const app = createApp(App);
+const application = createApp(App);
 
-app.use(Antd);
-app.use(createPinia());
-app.use(router);
-registerLayouts(app);
+application.use(Antd);
+application.use(createPinia());
+application.use(router);
+registerLayouts(application);
 
-app.mount('#app');
+application.mount('#app');

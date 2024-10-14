@@ -1,19 +1,27 @@
 <script>
-import { defineComponent } from "vue";
-import Header from "../components/header/Head.vue";
+import { computed, defineComponent } from "vue"
+import { useRoute } from "vue-router"
+
+import Head from "@/components/header/Head.vue";
+import Footer from "@/components/footer/Footer.vue";
 
 export default defineComponent({
     name: "TheDefaultLayout",
+    components: {
+        Head,
+        Footer,
+    },
 });
 </script>
 
 <template>
-    <Header />
-    <main>
-        <div class="container">
-            <slot />
-        </div>
-    </main>
+    <header> 
+       <Head />
+    </header>
+    <div class="container">
+       <slot />
+    </div>
+    <Footer />
 </template>
 
 <style>

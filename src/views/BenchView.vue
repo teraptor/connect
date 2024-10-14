@@ -12,13 +12,11 @@
     </template>
     
   </a-table>
-  <Footer />
 </template>
 
 <script>
 import axios from 'axios';
 import candidatesAPI from "@/api/candidates/candidates"
-import Footer from '@/components/footer/Footer.vue';
 
 let candidate = [];
 const columns = [

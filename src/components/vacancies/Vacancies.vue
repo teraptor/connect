@@ -32,12 +32,9 @@
             <button @click="nextPage" :disabled="currentPage === totalPages">Вперед</button>
         </div>
     </div>
-    <Footer />
 </template>
     
 <script>
-import Footer from '../footer/Footer.vue';
-
     export default {
     name: 'VacanciesList',
     data() {
