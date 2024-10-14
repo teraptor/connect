@@ -1,42 +1,73 @@
-<script setup>
-</script>
-
 <template>
-    <footer>
-        <div class="footer">
-            <div class="container">
-                <div class="social">
-                    <div class="logo">staffconnect</div>
-                    <div class="date">2024</div>
-                </div>
-                <div class="footer-menu">
-                    <nav>
-                        <a href="#" class="nav__link"><b>Все специалисты</b></a>
-                        <a href="#" class="nav__link">Системные аналитики</a>
-                        <a href="#" class="nav__link">Front-end разработчики</a>
-                        <a href="#" class="nav__link">Back-end разработчики</a>
-                        <a href="#" class="nav__link">UX/UI дизайнеры</a>
-                        <a href="#" class="nav__link">Ручные тестировщики</a>
-                        <a href="#" class="nav__link">Менеджеры проектов</a>
-                        <a href="#" class="nav__link">Системные архитекторы</a>
-                    </nav>
-                    <nav>
-                        <a href="#" class="nav__link">О платформе</a>
-                        <a href="#" class="nav__link">Стать партнером</a>
-                        <a href="#" class="nav__link">Сейчас ищут</a>
-                        <a href="#" class="nav__link">FAQ</a>
-                        <a href="#" class="nav__link">Контакты</a>
-                        <a href="#" class="nav__link">Бенчи компаний</a>
-                    </nav>
-                </div>
-                <div class="contacts">
-                    <ul>
-                        <li>info@staffconnect.ru</li>
-                        <li>8 - 800 - 000 - 00 - 00</li>
-                    </ul>
-                </div>
-                <div class="down-footer"></div>
-            </div>
+    <footer class="footer">
+        <div class="footer-column">
+         <!-- <img src="logo.png" alt="Company Logo" class="logo" /> -->
+         <div class="social-links">
+            <a href="#" target="_blank">Facebook</a>
+            <a href="#" target="_blank">Twitter</a>
+            <a href="#" target="_blank">LinkedIn</a>
+         </div>
+        </div>
+        <div class="footer-column">
+         <p><strong>Все специалисты</strong></p>
+         <p>Системные аналитики</p>
+         <p>Frontend-разработчики</p>
+         <p>Back-end-разработчики</p>
+         <p>Дизайнеры</p>
+         <p>Тестировщики</p>
+         <p>Менеджеры проектов</p>
+         <p>Системные архитекторы</p>
+        </div>
+        <div class="footer-column">
+         <p>О платформе</p>
+         <p>Стать партнером</p>
+         <p>Запросы клиентов</p>
+         <p>FAQ</p>
+         <p>Контакты</p>
+         <p>Блог</p>
+         <p>Карьера</p>
+        </div>
+        <div class="footer-column">
+         <p><strong>feedback@staffconnect.ru</strong></p>
+         <p><strong>Телефон: 8 000 000 00 00</strong></p>
+         <p>Подписка на новости</p>
+         <p>Политика обработки ПД</p>
+         <p>Условия использования сайта</p>
+         <p>Договор присоединения</p>
         </div>
     </footer>
-</template>
+    </template>
+    
+    <style scoped>
+    .footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #f8f8f8;
+    }
+    
+    .footer-column {
+    flex: 1;
+    margin: 0 10px;
+    }
+    
+    .logo {
+    width: 150px;
+    margin-bottom: 10px;
+    }
+    
+    .social-links a {
+    display: block;
+    margin-bottom: 5px;
+    text-decoration: none;
+    color: #333;
+    }
+    
+    .footer-column p {
+    margin: 5px 0;
+    }
+    
+    .footer-column p strong {
+    font-weight: bold;
+    }
+    </style>
