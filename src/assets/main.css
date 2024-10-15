@@ -142,28 +142,3 @@ a {
     box-sizing: border-box;
     justify-content: center;
 }
-
-/**
-===== footer
-*/
-.footer {
-    display: flex;
-    flex-direction: column;
-    margin-top: auto;
-    background-color: var(--gray);
-}
-.social {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.footer-menu {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.contacts {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}

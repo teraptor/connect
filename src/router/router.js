@@ -1,8 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import BenchView from '@/views/BenchView.vue';
-import DefaultView from '@/views/DefaultView.vue';
 import Vacancies from '@/components/vacancies/Vacancies.vue';
-import Vacancy from '@/components/vacancy/Vacancy.vue';
+import Vacancy from '@/components/vacancies/vacancy/Vacancy.vue';
 import Candidate from '@/components/candidate/candidate.vue';
 import RegisterView from '@/views/RegisterView.vue';
 import LoginView from '@/views/LoginView.vue';
@@ -10,11 +9,30 @@ import RecoveryView from '@/views/RecoveryView.vue';
 import TheNotFoundLayout from '@/layouts/TheNotFoundLayout.vue';
 import authMiddleware from '@/middleware/auth';
 import logMiddleware from '@/middleware/log';
+import ForecastChart from '@/views/ForecastChart.vue';
+import VizardView from '@/views/VizardView.vue';
 
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: '/vizard',
+      name: 'vizard',
+      component: VizardView,
+      meta: {
+        layout: 'Default',
+      },
+    },
+    {
+      path: '/forecast',
+      name: 'forecast',
+      component: ForecastChart,
+      meta: {
+        layout: 'Default',
+      },
+    },
+
     {
       path: '/:pathMatch(.*)*',
       name: '404',

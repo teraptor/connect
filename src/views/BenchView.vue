@@ -3,7 +3,7 @@
     <p class="ad_head">Создай бенч своей компании и делись им!</p>
     <p class="ad_offer">Уже более 394 IT‑компаний воспользовались бесплатным бенчем</p>
   </div> -->
-  <a-table :columns="columns" :data-source="result">
+  <a-table :columns="columns" :data-source="result" @change="onChange">
     <template #bodyCell="{ column }">
       
       <template v-if="column.key === 'operation'">
@@ -17,10 +17,36 @@
 <script>
 import axios from 'axios';
 import candidatesAPI from "@/api/candidates/candidates"
-
+/**
+ * variables for table
+ */
 let candidate = [];
+
+
 const columns = [
-  { title: 'Стек', dataIndex: 'stack', key: '3', width: 100 },  
+  { 
+    title: 'Стек',
+    dataIndex: 'stack',
+    key: '3', 
+    width: 100, 
+    filters: [
+      {
+        text: 'Joe',
+        value: 'Joe',
+      },
+      {
+        text: 'Category 1',
+        value: 'Category 1',
+      },
+      {
+        text: 'Category 2',
+        value: 'Category 2',
+      },
+    ],
+    filterMode: 'tree', 
+    filterSearch: true,
+    onFilter: (value, record) => record.name.startsWith(value),
+  },  
   { title: 'Грейд', dataIndex: 'greid', key: '1', width: 100 },
   { title: 'ФИО', width: 100, dataIndex: 'name', key: 'name'},
   { title: 'Город', dataIndex: 'city', key: '2', width: 100 },

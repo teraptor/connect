@@ -38,36 +38,38 @@
     </footer>
     </template>
     
-    <style scoped>
+<style scoped>
     .footer {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    background-color: #f8f8f8;
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+        background-color: #f8f8f8;
+        flex-wrap: wrap; /* Позволяет колонкам переноситься на новую строку при необходимости */
     }
     
     .footer-column {
-    flex: 1;
-    margin: 0 10px;
+        flex-grow: 1;
+        margin: 0 10px;
+        max-width: 200px; /* Минимальная ширина для каждой колонки */
     }
     
     .logo {
-    width: 150px;
-    margin-bottom: 10px;
+        width: 150px;
+        margin-bottom: 10px;
     }
     
     .social-links a {
-    display: block;
-    margin-bottom: 5px;
-    text-decoration: none;
-    color: #333;
+        display: block;
+        margin-bottom: 5px;
+        text-decoration: none;
+        color: #333;
     }
     
     .footer-column p {
-    margin: 5px 0;
+        margin: 5px 0;
     }
     
     .footer-column p strong {
-    font-weight: bold;
+        font-weight: bold;
     }
-    </style>
+</style>

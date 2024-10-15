@@ -18,9 +18,9 @@
         <span v-if="recoveryError" class="error">Ошибка при восстановлении пароля</span>
        </form>
    </div>
-   </template>
+</template>
    
-   <script>
+<script>
    export default {
    name: 'PasswordRecovery',
    data() {
@@ -56,9 +56,9 @@
        },
    },
    };
-   </script>
+</script>
    
-   <style scoped>
+<style scoped>
    .password-recovery-form {
    max-width: 400px;
    margin: 0 auto;
@@ -104,4 +104,4 @@
    background-color: #cccccc;
    cursor: not-allowed;
    }
-   </style>
+</style>

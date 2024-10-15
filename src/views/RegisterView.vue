@@ -51,9 +51,9 @@
        <button type="submit" :disabled="!isFormValid" class="register-btn">Зарегистрироваться</button>
       </form>
   </div>
-  </template>
+</template>
   
-  <script>
+<script>
   import { mask } from 'vue-the-mask';
   
   export default {
@@ -113,9 +113,9 @@
       },
   },
   };
-  </script>
-  
-  <style scoped>
+</script>
+
+<style scoped>
   .registration-form {
   max-width: 400px;
   margin: 0 auto;
@@ -160,4 +160,4 @@
   background-color: #cccccc;
   cursor: not-allowed;
   }
-  </style>
+</style>
