@@ -14,7 +14,8 @@ import VizardView from '@/views/VizardView.vue';
 
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(),
+  mode: 'history',
   routes: [
     {
       path: '/vizard',

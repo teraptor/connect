@@ -24,8 +24,8 @@ export default defineComponent({
                 <nav class="nav">
                     <a href="#" class="nav__link current">Почему мы?</a>
                     <a href="#" class="nav__link">Как это работает?</a>
-                    <a href="/vacancies" class="nav__link">Вакансии</a>
-                    <a href="/bench" class="nav__link">Бенчмарк</a>
+                    <a href="" class="nav__link">Вакансии</a>
+                    <router-link to="register" class="nav__link">Бенчмарк</router-link>
                     <AuthComponent />
                 </nav>
             </div>

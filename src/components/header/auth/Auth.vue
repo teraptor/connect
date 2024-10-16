@@ -6,6 +6,6 @@ export default defineComponent({
 </script>
 
 <template>
-    <a href="/login" class="btn btn_light _ml">Вход</a>
-    <a href="/register" class="btn btn_accent _icon">Регистрация</a>
+    <router-link to="login" class="btn btn_light _ml">Вход</router-link>
+    <router-link to="register" class="btn btn_accent _icon">Регистрация</router-link>
 </template>
