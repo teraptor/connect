@@ -7,7 +7,7 @@ export default defineComponent({
 
 
 <template>
-    <router-link to="home" class="header__logo">
+    <router-link to="/" class="header__logo">
         <img src="@/assets/logo.png" class="logo" alt="StaffConnect" width="45%">
         <!-- <span class="logo">StaffConnect</span> -->
     </router-link>

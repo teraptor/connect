@@ -44,7 +44,7 @@ const router = createRouter({
     },
     {
       path: '/',
-      name: 'home',
+      name: '/',
       component: BenchView,
       meta: {
         layout: 'Default',
