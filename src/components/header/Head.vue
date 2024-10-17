@@ -22,9 +22,9 @@ export default defineComponent({
            <LogoComponent />
             <div class="header__nav">
                 <nav class="nav">
-                    <a href="#" class="nav__link current">Почему мы?</a>
-                    <a href="#" class="nav__link">Как это работает?</a>
-                    <a href="" class="nav__link">Вакансии</a>
+                    <router-link to="#" class="nav__link">Почему мы?</router-link>
+                    <router-link to="#" class="nav__link">Как это работает?</router-link>
+                    <router-link to="vacancies" class="nav__link">Вакансии</router-link>
                     <router-link to="register" class="nav__link">Бенчмарк</router-link>
                     <AuthComponent />
                 </nav>

@@ -32,7 +32,7 @@
        <button type="submit" :disabled="!isFormValid" class="login-btn">Войти</button>
        <span v-if="loginError" class="error">Неверный email или пароль</span>
       </form>
-      <a href="/recovery" class="forgot-password">Забыли пароль?</a>
+      <router-link to="recovery" class="forgot-password">Забыли пароль?</router-link>
   </div>
   </template>
   

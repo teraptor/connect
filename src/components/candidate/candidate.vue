@@ -4,12 +4,10 @@
             <div class="breadcrumb-container">
              <div class="breadcrumb-list">
                 <div class="breadcrumb-item">
-                 <a href="/" class="link">
-                    Главная
-                 </a>
+                 <router-link to="home" class="link">Вход</router-link>
                 </div>
                 <div class="breadcrumb-item">
-                 <a href="/catalog-specialists/" class="link active">
+                 <router-link to="bench" class="link active">
                     Каталог ИТ-специалистов
                  </a>
                 </div>
