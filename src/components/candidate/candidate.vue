@@ -9,7 +9,7 @@
                 <div class="breadcrumb-item">
                  <router-link to="bench" class="link active">
                     Каталог ИТ-специалистов
-                 </a>
+                 </router-link >
                 </div>
              </div>
             </div>
