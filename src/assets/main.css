@@ -15,12 +15,14 @@ root
     --dark: #000;
     --green: #41ba74;
     --gray: #f3f3f3;
+    --light-gray: #fdfdfd;
     --tr: 0.2s;
 }
 
 body {
     font-family: "Roboto", sans-serif;
     font-optical-sizing: auto;
+    background-color: var(--light-gray);
 } 
 main {
     min-height: 100vh;
@@ -59,7 +61,7 @@ a {
 ===== navigation
 */
 .header {
-    background-color: var(--white);
+    background-color: var(--light-gray);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -68,21 +70,28 @@ a {
 }
 .header__logo {
     color: var(--blue);
-    padding-left: 10px;
     font-size: 900;
 }
 .logo {
     font-size: 28px;
+    width: 45%;
 }
 .nav {
     display: flex;
-    gap: 24px;
+    gap: 22px;
     align-items: center;
     font-size: 15px;
     font-weight: 300;
+    display: flex;
+    justify-content: space-between; /* Распределение пространства между элементами */
+    align-items: center;
 }
 .nav__link {
     color: var(--dark);
+    padding: 10px 20px; /* Добавляем отступы для создания области вокруг текста */
+    text-decoration: none; /* Убираем подчеркивание у ссылок */
+    color: inherit; /* Наследуем цвет из родительского элемента */
+    flex-grow: 1; /* Растягиваем каждый пункт меню по всей ширине */
 }
 .nav__link:hover {
     color: var(--blue);

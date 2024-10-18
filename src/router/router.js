@@ -6,17 +6,34 @@ import Candidate from '@/components/candidate/candidate.vue';
 import RegisterView from '@/views/RegisterView.vue';
 import LoginView from '@/views/LoginView.vue';
 import RecoveryView from '@/views/RecoveryView.vue';
+import CVView from '@/views/CVView.vue';
 import TheNotFoundLayout from '@/layouts/TheNotFoundLayout.vue';
 import authMiddleware from '@/middleware/auth';
-import logMiddleware from '@/middleware/log';
 import ForecastChart from '@/views/ForecastChart.vue';
 import VizardView from '@/views/VizardView.vue';
+import MultiUpload from '@/views/MultiUpload.vue';
 
 
 const router = createRouter({
   history: createWebHistory(),
   mode: 'history',
   routes: [
+    {
+      path: '/cv',
+      name: 'cv',
+      component: CVView,
+      meta: {
+        layout: 'Default',
+      },
+    },
+    {
+      path: '/multiupload',
+      name: 'multi',
+      component: MultiUpload,
+      meta: {
+        layout: 'Default',
+      },
+    },
     {
       path: '/vizard',
       name: 'vizard',
@@ -80,7 +97,6 @@ const router = createRouter({
       component: BenchView,
       meta: {
         layout: 'Default',
-        // middleware: [authMiddleware, logMiddleware],
       },
     },
     {
@@ -111,22 +127,6 @@ const router = createRouter({
   ]
 })
 
-router.beforeEach((to, from, next) => {
-  if (!to.meta.middleware) {
-      console.log(to.meta.middleware)
-      return next()
-  }
-  const middleware = to.meta.middleware
-  const context = {
-      to,
-      from,
-      next,
-      // store
-  }
-  return middleware[0]({
-      ...context,
-      // next: middlewarePipeline(context, middleware, 1)
-  })
-})
+router.beforeEach(authMiddleware); // Регистрируйте middleware
 
 export default router

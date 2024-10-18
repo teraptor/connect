@@ -38,7 +38,7 @@
   
   <script>
    import { ref } from 'vue';
-   import { AuthStore } from '../stores/auth';
+   import { useAuthStore } from '../stores/auth';
 
    export default {
       name: 'LoginForm',

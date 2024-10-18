@@ -1,21 +1,38 @@
-import {defineStore} from 'pinia';
+import { defineStore } from 'pinia';
+// import axios from 'axios'; // Добавьте axios для запросов к API
 
-export const AuthStore = defineStore('auth', {
-    state: () => ({
-        user: null,
-        isAuth: false,
-    }),
-    actions: {
-        login(userData) {
-            this.user = userData;
-            this.isAuth = true;
-        },
-        logout() {
-            this.user = null;
-            this.isAuth = false;
-        }
+export const useAuthStore = defineStore('auth', {
+  state: () => ({
+        token: localStorage.getItem('token') || "a",
+        user: {name:"Kolya"},
+  }),
+  actions: {
+    async login(credentials) {
+      try {
+        // const response = await axios.post('/api/login', credentials); // Замените на URL вашего API
+        // this.setToken(response.data.token);
+        // this.setUser(response.data.user);
+
+        this.setToken('aaa');
+        this.setUser('test user');
+
+
+      } catch (error) {
+        console.error('Ошибка авторизации:', error);
+        // Обработайте ошибку авторизации
+      }
     },
-    getters: {
-        getUser: (state) => state.user
-    }
-})
+    setToken(token) {
+      this.token = token;
+      localStorage.setItem('token', token);
+    },
+    clearToken() {
+      this.token = null;
+      this.user = null;
+      localStorage.removeItem('token');
+    },
+    async setUser(userData) {
+      this.user = userData;
+    },
+  },
+});
