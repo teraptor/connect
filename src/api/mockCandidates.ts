@@ -1,8 +1,5 @@
-import axios from 'axios';
-
 export default {
-    async getCandidates() {
-        // const data = await axios.get("https://66e8061fb17821a9d9db03c8.mockapi.io/api/v1/candidate");  
+    async getCandidates() { 
         let data = [
             {
                 key: 1,

@@ -1,4 +1,5 @@
 <template>
+  IndexView (Wrapper around different pages)
   <RouterView />
 </template>
 

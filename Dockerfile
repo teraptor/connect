@@ -1,14 +1,19 @@
 # build stage
-FROM node:lts-alpine as build-stage
+FROM node:20-slim AS build_stage
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
+COPY package.json ./
+
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+
+RUN pnpm install
 COPY . .
-RUN npm run build
+RUN pnpm run build
 
 # production stage
-FROM nginx:stable-alpine as production-stage
-COPY --from=build-stage /app/dist /usr/share/nginx/html
+FROM nginx:stable-alpine AS production_stage
+COPY --from=build_stage /app/dist /usr/share/nginx/html
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
