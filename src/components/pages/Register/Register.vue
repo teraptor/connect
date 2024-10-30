@@ -1,14 +1,14 @@
 <template>
   <div :class="$style.wrapper">
     <img src="/logo.png" alt="logo" />
-    <div class="text-3xl max-sm:text-center">Авторизация</div>
-    <Card title="Форма авторизации">
-      <LoginForm />
+    <div class="text-3xl max-sm:text-center">Регистрация</div>
+    <Card title="Форма регистрации">
+      <RegisterForm />
     </Card>
     <div class="flex items-center justify-center">
-      <span> У вас еще нет аккаунта?</span>
-      <Button type="link" class="text-base" @click="moveToRegister">
-        Зарегистрироваться
+      <span>Уже есть аккаунт?</span>
+      <Button type="link" class="text-base" @click="moveToLogin">
+        Войти
       </Button>
     </div>
   </div>
@@ -16,14 +16,14 @@
 
 <script setup lang="ts">
 import Card from '@/components/ui/Card/Card.vue'
-import LoginForm from '@/components/pages/Login/components/LoginForm.vue'
+import RegisterForm from '@/components/pages/Register/components/RegisterForm.vue'
 import Button from '@/components/ui/Button/Button.vue'
 import { RouteNames } from '@/router/routes/routeNames'
 
 const router = useRouter()
 
-const moveToRegister = () => {
-  router.push({ name: RouteNames.MAIN.REGISTER })
+const moveToLogin = () => {
+  router.push({ name: RouteNames.MAIN.LOGIN })
 }
 </script>
 

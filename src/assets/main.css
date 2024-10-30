@@ -17,10 +17,9 @@ root
   --tr: 0.2s;
 }
 
-body {
+* {
   font-family: 'Roboto', sans-serif;
   font-optical-sizing: auto;
-  background-color: var(--light-gray);
 }
 main {
   min-height: 100vh;

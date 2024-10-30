@@ -9,6 +9,11 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
     component: () => import('@/pages/Login/Login.vue'),
   },
   {
+    path: `/${RouteNames.MAIN.REGISTER}`,
+    name: RouteNames.MAIN.REGISTER,
+    component: () => import('@/pages/Register/Register.vue'),
+  },
+  {
     path: '/',
     name: RouteNames.MAIN.INDEX,
     component: IndexView,
