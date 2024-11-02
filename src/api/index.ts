@@ -2,7 +2,6 @@ import ky from 'ky'
 
 const api = ky.create({
   prefixUrl: import.meta.env.VITE_BACKEND_URL,
-  headers: { 'Content-Type': 'application/json' },
   retry: 0,
   hooks: {
     afterResponse: [
