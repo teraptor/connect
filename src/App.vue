@@ -1,7 +1,20 @@
 <template>
-  <RouterView />
+  <ConfigProvider :locale="ru_RU">
+    <RouterView />
+  </ConfigProvider>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useHead } from '@unhead/vue'
+import { ConfigProvider } from 'ant-design-vue'
+import ru_RU from 'ant-design-vue/es/locale/ru_RU'
+
+const route = useRoute()
+const currentRouteTitle = computed(() => route.meta?.title || '')
+
+useHead({
+  title: () => `Staffconnect | ${currentRouteTitle.value}`,
+})
+</script>
 
 <style scoped></style>
