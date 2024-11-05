@@ -19,7 +19,7 @@ interface IProps {
   name?: string
   layout?: 'vertical' | 'inline' | 'horizontal'
   disabled?: boolean
-  rules?: Record<string, Rule[]>
+  rules: Record<string, Rule[]>
   labelCol?: { span: number }
   wrapperCol?: { span: number }
 }
