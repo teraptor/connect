@@ -65,6 +65,14 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
           title: 'Бенчмарк',
         },
       },
+      {
+        path: `/${RouteNames.MAIN.MAIN_PAGE.children.CANDIDATES}`,
+        name: RouteNames.MAIN.MAIN_PAGE.children.CANDIDATES,
+        component: () => import('@/pages/Candidates/Candidates.vue'),
+        meta: {
+          title: 'Кандидаты',
+        },
+      }
     ],
   },
 ]
