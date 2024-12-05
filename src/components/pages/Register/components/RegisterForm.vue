@@ -7,13 +7,10 @@
     :wrapper-col="{ span: 16 }"
     name="register-form"
   >
-    <FormItem
-      v-bind="validateInfos?.['phone_number']"
-      label="Телефон"
-      name="phone_number"
-    >
+    {{ registerFormState }}
+    <FormItem v-bind="validateInfos?.['phone']" label="Телефон" name="phone">
       <TextInput
-        v-model:value="registerFormState.phone_number"
+        v-model:value="registerFormState.phone"
         placeholder="+79119999999"
       />
     </FormItem>
@@ -23,15 +20,30 @@
     <FormItem v-bind="validateInfos?.['email']" label="Email" name="email">
       <TextInput v-model:value="registerFormState.email" />
     </FormItem>
+    <FormItem v-bind="validateInfos?.['tg']" label="Ник в Telegram" name="tg">
+      <TextInput v-model:value="registerFormState.tg" />
+    </FormItem>
     <FormItem
-      v-bind="validateInfos?.['tgname']"
-      label="Ник в Telegram"
-      name="tgname"
+      v-bind="validateInfos?.['password']"
+      label="Пароль"
+      name="password"
     >
-      <TextInput v-model:value="registerFormState.tgname" />
+      <TextInput v-model:value="registerFormState.password" />
+    </FormItem>
+    <FormItem
+      v-bind="validateInfos?.['repeatPassword']"
+      label="Повторите пароль"
+      name="repeatPassword"
+    >
+      <TextInput v-model:value="registerFormState.repeatPassword" />
     </FormItem>
     <FormItem :wrapper-col="{ span: 32 }">
-      <Button :disabled="formIsEmpty" type="primary" block @click="validate">
+      <Button
+        :disabled="disableRegisterButton"
+        type="primary"
+        block
+        @click="validate"
+      >
         Зарегистрироваться
       </Button>
     </FormItem>
@@ -46,8 +58,13 @@ import Button from '@/components/ui/Button/Button.vue'
 import { useRegister } from '../composables/useRegister'
 
 const registerFormRef = useTemplateRef('registerForm')
-const { registerFormState, rules, validate, formIsEmpty, validateInfos } =
-  useRegister(registerFormRef)
+const {
+  registerFormState,
+  rules,
+  validate,
+  disableRegisterButton,
+  validateInfos,
+} = useRegister(registerFormRef)
 </script>
 
 <style scoped></style>

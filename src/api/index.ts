@@ -3,6 +3,7 @@ import ky from 'ky'
 const api = ky.create({
   prefixUrl: import.meta.env.VITE_BACKEND_URL,
   retry: 0,
+  method: 'post',
   hooks: {
     afterResponse: [
       (request, options, response) => {

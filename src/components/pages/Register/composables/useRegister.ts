@@ -1,29 +1,58 @@
 import type { ShallowRef } from 'vue'
-import type { IRegisterFormState, TRegisterRules } from '../types/registerForm'
 import Form from '@/components/ui/Form/Form.vue'
 import { message } from 'ant-design-vue'
+import { registerUser } from '@/api/auth'
+import type { IUser } from '@/entities/user'
+import type { Rule } from 'ant-design-vue/es/form'
+
+type EditableUser = Omit<IUser, 'id'> & { repeatPassword: string }
 
 export const useRegister = (
   formRef: Readonly<ShallowRef<InstanceType<typeof Form> | null>>,
 ) => {
-  const registerFormState = reactive<IRegisterFormState>({
-    phone_number: '',
+  const registerFormState = reactive<EditableUser>({
+    phone: '',
     inn: '',
     email: '',
-    tgname: '',
+    tg: '',
+    password: '',
+    repeatPassword: '',
   })
 
-  const formIsEmpty = computed(() => {
+  const disableRegisterButton = computed(() => {
     return (
-      !registerFormState.phone_number ||
+      !registerFormState.phone ||
       !registerFormState.inn ||
       !registerFormState.email ||
-      !registerFormState.tgname
+      !registerFormState.tg ||
+      !registerFormState.password ||
+      !registerFormState.repeatPassword
     )
   })
 
-  const rules = reactive<TRegisterRules>({
-    phone_number: [
+  const rules = reactive<Record<keyof EditableUser, Rule[]>>({
+    password: [
+      {
+        required: true,
+        message: 'Пароль обязателен',
+        trigger: ['change', 'blur'],
+      },
+    ],
+    repeatPassword: [
+      {
+        required: true,
+        message: 'Повторите пароль обязательно',
+        trigger: ['change', 'blur'],
+      },
+      {
+        validator: (rule: Rule, value: string) => {
+          if (value === registerFormState.password) return Promise.resolve()
+          return Promise.reject('Пароли не совпадают')
+        },
+        trigger: ['change'],
+      },
+    ],
+    phone: [
       {
         required: true,
         message: 'Телефон обязателен',
@@ -46,11 +75,6 @@ export const useRegister = (
         message: 'ИНН обязателен',
         trigger: ['change', 'blur'],
       },
-      {
-        type: 'number',
-        message: 'ИНН состоит только из цифр',
-        trigger: ['change', 'blur'],
-      },
     ],
     email: [
       {
@@ -64,7 +88,7 @@ export const useRegister = (
         trigger: ['change', 'blur'],
       },
     ],
-    tgname: [
+    tg: [
       {
         required: true,
         message: 'Telegram обязателен',
@@ -77,17 +101,19 @@ export const useRegister = (
     if (!formRef.value) return
     formRef.value
       .validate()
-      .then(() => {
-        console.log('Форма прошла валидацию')
+      .then(async () => {
+        await registerUser(registerFormState)
+        message.success('Пользователь зарегестрирован!')
       })
-      .catch(() => {
+      .catch(e => {
+        console.error(e)
         message.error('Проверьте правильность заполнения формы')
       })
   }
   return {
     registerFormState,
     rules,
-    formIsEmpty,
+    disableRegisterButton,
     validate,
     validateInfos: formRef.value?.validateInfos,
   }
