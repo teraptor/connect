@@ -17,16 +17,19 @@ export interface Candidate {
 export const useCandidatesStore = defineStore('candidates', {
   state: () => ({
     candidates: [] as Candidate[],
-    selectedCandidate: null as Candidate | null
+    selectedCandidate: null as Candidate | null,
   }),
   actions: {
-    async getCandidates(): Promise<any> {
+    async getCandidates(): Promise<void> {
       try {
-        const response = await axios.get(GET_CANDIDATES)
-        this.candidates = response.data.items
+        const response = await axios.get(GET_CANDIDATES);
+        this.candidates = response.data.items;
       } catch (error) {
-        console.error('Ошибка при запросе данных:', error)
+        console.error('Ошибка при запросе данных:', error);
       }
-    }
-  }
-})
+    },
+    selectCandidate(id: number): void {
+      this.selectedCandidate = this.candidates.find((c) => c.id === id) || null;
+    },
+  },
+});

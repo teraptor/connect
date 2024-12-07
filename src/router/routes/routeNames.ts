@@ -10,7 +10,8 @@ export const RouteNames = {
         HOW_IT_WORKS: 'how_it_works',
         VACANCIES: 'vacancies',
         BENCHMARK: 'benchmark',
-        CANDIDATES: 'candidates'
+        CANDIDATES: 'candidates',
+        CANDIDATES_DETAIL: 'candidates_detail'
       },
     },
   },

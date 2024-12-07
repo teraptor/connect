@@ -68,9 +68,17 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
       {
         path: `/${RouteNames.MAIN.MAIN_PAGE.children.CANDIDATES}`,
         name: RouteNames.MAIN.MAIN_PAGE.children.CANDIDATES,
-        component: () => import('@/pages/Candidates/Candidates.vue'),
+        component: () => import('@/pages/Candidates/CandidatesList.vue'),
         meta: {
           title: 'Кандидаты',
+        },
+      },
+      {
+        path: `/${RouteNames.MAIN.MAIN_PAGE.children.CANDIDATES}/:id`,
+        name: RouteNames.MAIN.MAIN_PAGE.children.CANDIDATES_DETAIL,
+        component: () => import('@/pages/Candidates/CandidateDetail.vue'),
+        meta: {
+          title: 'Кандидат описание',
         },
       }
     ],
