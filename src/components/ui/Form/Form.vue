@@ -14,17 +14,15 @@ import { Form } from 'ant-design-vue'
 import type { Rule } from 'ant-design-vue/es/form'
 import type { Reactive } from 'vue'
 
-interface IProps {
-  model?: Reactive<any>
-  name?: string
-  layout?: 'vertical' | 'inline' | 'horizontal'
-  disabled?: boolean
-  rules: Record<string, Rule[]>
-  labelCol?: { span: number }
-  wrapperCol?: { span: number }
-}
-
-const props = defineProps<IProps>()
+const props = defineProps<{
+  model?: Reactive<any>;
+  name?: string;
+  layout?: 'vertical' | 'inline' | 'horizontal';
+  disabled?: boolean;
+  rules: Record<string, Rule[]>;
+  labelCol?: { span: number };
+  wrapperCol?: { span: number };
+}>()
 const { rules, model } = toRefs(props)
 defineEmits(['fields-change', 'finish', 'finish-failed'])
 
