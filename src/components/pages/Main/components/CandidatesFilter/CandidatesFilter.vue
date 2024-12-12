@@ -1,5 +1,5 @@
 <template>
-  <div class="min-w-[200px] p-2 pt-0">
+  <div class="filter">
     <Card bordered>
       <Form
         ref="candidatesFilterForm"

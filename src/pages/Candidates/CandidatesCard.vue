@@ -18,99 +18,105 @@ const goToCandidateDetail = () => {
 </script>
 
 <template>
-  <div class="candidate-card" @click="goToCandidateDetail">
-    <div class="candidate-specialization">MedTech && EdTech</div>
-    <div class="candidate-container">
-      <div class="candidate-photo"></div>
-      <div class="candidate-items">
-        <div class="candidate-name">{{ candidate.fio }}</div>
-        <div class="candidate-city">{{ candidate.city }}</div>
-        <div class="candidate-greid">{{ candidate.greid }}</div>
-      </div>
+  <div class="candidate__card" @click="goToCandidateDetail">
+    <div class="candidate__card-specialization">MedTech && EdTech</div>
+    <div class="candidate__card-title">
+      <h3 class="candidate__card-title--name">{{ candidate.fio }}</h3>
+      <p class="candidate__card-title--city">{{ candidate.city }}</p>
     </div>
-    <div class="candidate-container-salary">
-      <div class="candidate-salary">{{ candidate.salary }}</div>
-      <div class="candidate-job-title">Frontend</div>
+    <div class="candidate__card-position">
+      <p class="candidate__card-position--name">Frontend Developer:</p>
+      <p class="candidate__card-position--grade">{{ candidate.greid }}</p>
     </div>
-    <ul>
-      <li
+    <div class="candidate__card--salary">Зарплатные ожидания:{{ candidate.salary }}</div>
+    <ul class="candidate__card-skills">
+      <li class="candidate__card-skills--item"
         v-for="technology in candidate.technologyList"
         :key="technology"
       >
         {{ technology }}
       </li>
     </ul>
+    <div class="candidate__card-about">qwertyqwertyqwertyqwertyqwertyqwertyqwertyqwertyqwertyqwertyqwertyqwertyqwertyqwertyqwertyqwerty </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-.candidate-card {
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-.candidate-card:hover {
-  transform: scale(1.02);
-}
-
-.candidate-specialization {
-  font-size: 14px;
-  font-weight: 300;
-  color: #686868;
-  border-bottom: 1px solid #686868;
-  margin-bottom: 10px;
-}
-
-.candidate-container {
-  width: 100%;
-  height: 50%;
+.candidate__card {
+  width: 300px;
+  height: 300px;
   display: flex;
-  margin-bottom: 10px;
-}
-.candidate-card {
-  width: 500px;
-  height: 500px;
-  background: #F8F8FF;
+  flex-direction: column;
+  gap: 10px;
+  background-color: $bg-card-color;
   margin: 10px;
   padding: 20px;
   border-radius: 10px;
-}
-.candidate-photo {
-  width: 50%;
-  height: 100%;
-  border: 1px solid #686868;
-  border-radius: 4px;
-}
-.candidate-items {
+  cursor: pointer;
+  transition: transform 0.2s;
+  &:hover {
+    transform: scale(1.04);
+  }
+
+  &-specialization {
+  font-size: 14px;
+  font-weight: 300;
+  color: $text-help;
+  }
+
+  &-title{
   display: flex;
   flex-direction: column;
-  width: 50%;
-  margin-left: 20px;
-}
-.candidate-name {
-  font-size: 16px;
-  font-weight: 900;
-}
-.candidate-city {
-  font-weight: 300;
-  color: #686868;
-}
-.candidate-greid {
-  font-weight: 600;
-  border: 1px solid #686868;
-  border-radius: 4px;
-  text-align: center;
+  width: 100%;
+
+    &--name {
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    &--city {
+      font-weight: 300;
+      color: $text-help;
+    }
+  }
+
+  &-position {
+    display: flex;
+    justify-content: space-between;
+
+    &--grade {
+      background-color: $main-color;
+      padding: 2px 16px;
+      color: white;
+      border-radius: 4px;
+    }
+  }
+
+  &-skills {
+    display: flex;
+    justify-content: flex-start;
+    gap: 8px;
+
+    &--item {
+      padding: 2px 16px;
+      border: 1px solid $main-color;
+      color: $main-color;
+      border-radius: 4px;
+    }
+  } 
+
+  &-about {
+    width: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: break-word;
+    overflow: hidden;
+    font-size: 14px;
+    font-weight: 300;
+    color: $text-help;
+  }
 }
 
-.candidate-container-salary {
-  display: flex;
-  justify-content: center;
-}
-
-.candidate-job-title {
-  width: 50%;
-}
-
-.candidate-salary {
-  text-align: center;
-}
 </style>

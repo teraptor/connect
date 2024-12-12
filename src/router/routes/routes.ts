@@ -80,6 +80,14 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
         meta: {
           title: 'Кандидат описание',
         },
+      },
+      {
+        path: `/${RouteNames.MAIN.UI_KIT.children.ICONS}`,
+        name: RouteNames.MAIN.UI_KIT.children.ICONS,
+        component: () => import('@/pages/UIKit/Icons.vue'),
+        meta: {
+          title: 'icons',
+        },
       }
     ],
   },

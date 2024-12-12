@@ -11,8 +11,14 @@ export const RouteNames = {
         VACANCIES: 'vacancies',
         BENCHMARK: 'benchmark',
         CANDIDATES: 'candidates',
-        CANDIDATES_DETAIL: 'candidates_detail'
+        CANDIDATES_DETAIL: 'candidates_detail',
       },
     },
+    UI_KIT: {
+      name:'UI_Kit',
+      children: {
+        ICONS: 'icons'
+      }
+    }
   },
 }
