@@ -1,54 +1,88 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useCandidatesStore } from '@/stores/useCandidatesStore';
+import { computed, onMounted } from 'vue';
 
 const route = useRoute();
-const router = useRouter();
-const candidatesStore = useCandidatesStore();
+const store = useCandidatesStore();
 
-const getCandidate = async () => {
-  const id = Number(route.params.id);
+const candidateId = route.params.id as string;
 
-  if (!candidatesStore.candidates.length) {
-    await candidatesStore.getCandidates();
+onMounted(async () => {
+  if (!store.candidates.length) {
+    await store.getCandidates();
   }
+  store.selectCandidate(candidateId);
+});
 
-  candidatesStore.selectCandidate(id);
-}
-
-const goBack = () => {
-  router.go(-1);
-};
-
-onMounted(getCandidate);
+const candidate = computed(() => store.selectedCandidate);
 </script>
 
 <template>
-  <button class="btn-go-back" @click="goBack">Назад</button>
-  <div v-if="candidatesStore.selectedCandidate">
-    <h1>{{ candidatesStore.selectedCandidate.fio }}</h1>
-    <p>Город: {{ candidatesStore.selectedCandidate.city }}</p>
-    <p>Зарплата: {{ candidatesStore.selectedCandidate.salary }}</p>
-    <p>Технологии:</p>
-    <ul>
-      <li
-        v-for="technology in candidatesStore.selectedCandidate.technologyList"
-        :key="technology"
-      >
-        {{ technology }}
-      </li>
-    </ul>
+  <div class="candidate-detail" v-if="candidate">
+    <h2 class="candidate-detail__name">{{ candidate.name }} {{ candidate.surname }}</h2>
+    <p class="candidate-detail__city">Город: {{ candidate.country }}</p>
+    <p class="candidate-detail__salary">
+      Зарплатные ожидания: {{ candidate.salary.salary_month }} руб./мес
+    </p>
+    <p class="candidate-detail__about">О себе: {{ candidate.about }}</p>
+
+    <div class="candidate-detail__skills">
+      <h3>Навыки:</h3>
+      <ul>
+        <li v-for="skill in candidate.skills" :key="skill">{{ skill }}</li>
+      </ul>
+    </div>
+
+    <div class="candidate-detail__work-format">
+      <h3>Формат работы:</h3>
+      <ul>
+        <li>Удалённо: {{ candidate.work_format.work_type === 'remote' ? 'Да' : 'Нет' }}</li>
+        <li>В офисе: {{ candidate.work_format.work_type === 'office' ? 'Да' : 'Нет' }}</li>
+        <li>Гибрид: {{ candidate.work_format.work_type === 'hybrid' ? 'Да' : 'Нет' }}</li>
+      </ul>
+    </div>
+
+    <div class="candidate-detail__employment">
+      <h3>Занятость:</h3>
+      <ul>
+        <li>Полная: {{ candidate.employement.fulltime ? 'Да' : 'Нет' }}</li>
+        <li>Частичная: {{ candidate.employement.parttime ? 'Да' : 'Нет' }}</li>
+      </ul>
+    </div>
   </div>
-  
-  
+
   <div v-else>
     <p>Кандидат не найден.</p>
   </div>
 </template>
-<style>
-.btn-go-back {
-  padding: 10px;
-  background-color: greenyellow;
+
+<style scoped>
+.candidate-detail {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+.candidate-detail__name {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.candidate-detail__city,
+.candidate-detail__salary,
+.candidate-detail__about {
+  margin-bottom: 10px;
+}
+.candidate-detail__skills,
+.candidate-detail__work-format,
+.candidate-detail__employment {
+  margin-top: 20px;
+}
+.candidate-detail__skills ul,
+.candidate-detail__work-format ul,
+.candidate-detail__employment ul {
+  list-style-type: disc;
+  padding-left: 20px;
 }
 </style>

@@ -24,12 +24,10 @@ export const useAuthStore = defineStore('auth', {
           phone: this.phone,
           password: this.password,
         });
-
         const token: string = response.data.token;
         localStorage.setItem('authToken', token);
 
         this.resetForm();
-
         return { success: true };
       } catch (err) {
         this.error = 'Неверный телефон или пароль';
