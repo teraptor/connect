@@ -2,14 +2,14 @@ import { defineStore } from 'pinia';
 import axios from 'axios';
 import { AUTORIZATION } from '@/constants';
 
-interface AuthState {
+interface IAuthState {
   phone: string;
   password: string;
   error: string | null;
 }
 
 export const useAuthStore = defineStore('auth', {
-  state: (): AuthState => ({
+  state: (): IAuthState => ({
     phone: '',
     password: '',
     error: null,

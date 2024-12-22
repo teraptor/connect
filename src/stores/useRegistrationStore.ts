@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import { REGISTRATION } from "@/constants";
 
-interface RegistrationFormData {
+interface IRegistration {
   email: string;
   password: string;
   tgAccount: string;
@@ -16,7 +16,7 @@ export const useRegistrationStore = defineStore("registration", {
     errorMessage: "",
   }),
   actions: {
-    async registerUser(formData: RegistrationFormData) {
+    async registerUser(formData: IRegistration) {
       this.successMessage = "";
       this.errorMessage = "";
 

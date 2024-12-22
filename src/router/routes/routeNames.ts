@@ -12,6 +12,7 @@ export const RouteNames = {
         BENCHMARK: 'benchmark',
         CANDIDATES: 'candidates',
         CANDIDATES_DETAIL: 'candidates_detail',
+        USER: 'user'
       },
     },
     UI_KIT: {
