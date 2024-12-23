@@ -43,13 +43,17 @@ export interface ICandidate {
 export const useCandidatesStore = defineStore('candidates', {
   state: () => ({
     candidates: [] as ICandidate[],
-    selectedCandidate: null as ICandidate | null
+    selectedCandidate: null as ICandidate | null,
   }),
   actions: {
     async getCandidates(): Promise<void> {
       try {
         const response = await axios.get(GET_CANDIDATES);
-        this.candidates = response.data.items;
+        if (response.data && Array.isArray(response.data.items)) {
+          this.candidates = response.data.items.filter(
+            (item: ICandidate | null) => item !== null
+          ) as ICandidate[];
+        }
       } catch (error) {
         console.error('Ошибка при запросе данных:', error);
       }

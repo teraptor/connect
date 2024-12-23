@@ -2,7 +2,6 @@
 import { onMounted } from 'vue';
 import { useCandidatesStore } from '@/stores/useCandidatesStore';
 import CandidatesCard from './CandidatesCard.vue';
-import { useUserStore } from '@/stores/useUserStore';
 
 const candidatesStore = useCandidatesStore();
 const getCandidates = candidatesStore.getCandidates();
