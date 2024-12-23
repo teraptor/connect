@@ -74,14 +74,6 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
         },
       },
       {
-        path: `/${RouteNames.MAIN.MAIN_PAGE.children.CANDIDATES_TABLE}`,
-        name: RouteNames.MAIN.MAIN_PAGE.children.CANDIDATES_TABLE,
-        component: () => import('@/pages/Candidates/CandidatesTable.vue'),
-        meta: {
-          title: 'Кандидаты таблица',
-        },
-      },
-      {
         path: `/${RouteNames.MAIN.MAIN_PAGE.children.CANDIDATES}/:id`,
         name: RouteNames.MAIN.MAIN_PAGE.children.CANDIDATES_DETAIL,
         component: () => import('@/pages/Candidates/CandidateDetail.vue'),

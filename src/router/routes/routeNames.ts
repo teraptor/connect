@@ -11,7 +11,6 @@ export const RouteNames = {
         VACANCIES: 'vacancies',
         BENCHMARK: 'benchmark',
         CANDIDATES: 'candidates',
-        CANDIDATES_TABLE: 'candidates_table',
         CANDIDATES_DETAIL: 'candidates_detail',
         USER: 'user'
       },
