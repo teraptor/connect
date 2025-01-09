@@ -35,6 +35,9 @@ export const useUserStore = defineStore('useUserStore', {
     async getUserData() {
       const userId = this.getUserId();
       const token = localStorage.getItem('authToken');
+
+      if(!token) return ''
+      
       try {
         const response = await axios.get(`${USER}/${userId}`, {
           headers: {
@@ -42,7 +45,6 @@ export const useUserStore = defineStore('useUserStore', {
           },
         });
         this.user = response.data;
-        console.log('Данные сотрудника:', this.user);
       } catch (error) {
         console.error('Ошибка при запросе данных сотрудника:', error);
       }

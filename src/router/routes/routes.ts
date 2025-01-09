@@ -1,6 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router'
 import { RouteNames } from './routeNames'
-import IndexView from '@/views/IndexView.vue'
 
 export const MAIN_ROUTES: RouteRecordRaw[] = [
   {
@@ -9,6 +8,8 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
     component: () => import('@/pages/Login/Login.vue'),
     meta: {
       title: 'Авторизация',
+      showHeader: false, 
+      showFooter: false
     },
   },
   {
@@ -17,13 +18,14 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
     component: () => import('@/pages/Register/Register.vue'),
     meta: {
       title: 'Регистрация',
+      showHeader: false, 
+      showFooter: false
     },
   },
   {
     path: '/',
-    name: RouteNames.MAIN.INDEX,
-    component: IndexView,
     redirect: { name: RouteNames.MAIN.MAIN_PAGE.name },
+    name: RouteNames.MAIN.INDEX,
     children: [
       {
         path: `/${RouteNames.MAIN.MAIN_PAGE.name}`,

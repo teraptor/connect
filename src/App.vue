@@ -1,6 +1,8 @@
 <template>
   <ConfigProvider :locale="ru_RU">
-    <RouterView />
+    <DefaultLayout>
+      <RouterView />
+    </DefaultLayout>
   </ConfigProvider>
 </template>
 
@@ -8,6 +10,7 @@
 import { useHead } from '@unhead/vue'
 import { ConfigProvider } from 'ant-design-vue'
 import ru_RU from 'ant-design-vue/es/locale/ru_RU'
+import DefaultLayout from './layouts/DefaultLayout.vue'
 
 const route = useRoute()
 const currentRouteTitle = computed(() => route.meta?.title || '')
