@@ -20,7 +20,6 @@
     line-height: 1;
     font-size: 1rem;
     position: relative;
-    top: 2px;
     /* Better Font Rendering =========== */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -319,6 +318,11 @@
   .icon-eye {
     &:before {
       content: $icon-eye;
+    }
+  }
+  .icon-eye-hidden {
+    &:before {
+      content: $icon-eye-hidden;
     }
   }
   .icon-target {
