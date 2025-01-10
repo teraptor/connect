@@ -1,6 +1,6 @@
 export default {
     async getCandidates() { 
-        let data = [
+        const data = [
             {
                 key: 1,
                 name:"Егор Б",

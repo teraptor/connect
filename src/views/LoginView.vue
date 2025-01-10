@@ -63,7 +63,7 @@
       },
       methods: {
             login() {
-               let userData = {
+               const userData = {
                   login: this.form.email,
                   password: this.form.password,
                }
