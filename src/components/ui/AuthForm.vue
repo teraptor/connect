@@ -36,15 +36,16 @@ const handleSubmit = (event: Event) => {
   display: flex;
   justify-content: center;
   align-items: start;
-  padding-top: 60px;
+  padding-top: 30px;
   height: 100vh;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 4px;
   max-width: 400px;
+  margin-bottom: 30px;
 
   &__logo {
     width: 50%;

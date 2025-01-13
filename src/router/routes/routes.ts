@@ -23,6 +23,16 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
     },
   },
   {
+    path: `/${RouteNames.MAIN.FORGOT}`,
+    name: RouteNames.MAIN.FORGOT,
+    component: () => import('@/pages/Forgot.vue'),
+    meta: {
+      title: 'Забыли пароль',
+      showHeader: false, 
+      showFooter: false
+    },
+  },
+  {
     path: '/',
     redirect: { name: RouteNames.MAIN.MAIN_PAGE.name },
     name: RouteNames.MAIN.INDEX,

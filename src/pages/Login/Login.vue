@@ -8,6 +8,7 @@
       placeholder="Введите номер телефона..."
       required
       autocomplete="phone"
+      :validators="[isRequired,isPhone]"
     />
     <InputField
       v-model="password"
@@ -17,12 +18,13 @@
       placeholder="Введите пароль..."
       required
       autocomplete="current-password"
+      :validators="[isRequired, isPassword]"
     >
       <span class="toggle-password" @click="togglePassword">
         <span :class=" showPassword ? 'icon icon-eye-hidden' : 'icon icon-eye'"/>
       </span>
     </InputField>
-    <RouterLink to="/register" class="form__link">Забыли пароль ?</RouterLink>
+    <RouterLink to="/forgot" class="form__link">Забыли пароль ?</RouterLink>
     <Button 
       class="btn btn-primary w-100" text="Войти" 
       :disabled="!isFormValid" 
@@ -30,7 +32,6 @@
       type="submit"
     />
     <p v-if="error" class="error-message">{{ error }}</p>
-
     <span> У вас еще нет аккаунта ? <RouterLink class="form__link" to="/register">Зарегистрироваться</RouterLink></span>
   </AuthForm>
 </template>
@@ -42,6 +43,7 @@ import { useAuthStore } from '@/stores/useAuthStore';
 import InputField from '@/components/ui/InputField.vue';
 import Button from '@/components/ui/Button.vue';
 import AuthForm from '@/components/ui/AuthForm.vue';
+import { isRequired, isPhone, isPassword } from '@/helpers/validation';
 
 const authStore = useAuthStore();
 const router = useRouter();
@@ -70,13 +72,15 @@ const handleLogin = async () => {
   }
 };
 
-const isFormValid = computed(() => {
-  return phone.value.trim() !== '' && password.value.trim() !== '';
-});
+const validation = computed(() => ({
+  phone: isPhone(phone.value) || isRequired(phone.value),
+  password: isPassword(password.value) || isRequired(password.value),
+}));
+
+const isFormValid = computed(() => !validation.value.phone && !validation.value.password);
 </script>
 
 <style scoped lang="scss">
-
 .toggle-password {
   position: absolute;
   right: 10px;

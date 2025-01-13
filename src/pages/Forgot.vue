@@ -1,0 +1,50 @@
+<template>
+  <AuthForm title="Восстановить пароль" @submit="handleForgotPassword">
+    <InputField
+      v-model="email"
+      label="E-mail"
+      type="email"
+      id="email"
+      placeholder="Введите e-mail"
+      required
+      :validators="[isRequired, isEmail]"
+    />
+    <span> Вспомнили пароль ? <RouterLink to="/login" class="form__link">Войти</RouterLink> </span>
+    <Button 
+      class="btn btn-primary w-100" text="Восстановить пароль" 
+      :disabled="!isFormValid"
+      type="submit"
+    />
+    <p v-if="successMessage" class="success-message">{{ successMessage }}</p>
+    <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
+  </AuthForm>
+</template>
+
+<script setup lang="ts">
+import AuthForm from '@/components/ui/AuthForm.vue';
+import { useForgotPasswordStore } from '@/stores/useForgotPasswordStore';
+import { storeToRefs } from 'pinia';
+import { isRequired, isEmail } from '@/helpers/validation';
+import InputField from '@/components/ui/InputField.vue';
+import Button from '@/components/ui/Button.vue';
+
+const forgotPasswordStore = useForgotPasswordStore();
+const { email, successMessage, errorMessage } = storeToRefs(forgotPasswordStore);
+const { handleForgotPassword } = forgotPasswordStore;
+
+const isFormValid = computed(() => {
+  return !(isRequired(email.value)) && !(isEmail(email.value));
+});
+
+</script>
+
+<style lang="scss" scoped>
+
+.success-message {
+  color: green;
+}
+
+.error-message {
+  color: red;
+}
+</style>

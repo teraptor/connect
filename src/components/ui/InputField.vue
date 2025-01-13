@@ -2,7 +2,8 @@
   <div class="form__group">
     <label class="form__group-label" :for="id">{{ label }}</label>
     <div class="form__group-input-wrapper">
-      <input class="form__group-input"
+      <input
+        class="form__group-input"
         v-bind="$attrs"
         v-model="internalValue"
         :type="type"
@@ -10,9 +11,12 @@
         :placeholder="placeholder"
         :required="required"
         :autocomplete="autocomplete"
+        :class="{ 'input-error': hasError }"
+        @blur="validate"
       />
       <slot />
     </div>
+    <span v-if="hasError" class="form__group-error">{{ errorMessage }}</span>
   </div>
 </template>
 
@@ -33,11 +37,33 @@ const props = defineProps({
   },
   autocomplete: String,
   modelValue: String,
+  validators: {
+    type: Array as () => Array<(value: any) => string | false>,
+    default: () => [],
+  },
 });
 
 const emit = defineEmits(['update:modelValue']);
 
 const internalValue = ref(props.modelValue);
+const hasError = ref(false);
+const errorMessage = ref('');
+
+const validate = () => {
+  let validationError: string | false = false;
+
+  for (const validator of props.validators) {
+    validationError = validator(internalValue.value);
+    if (validationError) {
+      hasError.value = true;
+      errorMessage.value = validationError;
+      return;
+    }
+  }
+
+  hasError.value = false;
+  errorMessage.value = '';
+};
 
 watch(internalValue, (newValue) => {
   emit('update:modelValue', newValue);
@@ -48,7 +74,6 @@ watch(internalValue, (newValue) => {
 .form__group {
   display: flex;
   flex-direction: column;
-  gap: 4px;
   font-weight: 300;
   font-size: 14px;
 
@@ -77,11 +102,15 @@ watch(internalValue, (newValue) => {
       box-shadow: 0 0 8px rgba(75, 156, 211, 0.5);
       outline: none;
     }
+
+    &.input-error {
+      border-color: red;
+    }
   }
-}
 
-
-input:focus {
-  border-color: #4b9cd3;
+  &-error {
+    color: red;
+    font-size: 12px;
+  }
 }
 </style>

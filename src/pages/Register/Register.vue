@@ -1,42 +1,82 @@
 <template>
-  <div class="registration-form">
-    <form @submit.prevent="onSubmit">
-      <div>
-        <label for="email">Email:</label>
-        <input id="email" v-model="form.email" type="email" required />
-      </div>
-      <div>
-        <label for="password">Пароль:</label>
-        <input id="password" v-model="form.password" type="password" required />
-      </div>
-      <div>
-        <label for="tgAccount">Telegram:</label>
-        <input id="tgAccount" v-model="form.tgAccount" type="text" />
-      </div>
-      <div>
-        <label for="phone">Телефон:</label>
-        <input id="phone" v-model="form.phone" type="text" />
-      </div>
-      <div>
-        <label for="companyINN">ИНН компании:</label>
-        <input id="companyINN" v-model="form.companyINN" type="text" />
-      </div>
-      <button type="submit">
-        Зарегистрироваться
-      </button>
-    </form>
-    <p v-if="regStore.errorMessage" class="error">
-      {{ regStore.errorMessage }}
-    </p>
-    <p v-if="regStore.successMessage" class="success">
-      {{ regStore.successMessage }}
-    </p>
-  </div>
+  <AuthForm title="Регистрация" @submit="onSubmit">
+    <InputField
+      v-model="form.email"
+      label="E-mail"
+      type="email"
+      id="email"
+      placeholder="Введите e-mail"
+      required
+      :validators="[isRequired, isEmail]"
+    />
+    <InputField
+      v-model="form.password"
+      label="Пароль"
+      type="password"
+      id="password"
+      placeholder="Введите пароль"
+      required
+      :validators="[isRequired, isPassword]"
+    >
+      <span class="toggle-password" @click="togglePassword">
+        <span :class=" showPassword ? 'icon icon-eye-hidden' : 'icon icon-eye'"/>
+      </span>
+    </InputField>
+    <InputField
+      v-model="form.tgAccount"
+      label="Telegram"
+      type="text"
+      id="tgAccount"
+      placeholder="Введите Telegram аккаунт"
+      required
+      :validators="[isRequired, isTelegram]"
+    />
+    <InputField
+      v-model="form.phone"
+      label="Телефон"
+      type="tel"
+      id="phone"
+      placeholder="Введите номер телефона..."
+      required
+      autocomplete="phone"
+      :validators="[isRequired,isPhone]"
+    />
+    <InputField
+      v-model="form.companyINN"
+      label="ИНН компании"
+      type="text"
+      id="companyINN"
+      placeholder="Введите ИНН компании..."
+      required
+      :validators="[isRequired,isINN]"
+    />
+    <RouterLink to="/login" class="form__link">Уже есть аккаунт ?</RouterLink>
+    <Button 
+      class="btn btn-primary w-100" text="Зарегистрироваться" 
+      :disabled="!isFormValid" 
+      :icon="'icon icon-log-in'" 
+      type="submit"
+    />
+  </AuthForm>
+  <p v-if="regStore.errorMessage" class="error">
+    {{ regStore.errorMessage }}
+  </p>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRegistrationStore } from '@/stores/useRegistrationStore';
+import AuthForm from '@/components/ui/AuthForm.vue';
+import InputField from '@/components/ui/InputField.vue';
+import Button from '@/components/ui/Button.vue';
+import { 
+  isRequired,
+  isPhone,
+  isTelegram,
+  isEmail,
+  isINN,
+  isPassword
+} from '@/helpers/validation';
 
 const form = ref({
   email: '',
@@ -46,7 +86,14 @@ const form = ref({
   companyINN: ''
 });
 
+const router = useRouter();
 const regStore = useRegistrationStore();
+
+const showPassword = ref(false);
+
+const togglePassword = () => {
+  showPassword.value = !showPassword.value;
+};
 
 const onSubmit = async (): Promise<void> => {
   try {
@@ -61,74 +108,35 @@ const onSubmit = async (): Promise<void> => {
         companyINN: ''
       };
     }
+
+    router.push('/login')
   } catch (error) {
     console.error('Ошибка отправки формы:', error);
   }
 };
+
+const validation = computed(() => ({
+  email: isEmail(form.value.email) || isRequired(form.value.email),
+  password: isPassword(form.value.password) || isRequired(form.value.password),
+  tgAccount: isTelegram(form.value.tgAccount) || isRequired(form.value.tgAccount),
+  phone: isPhone(form.value.phone) || isRequired(form.value.phone),
+  companyINN: isINN(form.value.companyINN) || isRequired(form.value.companyINN)
+  ,
+}));
+
+const isFormValid = computed(() => {
+  return Object.values(validation.value).every(value => !value);
+});
+
 </script>
 
 
-<style scoped>
-.registration-form {
-  max-width: 450px;
-  margin: 50px auto;
-  padding: 30px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 24px;
-  color: #333;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 600;
-  color: #444;
-}
-
-input {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  outline: none;
-  transition: border-color 0.3s ease;
-}
-
-input:focus {
-  border-color: blue;
-}
-
-button {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  background-color: blue;
-  color: white;
-  border: none;
-  border-radius: 4px;
+<style lang="scss" scoped>
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 30%;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-button:hover:not(:disabled) {
-  background-color: blue;
 }
 
 .error {

@@ -3,6 +3,7 @@ export const RouteNames = {
     INDEX: 'index',
     LOGIN: 'login',
     REGISTER: 'register',
+    FORGOT: 'forgot',
     MAIN_PAGE: {
       name: 'main',
       children: {

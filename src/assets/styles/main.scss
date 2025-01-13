@@ -159,6 +159,9 @@ a {
 
 .form__link {
   color: $form-link-color;
-  font-weight: 400;
+  font-weight: 300;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  margin: 4px 0;
 }
 
