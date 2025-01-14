@@ -385,3 +385,9 @@
       content: $icon-thumbsup;
     }
   }
+  .icon-spinner {
+    &:before {
+      content: $icon-spinner;
+    }
+  }
+

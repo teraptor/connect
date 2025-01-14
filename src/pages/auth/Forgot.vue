@@ -18,8 +18,6 @@
       :disabled="!isFormValid"
       type="submit"
     />
-    <p v-if="successMessage" class="success-message">{{ successMessage }}</p>
-    <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
   </AuthForm>
 </template>
 
@@ -32,7 +30,7 @@ import InputField from '@/components/ui/InputField.vue';
 import Button from '@/components/ui/Button.vue';
 
 const forgotPasswordStore = useForgotPasswordStore();
-const { email, successMessage, errorMessage } = storeToRefs(forgotPasswordStore);
+const { email } = storeToRefs(forgotPasswordStore);
 const { handleForgotPassword } = forgotPasswordStore;
 
 const isFormValid = computed(() => {

@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 import { REGISTRATION } from "@/constants";
+import { push } from "notivue";
 
 interface IRegistration {
   email: string;
@@ -12,26 +13,38 @@ interface IRegistration {
 
 export const useRegistrationStore = defineStore("registration", {
   state: () => ({
-    successMessage: "",
-    errorMessage: "",
+    formData: {
+      email: '',
+      password: '',
+      tgAccount: '',
+      phone: '',
+      companyINN: ''
+    } as IRegistration
   }),
   actions: {
-    async registerUser(formData: IRegistration) {
-      this.successMessage = "";
-      this.errorMessage = "";
-
+    async registerUser(): Promise<boolean> {
       try {
         const response = await axios.post(
           REGISTRATION,
-          formData
+          this.formData
         );
 
-        if (response.status === 200) {
-          this.successMessage = "Регистрация прошла успешно!";
-        }
-      } catch (error) {
-        const err = error as any;
-        this.errorMessage = err.response?.data?.message || "Ошибка регистрации.";
+        push.success('Регистрация прошла успешно!');
+        this.resetForm();
+        return true;
+      } catch (error:any) {
+        push.error(error.response?.data?.message || "Ошибка регистрации.");
+        return false;
+      }
+    },
+
+    resetForm() {
+      this.formData = {
+        email: '',
+        password: '',
+        tgAccount: '',
+        phone: '',
+        companyINN: ''
       }
     }
   }

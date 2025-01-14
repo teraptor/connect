@@ -1,24 +1,21 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
 import { AUTORIZATION } from '@/constants';
+import { push } from 'notivue';
 
 interface IAuthState {
   phone: string;
   password: string;
-  error: string | null;
 }
 
 export const useAuthStore = defineStore('auth', {
   state: (): IAuthState => ({
     phone: '',
-    password: '',
-    error: null,
+    password: ''
   }),
   
   actions: {
-    async handleLogin(): Promise<{ success: boolean }> {
-      this.error = null;
-
+    async handleLogin(): Promise<boolean> {
       try {
         const response = await axios.post(AUTORIZATION, {
           phone: this.phone,
@@ -28,10 +25,11 @@ export const useAuthStore = defineStore('auth', {
         localStorage.setItem('authToken', token);
 
         this.resetForm();
-        return { success: true };
+        push.success("Добро пожаловать!");
+        return true;
       } catch (err) {
-        this.error = 'Неверный телефон или пароль';
-        return { success: false };
+        push.error("Неверный телефон или пароль");
+        return false;
       }
     },
 

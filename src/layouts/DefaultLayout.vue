@@ -1,12 +1,15 @@
 <script setup lang="ts">
   import Header from '@/components/Header.vue';
   import Footer from '@/components/Footer.vue';
-
+  import { Notivue, Notification } from 'notivue'
   const route = useRoute();
 </script>
 
 <template>
   <div class="layout">
+    <Notivue v-slot="item">
+      <Notification :item="item" />
+    </Notivue>
     <Header v-if="route.meta.showHeader !== false"/>
     <div class="main-content">
       <slot/>

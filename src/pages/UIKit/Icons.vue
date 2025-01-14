@@ -70,6 +70,7 @@
       <p class="icon icon-printer">icon-printer</p>
       <p class="icon icon-folder-open-o">icon-folder-open-o</p>
       <p class="icon icon-thumbsdown">icon-icon-thumbsdown</p>
+      <p class="icon icon-spinner">icon-icon-spinner</p>
     </div>
   </template>
   

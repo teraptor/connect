@@ -1,14 +1,19 @@
 <template>
   <button
     :type="type"
-    :disabled="disabled"
+    :disabled="disabled || isLoading"
+    class="btn"
   >
-    {{ props.text }}
-    <span v-if="icon" :class="icon"></span>
+    <span v-if="isLoading" class="btn-spinner"></span>
+    <span v-else class="btn-content">
+      {{ text }}
+      <span v-if="icon" :class="icon" class="btn-icon"></span>
+    </span>
   </button>
 </template>
 
 <script setup lang="ts">
+import { defineProps, ref } from 'vue';
 
 const props = defineProps({
   type: {
@@ -26,9 +31,12 @@ const props = defineProps({
   icon: {
     type: String,
     default: ''
+  },
+  isLoading: {
+    type: Boolean,
+    default: false
   }
 });
-
 </script>
 
 <style lang="scss" scoped>
@@ -37,39 +45,80 @@ const props = defineProps({
   padding: 10px;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 4px;
   margin: 0 auto;
   color: white;
+  font-size: 16px;
+  font-weight: 300;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .btn-primary {
-  background-color: blue;
+  background-color: $btn-primary;
   border: none;
-}
 
-.btn-primary:disabled {
-  background-color: darken(blue, 20%);
+  &:disabled {
+  background-color: $btn-primary-disabled;
   cursor: not-allowed;
+  }
+  &:active {
+    background-color: $btn-primary-active;
+  }
 }
 
-button:focus {
-  outline: none;
+.btn-danger {
+  background-color: $btn-danger;
+  border: none;
+
+  &:disabled {
+  background-color: $btn-danger-disabled;
+  cursor: not-allowed;
+  }
+  &:active {
+    background-color: $btn-danger-active;
+  }
 }
 
-.button-icon {
-  margin-left: 8px;
+.btn-success {
+  background-color: $btn-success;
+  border: none;
+
+  &:disabled {
+  background-color: $btn-success-disabled;
+  cursor: not-allowed;
+  }
+  &:active {
+    background-color: $btn-success-active;
+  }
 }
 
-.w-20 {
-  width: 20%;
+.btn-spinner {
+  border: 2px solid #fff;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+}
+.btn-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
 }
 
-.w-100 {
-  width: 100%;
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>
-

@@ -25,14 +25,14 @@
     </InputField>
     <RouterLink to="/forgot" class="form__link">Забыли пароль ?</RouterLink>
     <Button 
-      class="btn btn-primary w-100" text="Войти" 
+      class="btn-primary w-100" text="Войти" 
       :disabled="!isFormValid" 
       :icon="'icon icon-log-in'" 
       type="submit"
     />
-    <p v-if="error" class="error-message">{{ error }}</p>
     <span> У вас еще нет аккаунта ? <RouterLink class="form__link" to="/register">Зарегистрироваться</RouterLink></span>
   </AuthForm>
+
 </template>
 
 <script setup lang="ts">
@@ -43,7 +43,6 @@ import InputField from '@/components/ui/InputField.vue';
 import Button from '@/components/ui/Button.vue';
 import AuthForm from '@/components/ui/AuthForm.vue';
 import { isRequired, isPhone, isPassword } from '@/helpers/validation';
-
 const authStore = useAuthStore();
 const router = useRouter();
 
@@ -57,7 +56,6 @@ const password = computed({
   set: (value: string) => { authStore.password = value; },
 });
 
-const error = computed(() => authStore.error);
 const showPassword = ref(false);
 
 const togglePassword = () => {
@@ -65,10 +63,8 @@ const togglePassword = () => {
 };
 
 const handleLogin = async () => {
-  const result = await authStore.handleLogin();
-  if (result.success) {
-    router.push('/main');
-  }
+  const response = await authStore.handleLogin();
+  if (response) router.push('/')
 };
 
 const validation = computed(() => ({

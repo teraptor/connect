@@ -33,7 +33,7 @@ const logout = () => {
     <CandidatesUserTable/>
   </div>
 </template>
-<style lang="scss">
+<style lang="scss" scoped>
 .container__btn {
   display: flex;
 }
