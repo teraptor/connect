@@ -14,7 +14,9 @@
         :class="{ 'input-error': hasError }"
         @blur="validate"
       />
-      <slot />
+      <span class="form__group-icon" v-if="icon" @click="$emit('icon-click')">
+        <span :class="icon"></span>
+      </span>
     </div>
     <span v-if="hasError" class="form__group-error">{{ errorMessage }}</span>
   </div>
@@ -35,6 +37,7 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  icon: String,
   autocomplete: String,
   modelValue: String,
   validators: {
@@ -43,11 +46,11 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['update:modelValue']);
+const internalValue = ref<string | undefined>(props.modelValue);
+const hasError = ref<boolean>(false);
+const errorMessage = ref<string>('');
 
-const internalValue = ref(props.modelValue);
-const hasError = ref(false);
-const errorMessage = ref('');
+const emit = defineEmits(['update:modelValue', 'icon-click']);
 
 const validate = () => {
   let validationError: string | false = false;
@@ -107,7 +110,12 @@ watch(internalValue, (newValue) => {
       border-color: red;
     }
   }
-
+  &-icon {
+    position: absolute;
+    right: 10px;
+    top: 30%;
+    cursor: pointer;
+  }
   &-error {
     color: red;
     font-size: 12px;

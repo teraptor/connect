@@ -9,7 +9,10 @@
       required
       :validators="[isRequired, isEmail]"
     />
-    <span> Вспомнили пароль ? <RouterLink to="/login" class="form__link">Войти</RouterLink> </span>
+    <span> 
+      Вспомнили пароль ? 
+      <RouterLink to="/login" class="form__link">Войти</RouterLink> 
+    </span>
     <Button 
       class="btn btn-primary w-100" text="Восстановить пароль" 
       :disabled="!isFormValid"
@@ -22,7 +25,7 @@
 
 <script setup lang="ts">
 import AuthForm from '@/components/ui/AuthForm.vue';
-import { useForgotPasswordStore } from '@/stores/useForgotPasswordStore';
+import { useForgotPasswordStore } from '@/stores/auth/useForgotPasswordStore';
 import { storeToRefs } from 'pinia';
 import { isRequired, isEmail } from '@/helpers/validation';
 import InputField from '@/components/ui/InputField.vue';
@@ -37,14 +40,3 @@ const isFormValid = computed(() => {
 });
 
 </script>
-
-<style lang="scss" scoped>
-
-.success-message {
-  color: green;
-}
-
-.error-message {
-  color: red;
-}
-</style>

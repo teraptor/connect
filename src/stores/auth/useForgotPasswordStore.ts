@@ -2,8 +2,14 @@ import { defineStore } from 'pinia';
 import axios from 'axios';
 import { FORGOT } from '@/constants';
 
+interface IForgotPasswordState {
+  email: string;
+  successMessage: string | null;
+  errorMessage: string | null;
+}
+
 export const useForgotPasswordStore = defineStore('forgotPassword', {
-  state: () => ({
+  state: (): IForgotPasswordState => ({
     email: '',
     successMessage: null as string | null,
     errorMessage: null as string | null,

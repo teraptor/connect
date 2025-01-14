@@ -5,7 +5,7 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
   {
     path: `/${RouteNames.MAIN.LOGIN}`,
     name: RouteNames.MAIN.LOGIN,
-    component: () => import('@/pages/Login/Login.vue'),
+    component: () => import('@/pages/auth/Login.vue'),
     meta: {
       title: 'Авторизация',
       showHeader: false, 
@@ -15,7 +15,7 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
   {
     path: `/${RouteNames.MAIN.REGISTER}`,
     name: RouteNames.MAIN.REGISTER,
-    component: () => import('@/pages/Register/Register.vue'),
+    component: () => import('@/pages/auth/Register.vue'),
     meta: {
       title: 'Регистрация',
       showHeader: false, 
@@ -25,7 +25,7 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
   {
     path: `/${RouteNames.MAIN.FORGOT}`,
     name: RouteNames.MAIN.FORGOT,
-    component: () => import('@/pages/Forgot.vue'),
+    component: () => import('@/pages/auth/Forgot.vue'),
     meta: {
       title: 'Забыли пароль',
       showHeader: false, 

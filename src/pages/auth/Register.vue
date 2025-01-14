@@ -12,15 +12,14 @@
     <InputField
       v-model="form.password"
       label="Пароль"
-      type="password"
+      :type="showPassword ? 'text' : 'password'"
       id="password"
       placeholder="Введите пароль"
       required
       :validators="[isRequired, isPassword]"
+      :icon = "showPassword ? 'icon icon-eye-hidden' : 'icon icon-eye'"
+      @icon-click="togglePassword"
     >
-      <span class="toggle-password" @click="togglePassword">
-        <span :class=" showPassword ? 'icon icon-eye-hidden' : 'icon icon-eye'"/>
-      </span>
     </InputField>
     <InputField
       v-model="form.tgAccount"
@@ -57,15 +56,19 @@
       :icon="'icon icon-log-in'" 
       type="submit"
     />
+    <p v-if="regStore.successMessage" class="success-message">
+      {{ regStore.successMessage }}
+      <RouterLink to="/login" class="form__link">Войти</RouterLink>
+    </p>
+    <p v-if="regStore.errorMessage" class="error-message">
+      {{ regStore.errorMessage }}
+    </p>
   </AuthForm>
-  <p v-if="regStore.errorMessage" class="error">
-    {{ regStore.errorMessage }}
-  </p>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useRegistrationStore } from '@/stores/useRegistrationStore';
+import { useRegistrationStore } from '@/stores/auth/useRegistrationStore';
 import AuthForm from '@/components/ui/AuthForm.vue';
 import InputField from '@/components/ui/InputField.vue';
 import Button from '@/components/ui/Button.vue';
@@ -108,8 +111,6 @@ const onSubmit = async (): Promise<void> => {
         companyINN: ''
       };
     }
-
-    router.push('/login')
   } catch (error) {
     console.error('Ошибка отправки формы:', error);
   }
@@ -121,7 +122,6 @@ const validation = computed(() => ({
   tgAccount: isTelegram(form.value.tgAccount) || isRequired(form.value.tgAccount),
   phone: isPhone(form.value.phone) || isRequired(form.value.phone),
   companyINN: isINN(form.value.companyINN) || isRequired(form.value.companyINN)
-  ,
 }));
 
 const isFormValid = computed(() => {
@@ -129,29 +129,5 @@ const isFormValid = computed(() => {
 });
 
 </script>
-
-
-<style lang="scss" scoped>
-.toggle-password {
-  position: absolute;
-  right: 10px;
-  top: 30%;
-  cursor: pointer;
-}
-
-.error {
-  color: red;
-  font-size: 14px;
-  margin-top: 15px;
-  text-align: center;
-}
-
-.success {
-  color: green;
-  font-size: 14px;
-  margin-top: 15px;
-  text-align: center;
-}
-</style>
 
 

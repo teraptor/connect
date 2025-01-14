@@ -19,10 +19,9 @@
       required
       autocomplete="current-password"
       :validators="[isRequired, isPassword]"
+      :icon = "showPassword ? 'icon icon-eye-hidden' : 'icon icon-eye'"
+      @icon-click="togglePassword"
     >
-      <span class="toggle-password" @click="togglePassword">
-        <span :class=" showPassword ? 'icon icon-eye-hidden' : 'icon icon-eye'"/>
-      </span>
     </InputField>
     <RouterLink to="/forgot" class="form__link">Забыли пароль ?</RouterLink>
     <Button 
@@ -39,7 +38,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { useAuthStore } from '@/stores/useAuthStore';
+import { useAuthStore } from '@/stores/auth/useAuthStore';
 import InputField from '@/components/ui/InputField.vue';
 import Button from '@/components/ui/Button.vue';
 import AuthForm from '@/components/ui/AuthForm.vue';
@@ -80,18 +79,4 @@ const validation = computed(() => ({
 const isFormValid = computed(() => !validation.value.phone && !validation.value.password);
 </script>
 
-<style scoped lang="scss">
-.toggle-password {
-  position: absolute;
-  right: 10px;
-  top: 30%;
-  cursor: pointer;
-}
-
-.error-message {
-  color: red;
-  text-align: center;
-  margin-top: 10px;
-}
-</style>
 
