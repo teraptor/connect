@@ -4,16 +4,15 @@
     :disabled="disabled || isLoading"
     class="btn"
   >
-    <span v-if="isLoading" class="btn-spinner"></span>
+    <span v-if="isLoading" class="icon icon-spinner"></span>
     <span v-else class="btn-content">
       {{ text }}
-      <span v-if="icon" :class="icon" class="btn-icon"></span>
+      <span v-if="icon" :class="icon"></span>
     </span>
   </button>
 </template>
 
 <script setup lang="ts">
-import { defineProps, ref } from 'vue';
 
 const props = defineProps({
   type: {
@@ -50,10 +49,10 @@ const props = defineProps({
   justify-content: center;
   gap: 4px;
   margin: 0 auto;
-  color: white;
+  color: $light-color;
   font-size: 16px;
   font-weight: 300;
-
+  max-height: 36px;
   &:focus {
     outline: none;
   }
@@ -64,11 +63,26 @@ const props = defineProps({
   border: none;
 
   &:disabled {
-  background-color: $btn-primary-disabled;
-  cursor: not-allowed;
+    background-color: $btn-primary-disabled;
+    cursor: not-allowed;
   }
   &:active {
     background-color: $btn-primary-active;
+  }
+}
+
+.btn-secondary {
+  border: 1px solid $btn-secondary;
+  color: $btn-secondary;
+
+  &:disabled {
+    border: 1px solid $btn-secondary-disabled;
+    color: $btn-secondary-disabled;
+    cursor: not-allowed;
+  }
+  &:active {
+    border: 1px solid $btn-secondary-active;
+    color: $btn-secondary-active;
   }
 }
 
@@ -77,8 +91,8 @@ const props = defineProps({
   border: none;
 
   &:disabled {
-  background-color: $btn-danger-disabled;
-  cursor: not-allowed;
+    background-color: $btn-danger-disabled;
+    cursor: not-allowed;
   }
   &:active {
     background-color: $btn-danger-active;
@@ -90,27 +104,28 @@ const props = defineProps({
   border: none;
 
   &:disabled {
-  background-color: $btn-success-disabled;
-  cursor: not-allowed;
+    background-color: $btn-success-disabled;
+    cursor: not-allowed;
   }
   &:active {
     background-color: $btn-success-active;
   }
 }
 
-.btn-spinner {
-  border: 2px solid #fff;
-  border-top: 2px solid transparent;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  animation: spin 1s linear infinite;
-}
-.btn-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 4px;
+.btn-primary,
+.btn-danger,
+.btn-secondary,
+.btn-success {
+  .icon-spinner {
+    animation: spin 1s linear infinite;
+  }
+  .btn-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    font-weight: 400;
+  }
 }
 
 @keyframes spin {

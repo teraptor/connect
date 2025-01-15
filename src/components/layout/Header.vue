@@ -4,18 +4,35 @@ import { useHeaderStore } from '@/stores/layout/useHeaderStore';
 import { useUserStore } from '@/stores/useUserStore';
 import { useRouter } from 'vue-router';
 import { RouteNames } from '@/router/routes/routeNames';
+import { onClickOutside } from '@vueuse/core';
 
-const { headerNav } = useHeaderStore()
+const router = useRouter();
+const { headerNav } = useHeaderStore();
+const userStore = useUserStore();
+const isOpen = ref(false);
+const dropdown:any = ref(null);
 
-const userStore = useUserStore()
+const toggle = () => {
+  isOpen.value = !isOpen.value;
+};
+
+onClickOutside(dropdown, () => {
+  isOpen.value = false;
+});
+
 onMounted(async () => {
   await userStore.getUserData()
 })
 
-const router = useRouter()
 const moveToLogin = () => router.push({ name: RouteNames.MAIN.LOGIN })
 const moveToRegister = () => router.push({ name: RouteNames.MAIN.REGISTER })
 const user = computed(() => userStore.user)
+
+const logout = () => {
+  localStorage.removeItem('authToken')
+  userStore.user = null
+  router.push('/main')
+}
 </script>
 
 <template>
@@ -37,8 +54,20 @@ const user = computed(() => userStore.user)
           {{ item.title }}
         </RouterLink>
       </div>
-      <div v-if="user" class="header__nav-user">
-        <RouterLink to="/user"> {{ user?.Name }}</RouterLink>
+      <div v-if="user" class="header__nav-user" ref="dropdown">
+        <div @click="toggle"> {{ user?.Name }}</div>
+        <div v-if="isOpen" class="dropdown-menu">
+          <ul class="dropdown-menu__items">
+            <li class="dropdown-menu__item">
+              <span class="icon icon-user"/>
+              <RouterLink to="/user">Личный кабинет</RouterLink>
+            </li>
+            <li class="dropdown-menu__item logout" @click="logout">
+              <span class="icon icon-log-out"/>
+              Выйти
+            </li>
+          </ul>
+        </div>
       </div>
       <div v-else class="header__nav-auth">
         <Button @click="moveToLogin">Вход</Button>
@@ -57,7 +86,7 @@ const user = computed(() => userStore.user)
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 0;
+  padding: 1rem;
   background-color: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(6px);
 
@@ -84,14 +113,48 @@ const user = computed(() => userStore.user)
     }
 
     &-user {
-      background: $main-color;
-      color: $light-color;
       padding: 8px;
       margin: 8px 16px;
-      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
 
-      &:hover {
-        background: lighten($main-color, 5%)
+      .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        right: 1rem;
+        background-color: $dropdown-bg;
+        border: 1px solid $dropdown-border;
+        box-shadow: $box-shadow;
+        width: 180px;
+        padding: 10px;
+        font-size: 16px;
+        font-weight: 300;
+        color: $text-help;
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+
+        &__items {
+          display: flex;
+          flex-direction: column;
+        }
+
+        &__item {
+          padding: 4px;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          gap: 4px;
+
+          &:hover {
+            background-color: $dropdown-bg-hover;
+          }
+
+          &.logout {
+            color: $danger;
+          }
+        }
       }
     }
 
@@ -104,4 +167,5 @@ const user = computed(() => userStore.user)
     }
   }
 }
+
 </style>

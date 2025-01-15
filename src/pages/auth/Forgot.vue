@@ -14,8 +14,10 @@
       <RouterLink to="/login" class="form__link">Войти</RouterLink> 
     </span>
     <Button 
-      class="btn btn-primary w-100" text="Восстановить пароль" 
+      class="btn btn-primary w-100" 
+      text="Восстановить пароль" 
       :disabled="!isFormValid"
+      :isLoading="isLoading"
       type="submit"
     />
   </AuthForm>
@@ -31,8 +33,18 @@ import Button from '@/components/ui/Button.vue';
 
 const forgotPasswordStore = useForgotPasswordStore();
 const { email } = storeToRefs(forgotPasswordStore);
-const { handleForgotPassword } = forgotPasswordStore;
+const isLoading = ref<boolean>(false)
 
+const handleForgotPassword = async (): Promise<void> => {
+  isLoading.value = true;
+  try {
+    const response = await forgotPasswordStore.handleForgotPassword();
+  } finally {
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 200);
+  }
+};
 const isFormValid = computed(() => {
   return !(isRequired(email.value)) && !(isEmail(email.value));
 });

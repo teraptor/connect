@@ -25,8 +25,10 @@
     </InputField>
     <RouterLink to="/forgot" class="form__link">Забыли пароль ?</RouterLink>
     <Button 
-      class="btn-primary w-100" text="Войти" 
+      class="btn-primary" 
+      text="Войти" 
       :disabled="!isFormValid" 
+      :isLoading="isLoading"
       :icon="'icon icon-log-in'" 
       type="submit"
     />
@@ -43,8 +45,11 @@ import InputField from '@/components/ui/InputField.vue';
 import Button from '@/components/ui/Button.vue';
 import AuthForm from '@/components/ui/AuthForm.vue';
 import { isRequired, isPhone, isPassword } from '@/helpers/validation';
+
 const authStore = useAuthStore();
 const router = useRouter();
+const isLoading = ref<boolean>(false);
+const showPassword = ref<boolean>(false);
 
 const phone = computed({
   get: () => authStore.phone,
@@ -56,15 +61,20 @@ const password = computed({
   set: (value: string) => { authStore.password = value; },
 });
 
-const showPassword = ref(false);
-
 const togglePassword = () => {
   showPassword.value = !showPassword.value;
 };
 
 const handleLogin = async () => {
-  const response = await authStore.handleLogin();
-  if (response) router.push('/')
+  isLoading.value = true;
+  try {
+    const response = await authStore.handleLogin();
+    if (response) router.push('/');
+  } finally {
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 200);
+  }
 };
 
 const validation = computed(() => ({

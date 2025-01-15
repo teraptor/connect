@@ -51,8 +51,10 @@
     />
     <RouterLink to="/login" class="form__link">Уже есть аккаунт ?</RouterLink>
     <Button 
-      class="btn btn-primary w-100" text="Зарегистрироваться" 
-      :disabled="!isFormValid" 
+      class="btn btn-primary w-100" 
+      text="Зарегистрироваться" 
+      :disabled="!isFormValid"
+      :isLoading="isLoading" 
       :icon="'icon icon-log-in'" 
       type="submit"
     />
@@ -77,14 +79,22 @@ import {
 const regStore = useRegistrationStore();
 const router = useRouter()
 const showPassword = ref<boolean>(false);
+const isLoading = ref<boolean>(false);
 
 const togglePassword = () => {
   showPassword.value = !showPassword.value;
 };
 
 const onSubmit = async (): Promise<void> => {
-  const response = await regStore.registerUser();
-  if (response) router.push('/login')
+  isLoading.value = true;
+  try {
+    const response = await regStore.registerUser();
+    if (response) router.push('/login');
+  } finally {
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 200);
+  }
 };
 
 

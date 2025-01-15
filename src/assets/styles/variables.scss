@@ -1,13 +1,29 @@
 
-$main-color: #1677FF;
+$main-color: #2563EB;
 $bg-card-color: #FFFFFF;
 $text-help: #686868;
 $light-color: #FFFFFF;
-$form-link-color: #1677FF;
+$form-link-color: #2563EB;
+$danger: #FF5449;
 
+$dropdown-bg: #FFFFFF;
+$dropdown-border: #f0f0f0;
+$dropdown-bg-hover: #fafafa;
+
+
+$box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+
+//layout
+$header-background: rgba(255, 255, 255, 0.5);
+
+//buttons
 $btn-primary: #2563EB;
 $btn-primary-disabled: #93C5FD;
 $btn-primary-active: #1E40AF;
+
+$btn-secondary: $btn-primary;
+$btn-secondary-disabled: $btn-primary-disabled;
+$btn-secondary-active: $btn-primary-active;
 
 $btn-danger: #FF5449;
 $btn-danger-disabled: #FFB4AB;
