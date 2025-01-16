@@ -21,6 +21,7 @@ export const RouteNames = {
       children: {
         ICONS: 'icons'
       }
-    }
+    },
+    NOT_FOUND: '/:pathMatch(.*)'
   },
 }

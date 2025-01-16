@@ -9,7 +9,8 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
     meta: {
       title: 'Авторизация',
       showHeader: false, 
-      showFooter: false
+      showFooter: false,
+      showSidebar: false
     },
   },
   {
@@ -19,7 +20,8 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
     meta: {
       title: 'Регистрация',
       showHeader: false, 
-      showFooter: false
+      showFooter: false,
+      showSidebar: false
     },
   },
   {
@@ -29,7 +31,8 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
     meta: {
       title: 'Забыли пароль',
       showHeader: false, 
-      showFooter: false
+      showFooter: false,
+      showSidebar: false
     },
   },
   {
@@ -43,6 +46,7 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
         component: () => import('@/pages/Main/Main.vue'),
         meta: {
           title: 'Главная страница',
+          showSidebar: false
         },
       },
       {
@@ -51,6 +55,7 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
         component: () => import('@/pages/WhyWe/WhyWe.vue'),
         meta: {
           title: 'Почему мы?',
+          showSidebar: false
         },
       },
       {
@@ -59,6 +64,7 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
         component: () => import('@/pages/HowItWorks/HowItWorks.vue'),
         meta: {
           title: 'Как это работает?',
+          showSidebar: false
         },
       },
       {
@@ -67,6 +73,7 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
         component: () => import('@/pages/Vacancies/Vacancies.vue'),
         meta: {
           title: 'Вакансии',
+          showSidebar: false
         },
       },
       {
@@ -75,6 +82,7 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
         component: () => import('@/pages/Benchmark/Benchmark.vue'),
         meta: {
           title: 'Бенчмарк',
+          showSidebar: false
         },
       },
       {
@@ -83,6 +91,7 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
         component: () => import('@/pages/Candidates/CandidatesList.vue'),
         meta: {
           title: 'Кандидаты',
+          showSidebar: false
         },
       },
       {
@@ -91,6 +100,7 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
         component: () => import('@/pages/Candidates/CandidateDetail.vue'),
         meta: {
           title: 'Кандидат описание',
+          showSidebar: false
         },
       },
       {
@@ -99,6 +109,7 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
         component: () => import('@/pages/User/User.vue'),
         meta: {
           title: 'Пользователь',
+          showFooter: false
         },
       },
       {
@@ -107,8 +118,20 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
         component: () => import('@/pages/UIKit/Icons.vue'),
         meta: {
           title: 'icons',
+          showSidebar: false
         },
-      }
+      },
     ],
+  },
+  {
+    path:`${RouteNames.MAIN.NOT_FOUND}`,
+    name: RouteNames.MAIN.NOT_FOUND,
+    component: () => import('@/pages/NotFound/NotFound.vue'),
+    meta: {
+      title: '404',
+      showHeader: false, 
+      showFooter: false,
+      showSidebar: false
+    },
   },
 ]

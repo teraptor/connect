@@ -16,6 +16,7 @@ interface IUser {
 export const useUserStore = defineStore('useUserStore', {
   state: () => ({
     user: null as IUser | null,
+    isUserLoaded: false
   }),
 
   actions: {
@@ -35,10 +36,12 @@ export const useUserStore = defineStore('useUserStore', {
     async getUserData() {
       const userId = this.getUserId();
       const token = localStorage.getItem('authToken');
-
-      if(!token) return ''
       
+      if (this.isUserLoaded) return;
+      if (!token) return '';
+
       try {
+        this.isUserLoaded = true;
         const response = await axios.get(`${USER}/${userId}`, {
           headers: {
             Bearer: token,
@@ -49,5 +52,5 @@ export const useUserStore = defineStore('useUserStore', {
         console.error('Ошибка при запросе данных сотрудника:', error);
       }
     },
-  },
+  }
 });
