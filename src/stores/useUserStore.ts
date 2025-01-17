@@ -16,7 +16,6 @@ interface IUser {
 export const useUserStore = defineStore('useUserStore', {
   state: () => ({
     user: null as IUser | null,
-    isUserLoaded: false
   }),
 
   actions: {
@@ -37,11 +36,9 @@ export const useUserStore = defineStore('useUserStore', {
       const userId = this.getUserId();
       const token = localStorage.getItem('authToken');
       
-      if (this.isUserLoaded) return;
       if (!token) return '';
 
       try {
-        this.isUserLoaded = true;
         const response = await axios.get(`${USER}/${userId}`, {
           headers: {
             Bearer: token,

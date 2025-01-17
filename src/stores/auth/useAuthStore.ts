@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import axios from 'axios';
 import { AUTORIZATION } from '@/constants';
 import { push } from 'notivue';
+import { useUserStore } from '../useUserStore';
 
 interface IAuthState {
   phone: string;
@@ -25,6 +26,7 @@ export const useAuthStore = defineStore('auth', {
         localStorage.setItem('authToken', token);
 
         this.resetForm();
+        await useUserStore().getUserData()
         push.success("Добро пожаловать!");
         return true;
       } catch (err) {

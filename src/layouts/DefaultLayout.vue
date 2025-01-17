@@ -3,7 +3,12 @@
   import Footer from '@/components/layout/Footer.vue';
   import Sidebar from '@/components/layout/Sidebar.vue';
   import { Notivue, Notification } from 'notivue'
+  import { useUserStore } from '@/stores/useUserStore';
+
   const route = useRoute();
+  const userStore = useUserStore();
+  userStore.getUserData();
+  console.log(route)
 </script>
 
 <template>
@@ -11,14 +16,14 @@
     <Notivue v-slot="item">
       <Notification :item="item" />
     </Notivue>
-    <Header v-if="route.meta.showHeader !== false"/>
+    <Header v-if="route.meta.showHeader"/>
     <div class="content-wrapper">
-      <Sidebar class="sidebar" v-if="route.meta.showSidebar !== false"/>
+      <Sidebar class="sidebar" v-if="route.meta.showSidebar"/>
       <div class="main-content">
         <slot/>
       </div>
     </div>
-    <Footer v-if="route.meta.showFooter !== false"/>
+    <Footer v-if="route.meta.showFooter"/>
   </div>
 </template>
 <style lang="scss" scoped>

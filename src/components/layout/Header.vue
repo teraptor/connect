@@ -20,10 +20,6 @@ onClickOutside(dropdown, () => {
   isOpen.value = false;
 });
 
-onMounted(async () => {
-  await userStore.getUserData()
-})
-
 const moveToLogin = () => router.push({ name: RouteNames.MAIN.LOGIN })
 const moveToRegister = () => router.push({ name: RouteNames.MAIN.REGISTER })
 const user = computed(() => userStore.user)
@@ -31,7 +27,7 @@ const user = computed(() => userStore.user)
 const logout = () => {
   localStorage.removeItem('authToken')
   userStore.user = null
-  router.push('/main')
+  router.push('/')
 }
 </script>
 

@@ -2,9 +2,6 @@
 import { useUserStore } from '@/stores/useUserStore';
 
 const userStore = useUserStore()
-onMounted(async () => {
-  await userStore.getUserData()
-})
 const user = computed(() => userStore.user)
 const getTGLink = (login: string) => `https://t.me/${login.replace('@', '')}`
 </script>

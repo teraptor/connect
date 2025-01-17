@@ -17,7 +17,7 @@ const isActive = (routeName: string | undefined) => {
 </script>
 
 <template>
-  <div class="sidebar" v-if="route.meta.showSidebar !== false">
+  <div class="sidebar">
     <ul class="sidebar__items">
       <li
         class="sidebar__item"

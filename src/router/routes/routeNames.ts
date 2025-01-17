@@ -5,17 +5,17 @@ export const RouteNames = {
     REGISTER: 'register',
     FORGOT: 'forgot',
     MAIN_PAGE: {
-      name: 'main',
+      name: '/',
       children: {
         WHY_WE: 'why_we',
         HOW_IT_WORKS: 'how_it_works',
         VACANCIES: 'vacancies',
         BENCHMARK: 'benchmark',
         CANDIDATES: 'candidates',
-        CANDIDATES_DETAIL: 'candidates_detail',
-        USER: 'user'
+        CANDIDATES_DETAIL: 'candidates_detail'
       },
     },
+    USER: 'user',
     UI_KIT: {
       name:'UI_Kit',
       children: {
