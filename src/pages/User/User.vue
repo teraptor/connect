@@ -1,13 +1,6 @@
-<script setup lang="ts">
-import { useUserStore } from '@/stores/useUserStore';
-
-
-const userStore = useUserStore();
-const user = computed(() => userStore.user)
-</script>
 <template>
-  <div>{{ user?.Name }}</div>
+  <CandidateForm/>
 </template>
-<style lang="scss" scoped>
-
-</style>
+<script setup>
+  import CandidateForm from '@/components/candidate/CandidateForm.vue';
+</script>

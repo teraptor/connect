@@ -21,8 +21,7 @@
       :validators="[isRequired, isPassword]"
       :icon = "showPassword ? 'icon icon-eye-hidden' : 'icon icon-eye'"
       @icon-click="togglePassword"
-    >
-    </InputField>
+    />
     <RouterLink to="/forgot" class="form__link">Забыли пароль ?</RouterLink>
     <Button 
       class="btn-primary" 

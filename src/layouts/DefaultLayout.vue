@@ -8,7 +8,6 @@
   const route = useRoute();
   const userStore = useUserStore();
   userStore.getUserData();
-  console.log(route)
 </script>
 
 <template>

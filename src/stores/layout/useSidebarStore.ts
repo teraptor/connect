@@ -18,7 +18,7 @@ export const usesidebarStore = defineStore('sidebar', {
     sidebarNav: [
       {
         title: 'Начало работы',
-        routeName: RouteNames.MAIN.MAIN_PAGE.children.USER,
+        routeName: RouteNames.MAIN.USER,
         icon: 'icon icon-user'
       },
       {
@@ -27,7 +27,7 @@ export const usesidebarStore = defineStore('sidebar', {
         items: [
           {
             title: 'Вкладка 1',
-            routeName: RouteNames.MAIN.MAIN_PAGE.children.USER,
+            routeName: RouteNames.MAIN.USER,
           },
           {
             title: 'Вкладка 2',
