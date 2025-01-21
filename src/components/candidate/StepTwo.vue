@@ -7,12 +7,11 @@ import InputField from '../ui/InputField.vue';
 const candidate = useCandidateStore();
 
 const addEducation = () => candidate.addEducation();
-
 const removeEducation = (index: number) => candidate.removeEducation(index);
 </script>
 <template>
   <div>
-    <h3 class="add-candidates__form-title">Шаг 2: Введите образование</h3>
+    <h3 class="add-candidates__form-title">Шаг 2: Образование</h3>
     <div v-for="(edu, index) in candidate.form.education" :key="index">
       <fieldset class="add-candidates__form-group">
         <div class="input__group">
@@ -48,14 +47,16 @@ const removeEducation = (index: number) => candidate.removeEducation(index);
             required
             size='medium'
           />
-          <Button 
-          v-if="index !== 0"
-          type="button"
-          class="btn-danger" 
-          text="Удалить"
-          @click="removeEducation(index)"
-          size="small"
-          />
+          <div class="input__group-btn">
+            <Button 
+            v-if="index !== 0"
+            type="button"
+            class="btn-danger" 
+            text="Удалить"
+            @click="removeEducation(index)"
+            size="small"
+            />
+          </div>
         </div>
       </fieldset>
     </div>
@@ -65,7 +66,7 @@ const removeEducation = (index: number) => candidate.removeEducation(index);
       text="Добавить"
       icon="icon icon-plus"
       @click="addEducation"
-      size="small"
+      size="medium"
     />
   </div>
 </template>
@@ -79,8 +80,12 @@ const removeEducation = (index: number) => candidate.removeEducation(index);
 
 .input__group {
   display: flex;
-  align-items: flex-end;
   gap: 8px;
+
+  &-btn {
+    display: flex;
+    align-items: flex-end;
+  }
 }
 
 .add-candidates__form-group {

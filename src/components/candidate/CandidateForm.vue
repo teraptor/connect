@@ -4,10 +4,14 @@ import Button from '../ui/Button.vue';
 import { useCandidateStore } from '@/stores/useCandidateStore';
 import StepOne from './StepOne.vue';
 import StepTwo from './StepTwo.vue';
+import StepThree from './StepThree.vue';
+import StepFour from './StepFour.vue';
+import StepFive from './StepFive.vue';
+import StepSix from './StepSix.vue';
 
 const currentTab = ref(1);
 
-const steps = [StepOne, StepTwo];
+const steps = [StepOne, StepTwo, StepThree, StepFour, StepFive, StepSix];
 
 const candidate = useCandidateStore();
 
