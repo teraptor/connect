@@ -11,7 +11,7 @@
         :placeholder="placeholder"
         :required="required"
         :autocomplete="autocomplete"
-        :class="{ 'input-error': hasError }"
+        :class="[size, { 'input-error': hasError }]"
         @blur="validate"
       />
       <span class="form__group-icon" v-if="icon" @click="$emit('icon-click')">
@@ -36,6 +36,10 @@ const props = defineProps({
   required: {
     type: Boolean,
     default: false,
+  },
+  size: {
+    type: String,
+    default: 'large'
   },
   icon: String,
   autocomplete: String,
@@ -73,7 +77,7 @@ watch(internalValue, (newValue) => {
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .form__group {
   display: flex;
   flex-direction: column;
@@ -89,7 +93,6 @@ watch(internalValue, (newValue) => {
   }
 
   &-input {
-    width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -110,6 +113,20 @@ watch(internalValue, (newValue) => {
       border-color: red;
     }
   }
+
+  .small {
+    width: 100px;
+  }
+
+  .medium {
+    width: 200px;
+    max-height: 36px;
+  }
+
+  .large {
+    width: 100%;
+  }
+
   &-icon {
     position: absolute;
     right: 10px;
@@ -121,4 +138,5 @@ watch(internalValue, (newValue) => {
     font-size: 12px;
   }
 }
+
 </style>

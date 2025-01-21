@@ -2,7 +2,7 @@
   <button
     :type="type"
     :disabled="disabled || isLoading"
-    class="btn"
+    :class="['btn', buttonSize]"
   >
     <span v-if="isLoading" class="icon icon-spinner"></span>
     <span v-else class="btn-content">
@@ -27,6 +27,10 @@ const props = defineProps({
     type: String,
     default: ''
   },
+  size: {
+    type: String as PropType<'small' | 'medium' | 'large'>,
+    default: 'large'
+  },
   icon: {
     type: String,
     default: ''
@@ -36,11 +40,12 @@ const props = defineProps({
     default: false
   }
 });
+
+const buttonSize = computed(() => `btn-${props.size}`);
 </script>
 
 <style lang="scss" scoped>
 .btn {
-  width: 100%;
   padding: 10px;
   border-radius: 4px;
   cursor: pointer;
@@ -48,11 +53,22 @@ const props = defineProps({
   align-items: center;
   justify-content: center;
   gap: 4px;
-  margin: 0 auto;
   color: $light-color;
   font-size: 16px;
   font-weight: 300;
   max-height: 36px;
+  &-small {
+    width: 100px;
+  }
+
+
+  &-medium {
+    width: 150px;
+  }
+
+  &-large {
+    width: 100%;
+  }
   &:focus {
     outline: none;
   }

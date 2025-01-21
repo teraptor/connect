@@ -23,7 +23,14 @@ export const useCandidateStore = defineStore('candidate', {
       name: '',
       lastname: '',
       date_of_birth: '',
-      education: [] as Education[],
+      education: [
+        {
+          institution: '',
+          degree: '',
+          date_start: '',
+          date_end: '',
+        }
+      ] as Education[]
     } as INewCandidate,
   }),
   actions: {
@@ -61,7 +68,7 @@ export const useCandidateStore = defineStore('candidate', {
     },
 
     removeEducation(index: number) {
-      this.form.education.splice(index, 1);
+      if (this.form.education.length > 1) this.form.education.splice(index, 1);
     },
     clearForm() {
       this.form = {
