@@ -60,7 +60,7 @@ const validation = computed(() => ({
   date_of_birth: isRequired(candidate.form.date_of_birth),
   sex: isRequired(candidate.form.sex)
 }));
-console.log(validation)
+
 const isFormValid = computed(() => {
   const isEducationValid = candidate.form.education.every((edu, index) => {
     return Object.values(validation.value.education[index]).every(isValid => !isValid);
@@ -91,7 +91,9 @@ const isFormValid = computed(() => {
       </div>
     </div>
     <form class="add-candidates__form" @submit.prevent="submitForm">
-      <component :is="steps[currentTab - 1]"></component>
+      <keep-alive>
+        <component :is="steps[currentTab - 1]" />
+      </keep-alive>
       <div class="add-candidates__form-buttons">
         <Button 
           v-if="currentTab > 1"
