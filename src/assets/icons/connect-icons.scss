@@ -396,4 +396,10 @@
     }
   }
 
+  .icon-bin {
+    &::before {
+      content: $icon-bin;
+    }
+  }
+
 

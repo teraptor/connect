@@ -11,7 +11,7 @@
         :placeholder="placeholder"
         :required="required"
         :autocomplete="autocomplete"
-        :class="[size, { 'input-error': hasError }]"
+        :class="[size && type !== 'checkbox' ? size : '', { 'input-error': hasError }, { 'checkbox-input': type === 'checkbox' }]"
         @blur="validate"
       />
       <span class="form__group-icon" v-if="icon" @click="$emit('icon-click')">
@@ -30,7 +30,7 @@ const props = defineProps({
   id: String,
   type: {
     type: String,
-    default: 'text',
+    default: 'text'
   },
   placeholder: String,
   required: {
@@ -39,18 +39,21 @@ const props = defineProps({
   },
   size: {
     type: String,
-    default: 'large'
+    default: 'large',
   },
   icon: String,
   autocomplete: String,
-  modelValue: String,
+  modelValue: {
+    type: [String, Number, Boolean],
+    default: '',
+  },
   validators: {
     type: Array as () => Array<(value: any) => string | false>,
     default: () => [],
   },
 });
 
-const internalValue = ref<string | undefined>(props.modelValue);
+const internalValue = ref<string | number | boolean>(props.modelValue);
 const hasError = ref<boolean>(false);
 const errorMessage = ref<string>('');
 
@@ -116,6 +119,7 @@ watch(internalValue, (newValue) => {
 
   .small {
     width: 100px;
+    max-height: 36px;
   }
 
   .medium {
@@ -138,5 +142,4 @@ watch(internalValue, (newValue) => {
     font-size: 12px;
   }
 }
-
 </style>

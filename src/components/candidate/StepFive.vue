@@ -1,150 +1,142 @@
-<script setup lang="ts">
-import { useCandidateStore } from '@/stores/useCandidateStore';
-import Button from '../ui/Button.vue';
-import InputField from '../ui/InputField.vue';
-
-const candidate = useCandidateStore();
-const addCVItem = () => candidate.addCVItem();
-const removeCVItem = (index: number) => candidate.removeCVItem(index);
-const addTechnologyToCV = (index: number) => candidate.addTechnologyToCV(index);
-const removeTechnologyFromCV = (cvIndex: number, techIndex: number) => candidate.removeTechnologyFromCV(cvIndex, techIndex);
-</script>
-
 <template>
-  <div>
-    <h3 class="add-candidates__form-title">Шаг 5: Опыт работы</h3>
-    <div v-for="(cvItem, index) in candidate.form.cv_item" :key="index">
-      <fieldset class="add-candidates__form-group">
-        <div class="input__group">
-          <InputField
-            v-model="cvItem.position_name"
-            label="Должность"
-            type="text"
-            placeholder="Введите должность..."
-            required
-            size="medium"
-          />
-          <InputField
-            v-model="cvItem.employer"
-            label="Работодатель"
-            type="text"
-            placeholder="Введите работодателя..."
-            required
-            size="medium"
-          />
-          <InputField
-            v-model="cvItem.start_period"
-            label="Период начала"
-            type="date"
-            placeholder="Введите период начала..."
-            required
-            size="medium"
-          />
-          <InputField
-            v-model="cvItem.end_period"
-            label="Период окончания"
-            type="date"
-            placeholder="Введите период окончания..."
-            required
-            size="medium"
-          />
-          <InputField
-            v-model="cvItem.description"
-            label="Описание"
-            type="text"
-            placeholder="Введите описание..."
-            required
-            size="medium"
-          />
-        </div>
-        <div class="input__group-technology">
-        <div v-for="(tech, techIndex) in cvItem.cv_technology" :key="techIndex" class="technology-group">
-            <InputField
-              v-model="tech.name"
-              label="Технология"
-              type="text"
-              placeholder="Введите технологию..."
-              required
-              size="medium"
-            />
-            <div class="input__group-btn">
-              <Button
-                v-if="cvItem.cv_technology.length > 1"
-                type="button"
-                class="btn-danger"
-                text="Удалить"
-                @click="removeTechnologyFromCV(index, techIndex)"
-                size="small"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="input__group-btn">
-          <Button
-            type="button"
-            class="btn-secondary"
-            text="Добавить"
-            @click="addTechnologyToCV(index)"
-            size="medium"
-          />
-          <Button
-            v-if="index !== 0"
-            type="button"
-            class="btn-danger"
-            text="Удалить"
-            @click="removeCVItem(index)"
-            size="small"
-          />
-        </div>
-      </fieldset>
+  <div class="input__container">
+    <div class="input__group">
+      <h3 class="input__group-title">Ставка</h3>
+      <div class="input__group-inputs">
+        <InputField
+          v-model="candidate.form.salary.salary_hour"
+          label="Стоимость часа (RUB)"
+          type="number"
+          placeholder="Введите стоимость часа..."
+          required
+          size="medium"
+        />
+        <InputField
+          v-model="candidate.form.salary.salary_month"
+          label="Стоимость в месяц (RUB)"
+          type="number"
+          placeholder="Введите стоимость в месяц..."
+          required
+          size="medium"
+        />
+      </div>
     </div>
-    <Button
-      type="button"
-      class="btn-secondary"
-      text="Добавить"
-      icon="icon icon-plus"
-      @click="addCVItem"
-      size="medium"
-    />
+    <div class="input__group">
+      <h3 class="input__group-title">Тип занятости</h3>
+      <div class="input__group-inputs">
+        <InputField
+          v-model="candidate.form.employement.parttime"
+          label="Парттайм"
+          type="checkbox"
+        />
+        <InputField
+          v-model="candidate.form.employement.fulltime"
+          label="Фултайм"
+          type="checkbox"
+        />
+      </div>
+    </div>
+    <div class="input__group">
+      <h3 class="input__group-title">Формат работы</h3>
+      <SelectField
+        v-model="candidate.form.work_format.work_type"
+        id="workType"
+        label="Формат работы:"
+        :enumObject="WorkFormatEnum"
+        placeholder="Выберите формат работы"
+        required
+      />
+      <InputField
+        v-model="candidate.form.work_format.business_trip"
+        label="Командировки"
+        type="checkbox"
+      />
+      <InputField
+        v-model="candidate.form.work_format.foreign_project"
+        label="Работа над зарубежными проектами"
+        type="checkbox"
+      />
+      <InputField
+        v-model="candidate.form.work_format.foreign_relocate"
+        label="Релокация за границу"
+        type="checkbox"
+      />
+      <InputField
+        v-model="candidate.form.work_format.national_relocate"
+        label="Релокация внутри страны"
+        type="checkbox"
+      />
+      <InputField
+        v-model="candidate.form.work_format.rent_in_team"
+        label="Работа в арендуемой команде"
+        type="checkbox"
+      />
+    </div>
   </div>
 </template>
 
+<script setup lang="ts">
+import { useCandidateStore } from '@/stores/useCandidateStore';
+import InputField from '../ui/InputField.vue';
+import SelectField from '../ui/SelectField.vue';
+import { WorkFormatEnum } from '@/enums/enums';
+
+
+const candidate = useCandidateStore();
+</script>
+
 <style lang="scss" scoped>
-.add-candidates__form-title {
-  font-size: 18px;
-  font-weight: 400;
-  margin-bottom: 10px;
+.input__container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 70%;
 }
 
 .input__group {
-  display: flex;
-  gap: 8px;
-
-  &-btn {
-    display: flex;
-    align-items: flex-end;
-  }
-
-  &-technology {
-    display: flex;
-    flex-direction: column;
-  }
-}
-
-.add-candidates__form-group {
-  margin: 10px 0;
-}
-
-.technology-group {
+  width: 100%;
   display: flex;
   flex-direction: column;
+  border: 2px solid $border-light;
+  padding: 24px;
+  background-color: $light-color;
+  border-radius: 30px;
   gap: 8px;
-  margin: 10px;
-}
+  margin: 8px 0;
 
-.input__group-btn {
-  display: flex;
-  align-items: flex-end;
-  gap: 8px;
+  &-title {
+    font-weight: 700;
+    color: $dark-color;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .icon {
+      cursor: pointer;
+      color: $icon-gray;
+
+      &:hover {
+        color: $main-color;
+      };
+    }
+  }
+
+  &-inputs {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: 12px;
+
+  .icon-bin {
+    cursor: pointer;
+    font-size: 28px;
+    color: $icon-gray;
+
+    &:hover {
+      color: $main-color;
+    };
+  };
+  }
 }
 </style>

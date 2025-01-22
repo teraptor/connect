@@ -8,88 +8,158 @@ const candidate = useCandidateStore();
 
 const addEducation = () => candidate.addEducation();
 const removeEducation = (index: number) => candidate.removeEducation(index);
+
+const addCertification = () => candidate.addCertification();
+const removeCertification = (index: number) => candidate.removeCertification(index);
 </script>
 <template>
-  <div>
-    <h3 class="add-candidates__form-title">Шаг 2: Образование</h3>
-    <div v-for="(edu, index) in candidate.form.education" :key="index">
-      <fieldset class="add-candidates__form-group">
-        <div class="input__group">
-          <InputField
-            v-model="edu.institution"
-            label="Учреждение образования:"
-            type="text"
-            placeholder="Введите учреждение..."
-            required
-            size='medium'
-          />
-          <InputField
-            v-model="edu.degree"
-            label="Степень:"
-            type="text"
-            placeholder="Введите степень..."
-            required
-            size='medium'
-          />
-          <InputField
-            v-model="edu.date_start"
-            label="Дата поступления:"
-            type="date"
-            placeholder="Введите дату поступления..."
-            required
-            size='medium'
-          />
-          <InputField
-            v-model="edu.date_end"
-            label="Дата окончания:"
-            type="date"
-            placeholder="Введите дату окончания..."
-            required
-            size='medium'
-          />
-          <div class="input__group-btn">
-            <Button 
-            v-if="index !== 0"
-            type="button"
-            class="btn-danger" 
-            text="Удалить"
-            @click="removeEducation(index)"
-            size="small"
-            />
-          </div>
-        </div>
-      </fieldset>
+  <div class="input__container">
+    <div v-for="(edu, index) in candidate.form.education" :key="index" class="input__group">
+      <h3 class="input__group-title">
+        Образование
+        <button  
+          type="button"           
+          v-if="index !== 0"
+          @click="removeEducation(index)"
+        >
+          <span class="icon icon-bin"/>
+        </button>
+      </h3>
+      <InputField
+        v-model="edu.institution"
+        label="Учреждение образования:"
+        type="text"
+        placeholder="Введите учреждение..."
+        required
+      />
+      <InputField
+        v-model="edu.degree"
+        label="Степень:"
+        type="text"
+        placeholder="Введите степень..."
+        required
+      />
+      <InputField
+        v-model="edu.date_start"
+        label="Дата поступления:"
+        type="date"
+        placeholder="Введите дату поступления..."
+        required
+      />
+      <InputField
+        v-model="edu.date_end"
+        label="Дата окончания:"
+        type="date"
+        placeholder="Введите дату окончания..."
+        required
+      />
     </div>
     <Button 
       type="button"
-      class="btn-secondary" 
-      text="Добавить"
+      class="btn-primary" 
+      text="Добавить образование"
       icon="icon icon-plus"
       @click="addEducation"
-      size="medium"
     />
+    <div class="input__group">
+      <h3 class="input__group-title">Дипломы и сертификаты</h3>
+      <div v-for="(cert, index) in candidate.form.certification" :key="index" class="input__group-inputs">
+        <InputField
+          v-model="cert.title"
+          label="Название диплома:"
+          type="text"
+          placeholder="Введите название..."
+          required
+          size="medium"
+        />
+        <InputField
+          v-model="cert.issuer"
+          label="Выдавшая организация"
+          type="text"
+          placeholder="Введите организацию..."
+          required
+          size="medium"
+        />
+        <InputField
+          v-model="cert.date_issued"
+          label="Дата выдачи:"
+          type="date"
+          id="date_issued"
+          placeholder="Введите дату выдачи..."
+          required
+          size="medium"
+        />
+        <button  
+          type="button"           
+          @click="removeCertification(index)"
+        >
+          <span class="icon icon-bin"/>
+        </button>
+      </div>
+      <Button
+      type="button"
+      class="btn-secondary"
+      text="Добавить"
+      icon="icon icon-plus-circle"
+      @click="addCertification"
+      size="medium"
+      />
+    </div>
   </div>
 </template>
 <style lang="scss" scoped>
-
-.add-candidates__form-title {
-  font-size: 18px;
-  font-weight: 400;
-  margin-bottom: 10px;
+.input__container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 70%;
 }
 
 .input__group {
+  width: 100%;
   display: flex;
+  flex-direction: column;
+  border: 2px solid $border-light;
+  padding: 24px;
+  background-color: $light-color;
+  border-radius: 30px;
   gap: 8px;
+  margin: 8px 0;
 
-  &-btn {
+  &-title {
+    font-weight: 700;
+    color: $dark-color;
     display: flex;
-    align-items: flex-end;
-  }
-}
+    justify-content: space-between;
+    align-items: center;
 
-.add-candidates__form-group {
-  margin: 10px 0;
+    .icon {
+      cursor: pointer;
+      color: $icon-gray;
+
+      &:hover {
+        color: $main-color;
+      };
+    }
+  }
+
+  &-inputs {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: 12px;
+
+  .icon-bin {
+    cursor: pointer;
+    font-size: 28px;
+    color: $icon-gray;
+
+    &:hover {
+      color: $main-color;
+    };
+  };
+  }
 }
 </style>
 

@@ -4,85 +4,151 @@ import Button from '../ui/Button.vue';
 import InputField from '../ui/InputField.vue';
 
 const candidate = useCandidateStore();
-const addCertification = () => candidate.addCertification();
-const removeCertification = (index: number) => candidate.removeCertification(index);
-
+const addCVItem = () => candidate.addCVItem();
+const removeCVItem = (index: number) => candidate.removeCVItem(index);
+const addTechnologyToCV = (index: number) => candidate.addTechnologyToCV(index);
+const removeTechnologyFromCV = (cvIndex: number, techIndex: number) => candidate.removeTechnologyFromCV(cvIndex, techIndex);
 </script>
 
 <template>
-  <div>
-    <h3 class="add-candidates__form-title">Шаг 4: Дипломы/грамоты</h3>
-    <div v-for="(cert, index) in candidate.form.certification" :key="index">
-      <fieldset class="add-candidates__form-group">
-        <div class="input__group">
-          <InputField
-            v-model="cert.title"
-            label="Название диплома:"
-            type="text"
-            placeholder="Введите название..."
-            required
-            size="medium"
-          />
-          <InputField
-            v-model="cert.issuer"
-            label="Выдавшая организация"
-            type="text"
-            placeholder="Введите организацию..."
-            required
-            size="medium"
-          />
-          <InputField
-            v-model="cert.date_issued"
-            label="Дата выдачи:"
-            type="date"
-            id="date_issued"
-            placeholder="Введите дату выдачи..."
-            required
-            size='medium'
-          />
-
-          <div class="input__group-btn">
-            <Button
-              v-if="index !== 0"
-              type="button"
-              class="btn-danger"
-              text="Удалить"
-              @click="removeCertification(index)"
-              size="small"
-            />
-          </div>
-        </div>
-      </fieldset>
+  <div v-for="(cvItem, index) in candidate.form.cv_item" :key="index" class="input__container">
+    <div class="input__group">
+      <h3 class="input__group-title">
+        Образование
+        <button  
+          type="button"           
+          v-if="index !== 0"
+          @click="removeCVItem(index)"
+        >
+          <span class="icon icon-bin"/>
+        </button>
+      </h3>
+      <InputField
+        v-model="cvItem.position_name"
+        label="Должность"
+        type="text"
+        placeholder="Введите должность..."
+        required
+      />
+      <InputField
+        v-model="cvItem.employer"
+        label="Работодатель"
+        type="text"
+        placeholder="Введите работодателя..."
+        required
+      />
+      <InputField
+        v-model="cvItem.start_period"
+        label="Период начала"
+        type="date"
+        placeholder="Введите период начала..."
+        required
+      />
+      <InputField
+        v-model="cvItem.end_period"
+        label="Период окончания"
+        type="date"
+        placeholder="Введите период окончания..."
+        required
+      />
+      <InputField
+        v-model="cvItem.description"
+        label="Описание"
+        type="text"
+        placeholder="Введите описание..."
+        required
+      />
     </div>
-    <Button
+    <div class="input__group">
+      <h3 class="input__group-title">Технологии</h3>
+      <div v-for="(tech, techIndex) in cvItem.cv_technology" :key="techIndex" class="input__group-inputs">
+        <InputField
+          v-model="tech.name"
+          label="Технология"
+          type="text"
+          placeholder="Введите технологию..."
+          required
+          size="medium"
+        />
+        <button  
+          v-if="techIndex !== 0"
+          type="button"           
+          @click="removeTechnologyFromCV(index, techIndex)"
+        >
+          <span class="icon icon-bin"/>
+        </button>
+      </div>
+      <Button
+        type="button"
+        class="btn-secondary"
+        text="Добавить"
+        icon="icon icon-plus-circle"
+        @click="addTechnologyToCV(index)"
+        size="medium"
+      />
+    </div>
+    <Button 
       type="button"
-      class="btn-secondary"
-      text="Добавить"
+      class="btn-primary" 
+      text="Добавить место работы"
       icon="icon icon-plus"
-      @click="addCertification"
-      size="medium"
+      @click="addCVItem"
     />
   </div>
 </template>
 
 <style lang="scss" scoped>
-.add-candidates__form-title {
-  font-size: 18px;
-  font-weight: 400;
-  margin-bottom: 10px;
+.input__container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 70%;
 }
 
 .input__group {
+  width: 100%;
   display: flex;
+  flex-direction: column;
+  border: 2px solid $border-light;
+  padding: 24px;
+  background-color: $light-color;
+  border-radius: 30px;
   gap: 8px;
+  margin: 8px 0;
 
-  &-btn {
+  &-title {
+    font-weight: 700;
+    color: $dark-color;
     display: flex;
-    align-items: flex-end;
-  }
-}
+    justify-content: space-between;
+    align-items: center;
 
-.add-candidates__form-group {
-  margin: 10px 0;
+    .icon {
+      cursor: pointer;
+      color: $icon-gray;
+
+      &:hover {
+        color: $main-color;
+      };
+    }
+  }
+
+  &-inputs {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: 12px;
+
+  .icon-bin {
+    cursor: pointer;
+    font-size: 28px;
+    color: $icon-gray;
+
+    &:hover {
+      color: $main-color;
+    };
+  };
+  }
 }
 </style>

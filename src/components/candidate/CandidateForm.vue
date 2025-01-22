@@ -13,6 +13,15 @@ const currentTab = ref(1);
 
 const steps = [StepOne, StepTwo, StepThree, StepFour, StepFive, StepSix];
 
+const stepTitles = [
+  'Личные данные',
+  'Образование',
+  'Навыки',
+  'Опыт работы',
+  'Условия работы',
+  'Главное о специалисте'
+];
+
 const candidate = useCandidateStore();
 
 const nextStep = () => {
@@ -24,28 +33,38 @@ const prevStep = () => {
 };
 
 const submitForm = async () => {
-    await candidate.newCandidate();
-    currentTab.value = 1;
+  await candidate.newCandidate();
+  currentTab.value = 1;
 };
 </script>
 
 <template>
   <div class="add-candidates">
-    <h3 class="add-candidates__title">Создание кандидата</h3>
-    <p class="add-candidates__subtitle">Шаг {{ currentTab }} из {{ steps.length }}</p>
+    <h3 class="add-candidates__title">Профиль специалиста</h3>
+    <div class="add-candidates__tabs">
+      <div 
+        v-for="(title, index) in stepTitles" 
+        :key="index" 
+        :class="['tab', { 'tab--active': currentTab === index + 1 }]"
+        @click="currentTab = index + 1"
+      >
+        {{ title }}
+      </div>
+    </div>
+
     <form class="add-candidates__form" @submit.prevent="submitForm">
       <component :is="steps[currentTab - 1]"></component>
       <div class="add-candidates__form-buttons">
         <Button 
           v-if="currentTab > 1"
-          class="btn-danger" 
+          class="btn-secondary" 
           text="Назад"
           @click="prevStep"
           size="small"
         />
         <Button 
           v-if="currentTab < steps.length"
-          class="btn-success" 
+          class="btn-primary" 
           text="Далее"
           @click="nextStep"
           size="small"
@@ -62,30 +81,44 @@ const submitForm = async () => {
   </div>
 </template>
 
-
 <style scoped lang="scss">
 .add-candidates {
+  padding: 20px 30px 0;
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin-top: 20px;
+  gap: 20px;
   flex-direction: column;
 
   &__title {
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 26px;
+    font-weight: 700;
     color: $dark-color;
   }
 
-  &__subtitle {
-    font-size: 16px;
-    font-weight: 300;
-    color: $text-help;
+  &__tabs {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    width: 100%;
+
+    .tab {
+      padding: 8px 16px;
+      cursor: pointer;
+      font-weight: 400;
+      border: 2px solid $border-light;
+      background-color: $light-color;
+      border-radius: 4px;
+
+      &--active {
+        border-color: $main-color;
+        color: $main-color;
+      }
+    }
   }
 
   &__form {
-    width: 80%;
+    width: 100%;
 
     &-buttons {
       margin-top: 20px;
@@ -93,6 +126,15 @@ const submitForm = async () => {
       align-items: center;
       justify-content: flex-end;
       gap: 4px;
+      position: sticky;
+      bottom: 0;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      border: 2px solid $border-light;
+      border-bottom: none;
+      background-color: $light-color;
+      z-index: 10;
+      padding: 20px;
     }
   }
 }

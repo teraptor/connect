@@ -12,69 +12,97 @@ const removeLanguage = (index: number) => candidate.removeLanguage(index);
 </script>
 
 <template>
-  <div>
-    <h3 class="add-candidates__form-title">Шаг 3: Языки</h3>
-    <div v-for="(lang, index) in candidate.form.language" :key="index">
-      <fieldset class="add-candidates__form-group">
-        <div class="input__group">
-          <InputField
-            v-model="lang.name"
-            label="Язык:"
-            type="text"
-            placeholder="Введите язык..."
-            required
-            size="medium"
-          />
-          <SelectField
-            id="lang.level"
-            v-model="lang.level"
-            label="Уровень владения:"
-            :enumObject="LanguageLevelEnum"
-            placeholder="Уровень владения"
-            size="medium"
-          />
-          <div class="input__group-btn">
-            <Button
-              v-if="index !== 0"
-              type="button"
-              class="btn-danger"
-              text="Удалить"
-              @click="removeLanguage(index)"
-              size="small"
-            />
-          </div>
-        </div>
-      </fieldset>
-    </div>
-    <Button
+  <div class="input__container">
+    <div class="input__group">
+      <h3 class="input__group-title">Язык</h3>
+      <div v-for="(lang, index) in candidate.form.language" :key="index" class="input__group-inputs">
+        <InputField
+          v-model="lang.name"
+          label="Язык:"
+          type="text"
+          placeholder="Введите язык..."
+          required
+          size="medium"
+        />
+        <SelectField
+          id="lang.level"
+          v-model="lang.level"
+          label="Уровень владения:"
+          :enumObject="LanguageLevelEnum"
+          placeholder="Уровень владения"
+          size="medium"
+        />
+        <button  
+          type="button"           
+          @click="removeLanguage(index)"
+        >
+          <span class="icon icon-bin"/>
+        </button>
+      </div>
+      <Button
       type="button"
       class="btn-secondary"
       text="Добавить"
-      icon="icon icon-plus"
+      icon="icon icon-plus-circle"
       @click="addLanguage"
       size="medium"
-    />
+      />
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.add-candidates__form-title {
-  font-size: 18px;
-  font-weight: 400;
-  margin-bottom: 10px;
+.input__container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 70%;
 }
 
 .input__group {
+  width: 100%;
   display: flex;
+  flex-direction: column;
+  border: 2px solid $border-light;
+  padding: 24px;
+  background-color: $light-color;
+  border-radius: 30px;
   gap: 8px;
+  margin: 8px 0;
 
-  &-btn {
+  &-title {
+    font-weight: 700;
+    color: $dark-color;
     display: flex;
-    align-items: flex-end;
-  }
-}
+    justify-content: space-between;
+    align-items: center;
 
-.add-candidates__form-group {
-  margin: 10px 0;
+    .icon {
+      cursor: pointer;
+      color: $icon-gray;
+
+      &:hover {
+        color: $main-color;
+      };
+    }
+  }
+
+  &-inputs {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: 12px;
+
+  .icon-bin {
+    cursor: pointer;
+    font-size: 28px;
+    color: $icon-gray;
+
+    &:hover {
+      color: $main-color;
+    };
+  };
+  }
 }
 </style>

@@ -94,19 +94,8 @@ export const useCandidateStore = defineStore('candidate', {
           date_end: ''
         }
       ] as Education[],
-      language: [
-        {
-          name: '',
-          level: ''
-        }
-      ] as Language[],
-      certification: [
-        {
-          title: '',
-          issuer: '',
-          date_issued: ''
-        }
-      ] as Certification[],
+      language: [] as Language[],
+      certification: [] as Certification[],
       cv_item: [
         {
           position_name: '',
@@ -189,9 +178,7 @@ export const useCandidateStore = defineStore('candidate', {
     },
 
     removeCertification(index: number) {
-      if (this.form.certification.length > 1) {
-        this.form.certification.splice(index, 1);
-      }
+      this.form.certification.splice(index, 1);
     },
 
     addLanguage() {
@@ -202,9 +189,7 @@ export const useCandidateStore = defineStore('candidate', {
     },
 
     removeLanguage(index: number) {
-      if (this.form.language.length > 1) {
-        this.form.language.splice(index, 1);
-      }
+      this.form.language.splice(index, 1);
     },
 
     addCVItem() {
@@ -255,17 +240,10 @@ export const useCandidateStore = defineStore('candidate', {
           }
         ],
         language: [
-          {
-            name: '',
-            level: ''
-          }
+
         ],
         certification: [
-          {
-            title: '',
-            issuer: '',
-            date_issued: ''
-          }
+
         ],
         cv_item: [
           {

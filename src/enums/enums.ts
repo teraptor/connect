@@ -23,3 +23,9 @@ export enum LanguageLevelEnum {
   Advanced = "Advanced",
   Proficiency = "Proficiency"
 }
+
+export enum WorkFormatEnum {
+  Ofic = "Офис",
+  Hybrid = "Гибрид",
+  Remote = "Удаленно"
+}
