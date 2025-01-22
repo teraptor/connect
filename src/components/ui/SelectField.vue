@@ -2,37 +2,31 @@
   <div class="select__group">
     <label :for="id" class="select__group-label">{{ label }}</label>
     <div class="select__group-select-wrapper">
-      <div
-        class="select__group-selected"
-        @click="toggleDropdown"
-        :class="[size, {'select__group-selected--active': isDropdownOpen}]"
+      <select
+        :id="id"
+        class="select__group-select"
+        :required="required"
+        :value="modelValue"
+        @input="handleInput"
+        :class="[size, { 'select-error': hasError }]"
+        @blur="validate"
       >
-        {{ selectedOption || placeholder }}
-      </div>
-      <div v-if="isDropdownOpen" class="select__group-dropdown">
-        <input
-          v-if="enableSearch"
-          type="text"
-          v-model="searchQuery"
-          class="select__group-search"
-          :placeholder="'Поиск...'"
-        />
-        <div
-          v-for="(value, key) in filteredOptions"
+        <option value="" disabled>{{ placeholder }}</option>
+        <option
+          v-for="(value, key) in enumObject"
           :key="key"
-          class="select__group-option"
-          @click="selectOption(value)"
+          :value="value"
         >
           {{ value }}
-        </div>
-      </div>
+        </option>
+      </select>
     </div>
     <span v-if="hasError" class="select__group-error">{{ errorMessage }}</span>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps, defineEmits, computed, watch } from 'vue';
+import { ref, defineProps, defineEmits, watch } from 'vue';
 
 const props = defineProps({
   id: {
@@ -61,22 +55,15 @@ const props = defineProps({
   },
   size: {
     type: String,
-    default: 'large',
+    default: 'large'
   },
   validators: {
     type: Array as () => Array<(value: string) => string | false>,
     default: () => [],
   },
-  enableSearch: {
-    type: Boolean,
-    default: false,
-  },
 });
 
 const internalValue = ref<string>(props.modelValue);
-const searchQuery = ref<string>('');
-const isDropdownOpen = ref<boolean>(false);
-const selectedOption = ref<string | null>(null);
 const hasError = ref<boolean>(false);
 const errorMessage = ref<string>('');
 
@@ -84,9 +71,13 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void;
 }>();
 
-const handleInput = (value: string) => {
-  internalValue.value = value;
-  emit('update:modelValue', value);
+const handleInput = (event: Event) => {
+  const target = event.target as HTMLSelectElement;
+  if (target) {
+    const value = target.value;
+    internalValue.value = value;
+    emit('update:modelValue', value);
+  }
 };
 
 const validate = () => {
@@ -103,23 +94,6 @@ const validate = () => {
 
   hasError.value = false;
   errorMessage.value = '';
-};
-
-const filteredOptions = computed(() => {
-  const query = searchQuery.value.toLowerCase();
-  return Object.values(props.enumObject).filter((value) =>
-    value.toLowerCase().includes(query)
-  );
-});
-
-const toggleDropdown = () => {
-  isDropdownOpen.value = !isDropdownOpen.value;
-};
-
-const selectOption = (value: string) => {
-  selectedOption.value = value;
-  handleInput(value);
-  isDropdownOpen.value = false;
 };
 
 watch(internalValue, (newValue) => {
@@ -140,58 +114,32 @@ watch(internalValue, (newValue) => {
 
   &-select-wrapper {
     position: relative;
-    width: 100%;
   }
 
-  &-selected {
-    padding: 8px;
+  &-select {
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    &--active {
-      border-color: #4b9cd3;
+
+    &::placeholder {
+      font-size: 14px;
+      font-weight: 300;
     }
-  }
 
-  &-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    max-height: 120px;
-    width: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
-    background-color: white;
-    z-index: 10;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
+    &:focus {
+      border-color: #4b9cd3;
+      background-color: #fff;
+      box-shadow: 0 0 8px rgba(75, 156, 211, 0.5);
+      outline: none;
+    }
 
-  &-search {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin: 8px;
-    width: 100%;
-  }
-
-  &-option {
-    padding: 8px;
-    cursor: pointer;
-    &:hover {
-      background-color: #f0f0f0;
+    &.select-error {
+      border-color: red;
     }
   }
 
   .small {
     width: 100px;
-    max-height: 36px;
   }
 
   .medium {
@@ -208,7 +156,9 @@ watch(internalValue, (newValue) => {
     font-size: 12px;
   }
 }
+
 </style>
+
 
 
 

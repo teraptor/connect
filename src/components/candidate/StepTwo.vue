@@ -3,6 +3,7 @@
 import { useCandidateStore } from '@/stores/useCandidateStore';
 import Button from '../ui/Button.vue';
 import InputField from '../ui/InputField.vue';
+import { isRequired } from '@/helpers/validation';
 
 const candidate = useCandidateStore();
 
@@ -31,6 +32,7 @@ const removeCertification = (index: number) => candidate.removeCertification(ind
         type="text"
         placeholder="Введите учреждение..."
         required
+        :validators="[isRequired]"
       />
       <InputField
         v-model="edu.degree"
@@ -38,6 +40,7 @@ const removeCertification = (index: number) => candidate.removeCertification(ind
         type="text"
         placeholder="Введите степень..."
         required
+        :validators="[isRequired]"
       />
       <InputField
         v-model="edu.date_start"
@@ -45,6 +48,7 @@ const removeCertification = (index: number) => candidate.removeCertification(ind
         type="date"
         placeholder="Введите дату поступления..."
         required
+        :validators="[isRequired]"
       />
       <InputField
         v-model="edu.date_end"
@@ -52,6 +56,7 @@ const removeCertification = (index: number) => candidate.removeCertification(ind
         type="date"
         placeholder="Введите дату окончания..."
         required
+        :validators="[isRequired]"
       />
     </div>
     <Button 
@@ -150,15 +155,15 @@ const removeCertification = (index: number) => candidate.removeCertification(ind
     align-items: flex-end;
     gap: 12px;
 
-  .icon-bin {
-    cursor: pointer;
-    font-size: 28px;
-    color: $icon-gray;
+    .icon-bin {
+      cursor: pointer;
+      font-size: 28px;
+      color: $icon-gray;
 
-    &:hover {
-      color: $main-color;
+      &:hover {
+        color: $main-color;
+      };
     };
-  };
   }
 }
 </style>

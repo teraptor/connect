@@ -1,3 +1,13 @@
+<script setup lang="ts">
+import { useCandidateStore } from '@/stores/useCandidateStore';
+import InputField from '../ui/InputField.vue';
+import SelectField from '../ui/SelectField.vue';
+import { WorkFormatEnum } from '@/enums/enums';
+
+
+const candidate = useCandidateStore();
+</script>
+
 <template>
   <div class="input__container">
     <div class="input__group">
@@ -74,16 +84,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { useCandidateStore } from '@/stores/useCandidateStore';
-import InputField from '../ui/InputField.vue';
-import SelectField from '../ui/SelectField.vue';
-import { WorkFormatEnum } from '@/enums/enums';
-
-
-const candidate = useCandidateStore();
-</script>
 
 <style lang="scss" scoped>
 .input__container {

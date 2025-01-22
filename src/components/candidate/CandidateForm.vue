@@ -1,18 +1,17 @@
-<script setup>
-import { ref } from 'vue';
-import Button from '../ui/Button.vue';
+<script setup lang="ts">
+import { ref, computed } from 'vue';
 import { useCandidateStore } from '@/stores/useCandidateStore';
+import Button from '../ui/Button.vue';
 import StepOne from './StepOne.vue';
 import StepTwo from './StepTwo.vue';
 import StepThree from './StepThree.vue';
 import StepFour from './StepFour.vue';
 import StepFive from './StepFive.vue';
 import StepSix from './StepSix.vue';
+import { isRequired } from '@/helpers/validation';
 
 const currentTab = ref(1);
-
 const steps = [StepOne, StepTwo, StepThree, StepFour, StepFive, StepSix];
-
 const stepTitles = [
   'Личные данные',
   'Образование',
@@ -36,6 +35,46 @@ const submitForm = async () => {
   await candidate.newCandidate();
   currentTab.value = 1;
 };
+
+const validation = computed(() => ({
+  education: candidate.form.education.map((edu) => ({
+    degree: isRequired(edu.degree),
+    institution: isRequired(edu.institution),
+    date_start: isRequired(edu.date_start),
+    date_end: isRequired(edu.date_end),
+  })),
+  cv_item: candidate.form.cv_item.map((item) => ({
+    position_name: isRequired(item.position_name),
+    employer: isRequired(item.employer),
+    start_period: isRequired(item.start_period),
+    end_period: isRequired(item.end_period),
+    description: isRequired(item.description)
+  })),
+  surname: isRequired(candidate.form.surname),
+  name: isRequired(candidate.form.name),
+  lastname: isRequired(candidate.form.lastname),
+  phone: isRequired(candidate.form.phone),
+  email: isRequired(candidate.form.email),
+  nationality: isRequired(candidate.form.nationality),
+  country: isRequired(candidate.form.country),
+  date_of_birth: isRequired(candidate.form.date_of_birth),
+  sex: isRequired(candidate.form.sex)
+}));
+console.log(validation)
+const isFormValid = computed(() => {
+  const isEducationValid = candidate.form.education.every((edu, index) => {
+    return Object.values(validation.value.education[index]).every(isValid => !isValid);
+  });
+
+  const isCVValid = candidate.form.cv_item.every((item, index) => {
+    return Object.values(validation.value.cv_item[index]).every(isValid => !isValid);
+  });
+
+  const isOtherFieldsValid = Object.values(validation.value).filter(value => typeof value !== 'object').every(isValid => !isValid)
+
+  return isEducationValid && isCVValid && isOtherFieldsValid
+})
+
 </script>
 
 <template>
@@ -51,7 +90,6 @@ const submitForm = async () => {
         {{ title }}
       </div>
     </div>
-
     <form class="add-candidates__form" @submit.prevent="submitForm">
       <component :is="steps[currentTab - 1]"></component>
       <div class="add-candidates__form-buttons">
@@ -75,6 +113,7 @@ const submitForm = async () => {
           text="Отправить"
           class="btn-success" 
           size="small"
+          :disabled="!isFormValid"
         />
       </div>
     </form>

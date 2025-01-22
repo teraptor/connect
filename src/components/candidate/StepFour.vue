@@ -2,6 +2,7 @@
 import { useCandidateStore } from '@/stores/useCandidateStore';
 import Button from '../ui/Button.vue';
 import InputField from '../ui/InputField.vue';
+import { isRequired } from '@/helpers/validation';
 
 const candidate = useCandidateStore();
 const addCVItem = () => candidate.addCVItem();
@@ -14,7 +15,7 @@ const removeTechnologyFromCV = (cvIndex: number, techIndex: number) => candidate
   <div v-for="(cvItem, index) in candidate.form.cv_item" :key="index" class="input__container">
     <div class="input__group">
       <h3 class="input__group-title">
-        Образование
+        Место работы
         <button  
           type="button"           
           v-if="index !== 0"
@@ -29,6 +30,7 @@ const removeTechnologyFromCV = (cvIndex: number, techIndex: number) => candidate
         type="text"
         placeholder="Введите должность..."
         required
+        :validators="[isRequired]"
       />
       <InputField
         v-model="cvItem.employer"
@@ -36,6 +38,7 @@ const removeTechnologyFromCV = (cvIndex: number, techIndex: number) => candidate
         type="text"
         placeholder="Введите работодателя..."
         required
+        :validators="[isRequired]"
       />
       <InputField
         v-model="cvItem.start_period"
@@ -43,6 +46,7 @@ const removeTechnologyFromCV = (cvIndex: number, techIndex: number) => candidate
         type="date"
         placeholder="Введите период начала..."
         required
+        :validators="[isRequired]"
       />
       <InputField
         v-model="cvItem.end_period"
@@ -50,6 +54,7 @@ const removeTechnologyFromCV = (cvIndex: number, techIndex: number) => candidate
         type="date"
         placeholder="Введите период окончания..."
         required
+        :validators="[isRequired]"
       />
       <InputField
         v-model="cvItem.description"
@@ -57,6 +62,7 @@ const removeTechnologyFromCV = (cvIndex: number, techIndex: number) => candidate
         type="text"
         placeholder="Введите описание..."
         required
+        :validators="[isRequired]"
       />
     </div>
     <div class="input__group">

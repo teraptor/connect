@@ -1,3 +1,9 @@
+<script setup lang="ts">
+import { useCandidateStore } from '@/stores/useCandidateStore';
+import TextAreaField from '../ui/TextAreaField.vue';
+
+const candidate = useCandidateStore();
+</script>
 <template>
   <div class="input__container">
     <div class="input__group">
@@ -7,18 +13,10 @@
         id="about" 
         v-model="candidate.form.about" 
         placeholder="Введите текст" 
-        required
       />
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { useCandidateStore } from '@/stores/useCandidateStore';
-import TextAreaField from '../ui/TextAreaField.vue';
-
-const candidate = useCandidateStore();
-</script>
 <style lang="scss" scoped>
 .input__container {
   width: 70%;

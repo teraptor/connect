@@ -1,3 +1,12 @@
+<script setup lang="ts">
+import { useCandidateStore } from '@/stores/useCandidateStore';
+import InputField from '../ui/InputField.vue';
+import { CountryEnum, NationalityEnum, SexEnum } from '@/enums/enums';
+import SelectField from '../ui/SelectField.vue';
+import { isRequired } from '@/helpers/validation';
+
+const candidate = useCandidateStore();
+</script>
 <template>
   <div class="input__container">
     <div class="input__group">
@@ -9,6 +18,7 @@
         id="surname"
         placeholder="Введите фамилию..."
         required
+        :validators="[isRequired]"
       />
       <InputField
         v-model="candidate.form.name"
@@ -17,6 +27,7 @@
         id="name"
         placeholder="Введите имя..."
         required
+        :validators="[isRequired]"
       />
       <InputField
         v-model="candidate.form.lastname"
@@ -25,6 +36,7 @@
         id="lastname"
         placeholder="Введите отчество..."
         required
+        :validators="[isRequired]"
       />
       <InputField
         v-model="candidate.form.phone"
@@ -33,6 +45,7 @@
         id="phone"
         placeholder="Введите номер телефона..."
         required
+        :validators="[isRequired]"
       />
       <InputField
         v-model="candidate.form.email"
@@ -41,6 +54,7 @@
         id="email"
         placeholder="Введите почту..."
         required
+        :validators="[isRequired]"
       />
       <SelectField
         v-model="candidate.form.nationality"
@@ -49,6 +63,7 @@
         :enumObject="NationalityEnum"
         placeholder="Выберите гражданство"
         required
+        :validators="[isRequired]"
       />
       <SelectField
         v-model="candidate.form.country"
@@ -57,7 +72,7 @@
         :enumObject="CountryEnum"
         placeholder="Выберите страну"
         required
-        :enableSearch="true"
+        :validators="[isRequired]"
       />
       <div class="input__group-inputs">
         <InputField
@@ -68,6 +83,7 @@
           placeholder="Введите дату рождения..."
           required
           size="medium"
+          :validators="[isRequired]"
         />
         <SelectField
           v-model="candidate.form.sex"
@@ -77,21 +93,13 @@
           placeholder="Выберите пол"
           size="medium"
           required
+          :validators="[isRequired]"
         />
       </div>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
-import { useCandidateStore } from '@/stores/useCandidateStore';
-import InputField from '../ui/InputField.vue';
-import { CountryEnum, NationalityEnum, SexEnum } from '@/enums/enums';
-import SelectField from '../ui/SelectField.vue';
-import TextAreaField from '../ui/TextAreaField.vue';
-
-const candidate = useCandidateStore();
-</script>
 <style lang="scss" scoped>
 .input__container {
   width: 70%;
