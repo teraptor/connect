@@ -21,7 +21,6 @@ const removeLanguage = (index: number) => candidate.removeLanguage(index);
           label="Язык:"
           type="text"
           placeholder="Введите язык..."
-          required
           size="medium"
         />
         <SelectField

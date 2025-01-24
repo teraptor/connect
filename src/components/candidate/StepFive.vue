@@ -18,7 +18,6 @@ const candidate = useCandidateStore();
           label="Стоимость часа (RUB)"
           type="number"
           placeholder="Введите стоимость часа..."
-          required
           size="medium"
         />
         <InputField
@@ -26,7 +25,6 @@ const candidate = useCandidateStore();
           label="Стоимость в месяц (RUB)"
           type="number"
           placeholder="Введите стоимость в месяц..."
-          required
           size="medium"
         />
       </div>
@@ -54,7 +52,6 @@ const candidate = useCandidateStore();
         label="Формат работы:"
         :enumObject="WorkFormatEnum"
         placeholder="Выберите формат работы"
-        required
       />
       <InputField
         v-model="candidate.form.work_format.business_trip"

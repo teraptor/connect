@@ -1,6 +1,9 @@
 <template>
   <div class="form__group">
-    <label class="form__group-label" :for="id">{{ label }}</label>
+    <label class="form__group-label" :for="id">
+      {{ label }}
+      <span v-if="required">*</span>
+    </label>
     <div class="form__group-input-wrapper">
       <input
         class="form__group-input"
@@ -52,7 +55,6 @@ const props = defineProps({
     default: () => [],
   },
 });
-
 const internalValue = ref<string | number | boolean>(props.modelValue);
 const hasError = ref<boolean>(false);
 const errorMessage = ref<string>('');
@@ -89,6 +91,10 @@ watch(internalValue, (newValue) => {
 
   &-label {
     font-weight: 300;
+
+    span {
+      color: $danger;
+    }
   }
 
   &-input-wrapper {

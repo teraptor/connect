@@ -73,7 +73,6 @@ const removeTechnologyFromCV = (cvIndex: number, techIndex: number) => candidate
           label="Технология"
           type="text"
           placeholder="Введите технологию..."
-          required
           size="medium"
         />
         <button  

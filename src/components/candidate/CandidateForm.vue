@@ -9,8 +9,10 @@ import StepFour from './StepFour.vue';
 import StepFive from './StepFive.vue';
 import StepSix from './StepSix.vue';
 import { isRequired } from '@/helpers/validation';
+import { push } from 'notivue';
 
-const currentTab = ref(1);
+const currentTab = ref<number>(1);
+const visitedTabs = ref<number[]>([0]);
 const steps = [StepOne, StepTwo, StepThree, StepFour, StepFive, StepSix];
 const stepTitles = [
   'Личные данные',
@@ -31,9 +33,12 @@ const prevStep = () => {
   if (currentTab.value > 1) currentTab.value--;
 };
 
+const help = () => push.info('Для отправки формы заполните все обязательные поля!');
+
 const submitForm = async () => {
   await candidate.newCandidate();
   currentTab.value = 1;
+  visitedTabs.value = [0]
 };
 
 const validation = computed(() => ({
@@ -50,19 +55,54 @@ const validation = computed(() => ({
     end_period: isRequired(item.end_period),
     description: isRequired(item.description)
   })),
-  surname: isRequired(candidate.form.surname),
-  name: isRequired(candidate.form.name),
-  lastname: isRequired(candidate.form.lastname),
-  phone: isRequired(candidate.form.phone),
-  email: isRequired(candidate.form.email),
-  nationality: isRequired(candidate.form.nationality),
-  country: isRequired(candidate.form.country),
-  date_of_birth: isRequired(candidate.form.date_of_birth),
-  sex: isRequired(candidate.form.sex)
+  personal: {
+    surname: isRequired(candidate.form.surname),
+    name: isRequired(candidate.form.name),
+    lastname: isRequired(candidate.form.lastname),
+    phone: isRequired(candidate.form.phone),
+    email: isRequired(candidate.form.email),
+    nationality: isRequired(candidate.form.nationality),
+    country: isRequired(candidate.form.country),
+    date_of_birth: isRequired(candidate.form.date_of_birth),
+    sex: isRequired(candidate.form.sex),
+  }
 }));
 
+const markTabAsVisited = (tabIndex: number) => {
+  if (!visitedTabs.value.includes(tabIndex)) {
+    visitedTabs.value.push(tabIndex);
+  }
+};
+
+const showErrorForTab = (index: number) => {
+  if (!visitedTabs.value.includes(index) || currentTab.value === index + 1) {
+    return false;
+  }
+  return isErrorForTab(index);
+};
+
+const isErrorForTab = (tabIndex: number) => {
+  switch (tabIndex) {
+    case 0:
+      return !Object.values(validation.value.personal).every(isValid => !isValid);
+
+    case 1:
+      return validation.value.education.some((item) =>
+        Object.values(item).some(isValid => isValid)
+      );
+
+    case 3:
+      return validation.value.cv_item.some((item) =>
+        Object.values(item).some(isValid => isValid)
+      );
+
+    default:
+      return false;
+  }
+};
+
 const isFormValid = computed(() => {
-  const isEducationValid = candidate.form.education.every((edu, index) => {
+  const isEducationValid = candidate.form.education.every((item, index) => {
     return Object.values(validation.value.education[index]).every(isValid => !isValid);
   });
 
@@ -70,30 +110,36 @@ const isFormValid = computed(() => {
     return Object.values(validation.value.cv_item[index]).every(isValid => !isValid);
   });
 
-  const isOtherFieldsValid = Object.values(validation.value).filter(value => typeof value !== 'object').every(isValid => !isValid)
+  const isPersonalValid = Object.values(validation.value.personal).every(isValid => !isValid);
 
-  return isEducationValid && isCVValid && isOtherFieldsValid
+  return isEducationValid && isCVValid && isPersonalValid
 })
-
 </script>
 
 <template>
   <div class="add-candidates">
-    <h3 class="add-candidates__title">Профиль специалиста</h3>
+    <h3 class="add-candidates__title">
+      Профиль специалиста
+      <span class="icon icon-alert-octagon" @click="help"/>
+    </h3>
     <div class="add-candidates__tabs">
       <div 
         v-for="(title, index) in stepTitles" 
         :key="index" 
-        :class="['tab', { 'tab--active': currentTab === index + 1 }]"
-        @click="currentTab = index + 1"
+        :class="['tab', 
+        { 'tab--active': currentTab === index + 1 },
+        { 'tab--error': showErrorForTab(index)
+        }]"
+        @click="() => { 
+        currentTab = index + 1; 
+        markTabAsVisited(index); 
+      }"
       >
         {{ title }}
       </div>
     </div>
     <form class="add-candidates__form" @submit.prevent="submitForm">
-      <keep-alive>
-        <component :is="steps[currentTab - 1]" />
-      </keep-alive>
+      <component :is="steps[currentTab - 1]" />
       <div class="add-candidates__form-buttons">
         <Button 
           v-if="currentTab > 1"
@@ -135,6 +181,18 @@ const isFormValid = computed(() => {
     font-size: 26px;
     font-weight: 700;
     color: $dark-color;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .icon {
+      cursor: pointer;
+      font-size: 26px;
+
+      &:hover {
+        color: $main-color;
+      };
+    }
   }
 
   &__tabs {
@@ -154,6 +212,11 @@ const isFormValid = computed(() => {
       &--active {
         border-color: $main-color;
         color: $main-color;
+      }
+
+      &--error {
+        color: $danger;
+        border-color: $danger;
       }
     }
   }

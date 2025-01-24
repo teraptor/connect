@@ -1,6 +1,9 @@
 <template>
   <div class="select__group">
-    <label :for="id" class="select__group-label">{{ label }}</label>
+    <label class="select__group-label" :for="id">
+      {{ label }}
+      <span v-if="required">*</span>
+    </label>
     <div class="select__group-select-wrapper">
       <select
         :id="id"
@@ -110,6 +113,10 @@ watch(internalValue, (newValue) => {
 
   &-label {
     font-weight: 300;
+
+    span {
+      color: $danger;
+    }
   }
 
   &-select-wrapper {

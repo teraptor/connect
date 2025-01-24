@@ -74,7 +74,6 @@ const removeCertification = (index: number) => candidate.removeCertification(ind
           label="Название диплома:"
           type="text"
           placeholder="Введите название..."
-          required
           size="medium"
         />
         <InputField
@@ -82,7 +81,6 @@ const removeCertification = (index: number) => candidate.removeCertification(ind
           label="Выдавшая организация"
           type="text"
           placeholder="Введите организацию..."
-          required
           size="medium"
         />
         <InputField
@@ -91,7 +89,6 @@ const removeCertification = (index: number) => candidate.removeCertification(ind
           type="date"
           id="date_issued"
           placeholder="Введите дату выдачи..."
-          required
           size="medium"
         />
         <button  
