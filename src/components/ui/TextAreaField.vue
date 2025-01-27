@@ -16,7 +16,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineProps, defineEmits, useAttrs } from 'vue';
 
 const props = defineProps({
@@ -58,8 +58,11 @@ const emit = defineEmits(['update:modelValue']);
 
 const $attrs = useAttrs();
 
-const updateValue = (event) => {
-  emit('update:modelValue', event.target.value);
+const updateValue = (event: Event) => {
+  const target = event.target as HTMLTextAreaElement | null;
+  if (target) {
+    emit('update:modelValue', target.value);
+  }
 };
 </script>
 

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { useCandidateStore } from '@/stores/useCandidateStore';
+import { useCandidatesStore } from '@/stores/useCandidatesStore';
 import Button from '../ui/Button.vue';
 import InputField from '../ui/InputField.vue';
 import { isRequired } from '@/helpers/validation';
 
-const candidate = useCandidateStore();
+const candidate = useCandidatesStore();
 const addCVItem = () => candidate.addCVItem();
 const removeCVItem = (index: number) => candidate.removeCVItem(index);
 const addTechnologyToCV = (index: number) => candidate.addTechnologyToCV(index);
@@ -12,7 +12,7 @@ const removeTechnologyFromCV = (cvIndex: number, techIndex: number) => candidate
 </script>
 
 <template>
-  <div v-for="(cvItem, index) in candidate.form.cv_item" :key="index" class="input__container">
+  <div v-for="(cvItem, index) in candidate.addCandidateForm.cv_item" :key="index" class="input__container">
     <div class="input__group">
       <h3 class="input__group-title">
         Место работы

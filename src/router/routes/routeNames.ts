@@ -1,3 +1,5 @@
+import { ADD_CANDIDATE } from "@/constants";
+
 export const RouteNames = {
   MAIN: {
     INDEX: 'index',
@@ -15,13 +17,18 @@ export const RouteNames = {
         CANDIDATES_DETAIL: 'candidates_detail'
       },
     },
-    USER: 'user',
     UI_KIT: {
       name:'UI_Kit',
       children: {
         ICONS: 'icons'
       }
     },
-    NOT_FOUND: '/:pathMatch(.*)'
   },
+  USER: {
+    name: 'user',
+    children: {
+      ADD_CANDIDATE: 'add_candidate'
+    }
+  },
+  NOT_FOUND: '/:pathMatch(.*)'
 }

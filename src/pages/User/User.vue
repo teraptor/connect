@@ -1,6 +1,4 @@
 <template>
-  <CandidateForm/>
+  <div>USER test</div>
+  <router-view></router-view>
 </template>
-<script setup>
-  import CandidateForm from '@/components/candidate/CandidateForm.vue';
-</script>

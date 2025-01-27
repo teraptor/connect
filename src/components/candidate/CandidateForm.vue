@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { useCandidateStore } from '@/stores/useCandidateStore';
+import { useCandidatesStore } from '@/stores/useCandidatesStore';
 import CandidateParse from './CandidateParse.vue';
 import Button from '../ui/Button.vue';
 import StepOne from './StepOne.vue';
@@ -24,7 +24,7 @@ const stepTitles = [
   'Главное о специалисте'
 ];
 
-const candidate = useCandidateStore();
+const candidate = useCandidatesStore();
 
 const nextStep = () => {
   if (currentTab.value < steps.length) currentTab.value++;
@@ -43,13 +43,13 @@ const submitForm = async () => {
 };
 
 const validation = computed(() => ({
-  education: candidate.form.education.map((edu) => ({
+  education: candidate.addCandidateForm.education.map((edu) => ({
     degree: isRequired(edu.degree),
     institution: isRequired(edu.institution),
     date_start: isRequired(edu.date_start),
     date_end: isRequired(edu.date_end),
   })),
-  cv_item: candidate.form.cv_item.map((item) => ({
+  cv_item: candidate.addCandidateForm.cv_item.map((item) => ({
     position_name: isRequired(item.position_name),
     employer: isRequired(item.employer),
     start_period: isRequired(item.start_period),
@@ -57,15 +57,15 @@ const validation = computed(() => ({
     description: isRequired(item.description)
   })),
   personal: {
-    surname: isRequired(candidate.form.surname),
-    name: isRequired(candidate.form.name),
-    lastname: isRequired(candidate.form.lastname),
-    phone: isRequired(candidate.form.phone),
-    email: isRequired(candidate.form.email),
-    nationality: isRequired(candidate.form.nationality),
-    country: isRequired(candidate.form.country),
-    date_of_birth: isRequired(candidate.form.date_of_birth),
-    sex: isRequired(candidate.form.sex),
+    surname: isRequired(candidate.addCandidateForm.surname),
+    name: isRequired(candidate.addCandidateForm.name),
+    lastname: isRequired(candidate.addCandidateForm.lastname),
+    phone: isRequired(candidate.addCandidateForm.phone),
+    email: isRequired(candidate.addCandidateForm.email),
+    nationality: isRequired(candidate.addCandidateForm.nationality),
+    country: isRequired(candidate.addCandidateForm.country),
+    date_of_birth: isRequired(candidate.addCandidateForm.date_of_birth),
+    sex: isRequired(candidate.addCandidateForm.sex),
   }
 }));
 
@@ -103,11 +103,11 @@ const isErrorForTab = (tabIndex: number) => {
 };
 
 const isFormValid = computed(() => {
-  const isEducationValid = candidate.form.education.every((item, index) => {
+  const isEducationValid = candidate.addCandidateForm.education.every((item, index) => {
     return Object.values(validation.value.education[index]).every(isValid => !isValid);
   });
 
-  const isCVValid = candidate.form.cv_item.every((item, index) => {
+  const isCVValid = candidate.addCandidateForm.cv_item.every((item, index) => {
     return Object.values(validation.value.cv_item[index]).every(isValid => !isValid);
   });
 

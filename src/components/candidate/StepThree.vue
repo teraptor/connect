@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { useCandidateStore } from '@/stores/useCandidateStore';
+import { useCandidatesStore } from '@/stores/useCandidatesStore';
 import Button from '../ui/Button.vue';
 import InputField from '../ui/InputField.vue';
 import SelectField from '../ui/SelectField.vue';
 import { LanguageLevelEnum } from '@/enums/enums';
 
-const candidate = useCandidateStore();
+const candidate = useCandidatesStore();
 const addLanguage = () => candidate.addLanguage();
 const removeLanguage = (index: number) => candidate.removeLanguage(index);
 
@@ -15,7 +15,7 @@ const removeLanguage = (index: number) => candidate.removeLanguage(index);
   <div class="input__container">
     <div class="input__group">
       <h3 class="input__group-title">Язык</h3>
-      <div v-for="(lang, index) in candidate.form.language" :key="index" class="input__group-inputs">
+      <div v-for="(lang, index) in candidate.addCandidateForm.language" :key="index" class="input__group-inputs">
         <InputField
           v-model="lang.name"
           label="Язык:"

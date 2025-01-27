@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { useCandidateStore } from '@/stores/useCandidateStore';
+import { useCandidatesStore } from '@/stores/useCandidatesStore';
 import InputField from '../ui/InputField.vue';
 import { CountryEnum, NationalityEnum, SexEnum } from '@/enums/enums';
 import SelectField from '../ui/SelectField.vue';
 import { isRequired } from '@/helpers/validation';
 
-const candidate = useCandidateStore();
+const candidate = useCandidatesStore();
 </script>
 <template>
   <div class="input__container">
     <div class="input__group">
       <h3 class="input__group-title">Контактные данные</h3>
       <InputField
-        v-model="candidate.form.surname"
+        v-model="candidate.addCandidateForm.surname"
         label="Фамилия:"
         type="text"
         id="surname"
@@ -21,7 +21,7 @@ const candidate = useCandidateStore();
         :validators="[isRequired]"
       />
       <InputField
-        v-model="candidate.form.name"
+        v-model="candidate.addCandidateForm.name"
         label="Имя:"
         type="text"
         id="name"
@@ -30,7 +30,7 @@ const candidate = useCandidateStore();
         :validators="[isRequired]"
       />
       <InputField
-        v-model="candidate.form.lastname"
+        v-model="candidate.addCandidateForm.lastname"
         label="Отчество"
         type="text"
         id="lastname"
@@ -39,7 +39,7 @@ const candidate = useCandidateStore();
         :validators="[isRequired]"
       />
       <InputField
-        v-model="candidate.form.phone"
+        v-model="candidate.addCandidateForm.phone"
         label="Номер телефона:"
         type="tel"
         id="phone"
@@ -48,7 +48,7 @@ const candidate = useCandidateStore();
         :validators="[isRequired]"
       />
       <InputField
-        v-model="candidate.form.email"
+        v-model="candidate.addCandidateForm.email"
         label="Электронная почта:"
         type="email"
         id="email"
@@ -57,7 +57,7 @@ const candidate = useCandidateStore();
         :validators="[isRequired]"
       />
       <SelectField
-        v-model="candidate.form.nationality"
+        v-model="candidate.addCandidateForm.nationality"
         id="country"
         label="Выберите гражданство:"
         :enumObject="NationalityEnum"
@@ -66,7 +66,7 @@ const candidate = useCandidateStore();
         :validators="[isRequired]"
       />
       <SelectField
-        v-model="candidate.form.country"
+        v-model="candidate.addCandidateForm.country"
         id="country"
         label="Страна нахождения:"
         :enumObject="CountryEnum"
@@ -76,7 +76,7 @@ const candidate = useCandidateStore();
       />
       <div class="input__group-inputs">
         <InputField
-          v-model="candidate.form.date_of_birth"
+          v-model="candidate.addCandidateForm.date_of_birth"
           label="Дата рождения:"
           type="date"
           id="date_of_birth"
@@ -86,7 +86,7 @@ const candidate = useCandidateStore();
           :validators="[isRequired]"
         />
         <SelectField
-          v-model="candidate.form.sex"
+          v-model="candidate.addCandidateForm.sex"
           id="sex"
           label="Выберите пол:"
           :enumObject="SexEnum"

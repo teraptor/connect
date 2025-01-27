@@ -71,7 +71,7 @@ const sendFile = async (file: File) => {
 </script>
 <template>
   <div class="parse-candidate">
-    <h3 class="parse-candidate__title">Загрузить кандидата через PDF файл</h3>
+    <h3 class="parse-candidate__title">Загрузить специалиста через PDF файл</h3>
     <div 
       class="parse-candidate__drop-zone" 
       @dragover="handleDragOver" 

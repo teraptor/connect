@@ -39,15 +39,14 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
     },
   },
   {
-    path: '',
-    redirect: { name: RouteNames.MAIN.MAIN_PAGE.name },
+    path: `${RouteNames.MAIN.MAIN_PAGE.name}`,
     meta: {
       title: 'Главная страница',
       ...defaultMeta
     },
     children: [
       {
-        path: RouteNames.MAIN.MAIN_PAGE.name,
+        path: '',
         name: RouteNames.MAIN.MAIN_PAGE.name,
         component: () => import('@/pages/index.vue'),
         meta: {
@@ -113,17 +112,34 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
     ]
   },
   {
-    path: `/${RouteNames.MAIN.USER}`,
-    name: RouteNames.MAIN.USER,
-    component: () => import('@/pages/User/User.vue'),
+    path: `/${RouteNames.USER.name}`,
+    name: RouteNames.USER.name,
     meta: {
       title: 'Пользователь',
-      ...userMeta
+      ...userMeta,
     },
+    children: [
+      {
+        path: '',
+        name: RouteNames.USER.name,
+        component: () => import('@/pages/User/User.vue'),
+        meta: {
+          title: 'Пользователь',
+        },
+      },
+      {
+        path: RouteNames.USER.children.ADD_CANDIDATE,
+        name: RouteNames.USER.children.ADD_CANDIDATE,
+        component: () => import('@/pages/Candidates/CreateCandidate.vue'),
+        meta: {
+          title: 'Добавить кандидата',
+        },
+      }
+    ]
   },
   {
-    path:`${RouteNames.MAIN.NOT_FOUND}`,
-    name: RouteNames.MAIN.NOT_FOUND,
+    path:`${RouteNames.NOT_FOUND}`,
+    name: RouteNames.NOT_FOUND,
     component: () => import('@/pages/NotFound/NotFound.vue'),
     meta: {
       title: '404',

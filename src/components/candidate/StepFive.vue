@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { useCandidateStore } from '@/stores/useCandidateStore';
+import { useCandidatesStore } from '@/stores/useCandidatesStore';
 import InputField from '../ui/InputField.vue';
 import SelectField from '../ui/SelectField.vue';
 import { WorkFormatEnum } from '@/enums/enums';
 
 
-const candidate = useCandidateStore();
+const candidate = useCandidatesStore();
 </script>
 
 <template>
@@ -14,14 +14,14 @@ const candidate = useCandidateStore();
       <h3 class="input__group-title">Ставка</h3>
       <div class="input__group-inputs">
         <InputField
-          v-model="candidate.form.salary.salary_hour"
+          v-model="candidate.addCandidateForm.salary.salary_hour"
           label="Стоимость часа (RUB)"
           type="number"
           placeholder="Введите стоимость часа..."
           size="medium"
         />
         <InputField
-          v-model="candidate.form.salary.salary_month"
+          v-model="candidate.addCandidateForm.salary.salary_month"
           label="Стоимость в месяц (RUB)"
           type="number"
           placeholder="Введите стоимость в месяц..."
@@ -33,12 +33,12 @@ const candidate = useCandidateStore();
       <h3 class="input__group-title">Тип занятости</h3>
       <div class="input__group-inputs">
         <InputField
-          v-model="candidate.form.employement.parttime"
+          v-model="candidate.addCandidateForm.employement.parttime"
           label="Парттайм"
           type="checkbox"
         />
         <InputField
-          v-model="candidate.form.employement.fulltime"
+          v-model="candidate.addCandidateForm.employement.fulltime"
           label="Фултайм"
           type="checkbox"
         />
@@ -47,34 +47,34 @@ const candidate = useCandidateStore();
     <div class="input__group">
       <h3 class="input__group-title">Формат работы</h3>
       <SelectField
-        v-model="candidate.form.work_format.work_type"
+        v-model="candidate.addCandidateForm.work_format.work_type"
         id="workType"
         label="Формат работы:"
         :enumObject="WorkFormatEnum"
         placeholder="Выберите формат работы"
       />
       <InputField
-        v-model="candidate.form.work_format.business_trip"
+        v-model="candidate.addCandidateForm.work_format.business_trip"
         label="Командировки"
         type="checkbox"
       />
       <InputField
-        v-model="candidate.form.work_format.foreign_project"
+        v-model="candidate.addCandidateForm.work_format.foreign_project"
         label="Работа над зарубежными проектами"
         type="checkbox"
       />
       <InputField
-        v-model="candidate.form.work_format.foreign_relocate"
+        v-model="candidate.addCandidateForm.work_format.foreign_relocate"
         label="Релокация за границу"
         type="checkbox"
       />
       <InputField
-        v-model="candidate.form.work_format.national_relocate"
+        v-model="candidate.addCandidateForm.work_format.national_relocate"
         label="Релокация внутри страны"
         type="checkbox"
       />
       <InputField
-        v-model="candidate.form.work_format.rent_in_team"
+        v-model="candidate.addCandidateForm.work_format.rent_in_team"
         label="Работа в арендуемой команде"
         type="checkbox"
       />

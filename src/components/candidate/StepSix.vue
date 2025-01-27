@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { useCandidateStore } from '@/stores/useCandidateStore';
-import TextAreaField from '../ui/TextAreaField.vue';
+import { useCandidatesStore } from '@/stores/useCandidatesStore';
+import TextAreaField from '@/components/ui/TextAreaField.vue';
 
-const candidate = useCandidateStore();
+const candidate = useCandidatesStore();
 </script>
 <template>
   <div class="input__container">
     <div class="input__group">
       <h3 class="input__group-title">Главное о специалисте</h3>
-      <TextAreaField 
+      <TextAreaField
         label="Расскажите о себе:" 
         id="about" 
-        v-model="candidate.form.about" 
+        v-model="candidate.addCandidateForm.about" 
         placeholder="Введите текст" 
       />
     </div>
