@@ -65,12 +65,12 @@ const isActive = (routeName: string | undefined) => {
   background: $sidebar-background;
   color: $light-color;
   width: 20%;
+  gap: 30px;
 
   &__items {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    flex-grow: 1; 
     width: 100%;
     padding: 4px;
   }

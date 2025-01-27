@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { useCandidateStore } from '@/stores/useCandidateStore';
+import CandidateParse from './CandidateParse.vue';
 import Button from '../ui/Button.vue';
 import StepOne from './StepOne.vue';
 import StepTwo from './StepTwo.vue';
@@ -117,6 +118,7 @@ const isFormValid = computed(() => {
 </script>
 
 <template>
+  <CandidateParse />
   <div class="add-candidates">
     <h3 class="add-candidates__title">
       Профиль специалиста

@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
-import { GET_CANDIDATES } from '@/constants';
+import { GET_CANDIDATES, PARSE_CANDIDATES } from '@/constants';
+import { push } from 'notivue';
 
 export interface ICandidate {
   about: string;
@@ -44,6 +45,7 @@ export const useCandidatesStore = defineStore('candidates', {
   state: () => ({
     candidates: [] as ICandidate[],
     selectedCandidate: null as ICandidate | null,
+    candidateParseJSON: ''
   }),
   actions: {
     async getCandidates(): Promise<void> {
@@ -58,8 +60,31 @@ export const useCandidatesStore = defineStore('candidates', {
         console.error('Ошибка при запросе данных:', error);
       }
     },
+
     selectCandidate(id: string): void {
       this.selectedCandidate = this.candidates.find(c => c.id === id) || null;
+    },
+
+    async sendCandidateParseJSON() {
+      if (this.candidateParseJSON) {
+        try {
+          const response = await axios.post(PARSE_CANDIDATES, this.candidateParseJSON, {
+            headers: {
+              Bearer: localStorage.getItem('authToken'),
+              'Content-Type': 'text/plain',
+            },
+          });
+          push.success('Кандидат успешно добавлен');
+        } catch (error: any) {
+          push.error(`Ошибка создания кандидата: ${error}`);
+        } finally {
+          this.candidateParseJSON = '';
+        }
+      }
+    },
+
+    setCandidateParseJSON(content: string) {
+      this.candidateParseJSON = content;
     }
-  },
+  }
 });

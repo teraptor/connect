@@ -60,7 +60,7 @@ const goToCandidateDetail = () => {
   &-specialization {
   font-size: 14px;
   font-weight: 300;
-  color: $text-help;
+  color: $help-color;
   }
 
   &-title{
@@ -75,7 +75,7 @@ const goToCandidateDetail = () => {
 
     &--city {
       font-weight: 300;
-      color: $text-help;
+      color: $help-color;
     }
   }
 
@@ -114,7 +114,7 @@ const goToCandidateDetail = () => {
     overflow: hidden;
     font-size: 14px;
     font-weight: 300;
-    color: $text-help;
+    color: $help-color;
   }
 }
 

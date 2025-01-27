@@ -127,7 +127,7 @@ const logout = () => {
         padding: 10px;
         font-size: 16px;
         font-weight: 300;
-        color: $text-help;
+        color: $help-color;
         border-bottom-left-radius: 4px;
         border-bottom-right-radius: 4px;
 

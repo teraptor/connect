@@ -26,8 +26,6 @@ const getTGLink = (login: string) => `https://t.me/${login.replace('@', '')}`
   align-items: center;
   width: 100%;
   padding: 10px;
-  margin-bottom: 20px;
-  margin-top: auto;
   
   &-container {
     display: flex;
@@ -35,7 +33,7 @@ const getTGLink = (login: string) => `https://t.me/${login.replace('@', '')}`
     gap: 4px;
     align-items: flex-start;
     background-color: $bg-card-color;
-    color: $text-help;
+    color: $help-color;
     padding: 10px;
     font-size: 14px;
     font-weight: 300;
