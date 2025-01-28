@@ -27,7 +27,8 @@ export const RouteNames = {
   USER: {
     name: 'user',
     children: {
-      ADD_CANDIDATE: 'add_candidate'
+      ADD_CANDIDATE: 'add_candidate',
+      PARSE_CANDIDATE: 'parse_candidate'
     }
   },
   NOT_FOUND: '/:pathMatch(.*)'

@@ -134,6 +134,14 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
         meta: {
           title: 'Добавить кандидата',
         },
+      },
+      {
+        path: RouteNames.USER.children.PARSE_CANDIDATE,
+        name: RouteNames.USER.children.PARSE_CANDIDATE,
+        component: () => import('@/pages/Candidates/ParseCandidate.vue'),
+        meta: {
+          title: 'Парсинг кандидата',
+        },
       }
     ]
   },

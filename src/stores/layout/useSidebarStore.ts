@@ -44,8 +44,8 @@ export const usesidebarStore = defineStore('sidebar', {
             routeName: RouteNames.USER.children.ADD_CANDIDATE,
           },
           {
-            title: 'Вкладка 2',
-            routeName: RouteNames.MAIN.MAIN_PAGE.children.CANDIDATES,
+            title: 'Парсинг специалиста',
+            routeName: RouteNames.USER.children.PARSE_CANDIDATE,
           }
         ]
       },
