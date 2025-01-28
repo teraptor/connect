@@ -61,7 +61,7 @@ const removeCertification = (index: number) => candidate.removeCertification(ind
     </div>
     <Button 
       type="button"
-      class="btn-primary" 
+      button-type="primary"
       text="Добавить образование"
       icon="icon icon-plus"
       @click="addEducation"

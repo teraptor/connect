@@ -14,7 +14,7 @@
       <RouterLink to="/login" class="form__link">Войти</RouterLink> 
     </span>
     <Button 
-      class="btn btn-primary w-100" 
+      button-type="primary" 
       text="Восстановить пароль" 
       :disabled="!isFormValid"
       :isLoading="isLoading"

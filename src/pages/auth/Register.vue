@@ -51,7 +51,7 @@
     />
     <RouterLink to="/login" class="form__link">Уже есть аккаунт ?</RouterLink>
     <Button 
-      class="btn btn-primary w-100" 
+      button-type="primary" 
       text="Зарегистрироваться" 
       :disabled="!isFormValid"
       :isLoading="isLoading" 

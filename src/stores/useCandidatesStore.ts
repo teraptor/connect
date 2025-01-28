@@ -6,10 +6,12 @@ import dayjs from "dayjs";
 
 export interface ICandidate {
   about: string;
+  certification: string | null;
   country: string;
+  cv_item: ICVItem[];
   date_registration: string;
   dateofbirth: string;
-  education: string | null;
+  education: IEducation[];
   email: string;
   employement: {
     fulltime: boolean;
@@ -19,6 +21,7 @@ export interface ICandidate {
   inavailible_date_end: string;
   inavailible_date_start: string;
   is_visible: boolean;
+  language: string | null;
   lastname: string;
   name: string;
   nationality: string;
@@ -29,8 +32,8 @@ export interface ICandidate {
     salary_hour: number;
     salary_month: number;
   };
-  sex: "male" | "female";
-  skills: string[];
+  sex: string;
+  skills: string[] | null;
   surname: string;
   work_format: {
     business_trip: boolean;
@@ -38,8 +41,17 @@ export interface ICandidate {
     foreign_relocate: boolean;
     national_relocate: boolean;
     rent_in_team: boolean;
-    work_type: "remote" | "office" | "hybrid";
+    work_type: string;
   };
+  total: number;
+  currentPage: number;
+  pageLimit: number;
+}
+
+export interface ICandidatePagination {
+  total: number;
+  currentPage: number;
+  pageLimit: number;
 }
 
 export interface INewCandidate {
@@ -116,6 +128,11 @@ export interface ISalary {
 export const useCandidatesStore = defineStore('candidates', {
   state: () => ({
     candidates: [] as ICandidate[],
+    candidatesPagination: {
+      total: 0,
+      currentPage: 1,
+      pageLimit: 10,
+    } as ICandidatePagination,
     selectedCandidate: null as ICandidate | null,
     candidateParseJSON: '',
     addCandidateForm: {
@@ -168,19 +185,29 @@ export const useCandidatesStore = defineStore('candidates', {
     } as INewCandidate
   }),
   actions: {
-    async getCandidates(): Promise<void> {
+    async getCandidates(filters: Record<string, any> = {}): Promise<void> {
       try {
-        const response = await axios.get(GET_CANDIDATES);
+        const { currentPage, pageLimit } = this.candidatesPagination;
+        const response = await axios.post(GET_CANDIDATES, {
+          ...filters,
+          page: currentPage,
+          limit: pageLimit,
+          sort: {
+            param: "date_registration", 
+            direction: "desc",
+          },
+        });
+
         if (response.data && Array.isArray(response.data.items)) {
           this.candidates = response.data.items.filter(
             (item: ICandidate | null) => item !== null
           ) as ICandidate[];
+          this.candidatesPagination.total = response.data.total;
         }
       } catch (error) {
-        console.error('Ошибка при запросе данных:', error);
+        push.error('Ошибка загрузки данных')
       }
     },
-
     selectCandidate(id: string): void {
       this.selectedCandidate = this.candidates.find(c => c.id === id) || null;
     },

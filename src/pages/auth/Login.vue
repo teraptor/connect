@@ -24,7 +24,7 @@
     />
     <RouterLink to="/forgot" class="form__link">Забыли пароль ?</RouterLink>
     <Button 
-      class="btn-primary" 
+      button-type="primary"
       text="Войти" 
       :disabled="!isFormValid" 
       :isLoading="isLoading"

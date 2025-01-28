@@ -20,8 +20,8 @@ const goToCandidateDetail = () => {
   <div class="candidate__card" @click="goToCandidateDetail">
     <div class="candidate__card-specialization">MedTech && EdTech</div>
     <div class="candidate__card-title">
-      <h3 class="candidate__card-title--name">{{ candidate.fio }}</h3>
-      <p class="candidate__card-title--city">{{ candidate.city }}</p>
+      <h3 class="candidate__card-title--name">{{ candidate.name }}</h3>
+      <p class="candidate__card-title--city">{{ candidate.surname }}</p>
     </div>
     <div class="candidate__card-position">
       <p class="candidate__card-position--name">Frontend Developer:</p>

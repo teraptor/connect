@@ -2,7 +2,7 @@
   <button
     :type="type"
     :disabled="disabled || isLoading"
-    :class="['btn', buttonSize]"
+    :class="['btn', buttonSize, buttonClass, { active: isActive }]"
   >
     <span v-if="isLoading" class="icon icon-spinner"></span>
     <span v-else class="btn-content">
@@ -13,7 +13,6 @@
 </template>
 
 <script setup lang="ts">
-
 const props = defineProps({
   type: {
     type: String as PropType<'submit' | 'reset' | 'button'>,
@@ -24,11 +23,11 @@ const props = defineProps({
     default: false
   },
   text: {
-    type: String,
+    type: [String, Number],
     default: ''
   },
   size: {
-    type: String as PropType<'small' | 'medium' | 'large'>,
+    type: String as PropType<'tab'| 'small' | 'medium' | 'large'>,
     default: 'large'
   },
   icon: {
@@ -38,10 +37,19 @@ const props = defineProps({
   isLoading: {
     type: Boolean,
     default: false
+  },
+  isActive: {
+    type: Boolean,
+    default: false
+  },
+  buttonType: {
+    type: String,
+    default: 'primary'
   }
 });
 
 const buttonSize = computed(() => `btn-${props.size}`);
+const buttonClass = computed(() => `btn-${props.buttonType}`);
 </script>
 
 <style lang="scss" scoped>
@@ -57,11 +65,14 @@ const buttonSize = computed(() => `btn-${props.size}`);
   font-size: 16px;
   font-weight: 300;
   max-height: 36px;
+
+  &-tab {
+    width: 50px;
+  }
+
   &-small {
     width: 100px;
   }
-
-
   &-medium {
     width: 150px;
   }
@@ -82,7 +93,7 @@ const buttonSize = computed(() => `btn-${props.size}`);
     background-color: $btn-primary-disabled;
     cursor: not-allowed;
   }
-  &:active {
+  &.active {
     background-color: $btn-primary-active;
   }
 }
