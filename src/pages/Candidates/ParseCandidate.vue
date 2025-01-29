@@ -78,7 +78,7 @@ const sendFile = async (file: File) => {
       @drop="handleDrop"
     >
       <Button 
-        class="btn-primary" 
+        button-type="primary" 
         text="Добавить кандидата"
         :icon="'icon icon-plus-circle'" 
         type="button"

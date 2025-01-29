@@ -101,6 +101,7 @@ const buttonClass = computed(() => `btn-${props.buttonType}`);
 .btn-secondary {
   border: 1px solid $btn-secondary;
   color: $btn-secondary;
+  background-color: $light-color;
 
   &:disabled {
     border: 1px solid $btn-secondary-disabled;

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, watch } from 'vue';
 import { useCandidatesStore } from '@/stores/useCandidatesStore';
-import CandidatesCard from './CandidatesCard.vue';
+import CandidatesCard from '@/components/CandidatesCard.vue';
 import Pagination from '@/components/ui/Pagination.vue';
 
 const candidatesStore = useCandidatesStore();
@@ -44,6 +44,7 @@ watch([() => candidatesStore.candidatesPagination.currentPage, () => candidatesS
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 15px;
+  padding: 20px;
 }
 </style>
 

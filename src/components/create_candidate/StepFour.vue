@@ -85,7 +85,7 @@ const removeTechnologyFromCV = (cvIndex: number, techIndex: number) => candidate
       </div>
       <Button
         type="button"
-        class="btn-secondary"
+        button-type="secondary"
         text="Добавить"
         icon="icon icon-plus-circle"
         @click="addTechnologyToCV(index)"
@@ -94,7 +94,7 @@ const removeTechnologyFromCV = (cvIndex: number, techIndex: number) => candidate
     </div>
     <Button 
       type="button"
-      class="btn-primary" 
+      button-type="primary" 
       text="Добавить место работы"
       icon="icon icon-plus"
       @click="addCVItem"

@@ -39,12 +39,12 @@ const removeLanguage = (index: number) => candidate.removeLanguage(index);
         </button>
       </div>
       <Button
-      type="button"
-      class="btn-secondary"
-      text="Добавить"
-      icon="icon icon-plus-circle"
-      @click="addLanguage"
-      size="medium"
+        type="button"
+        button-type="secondary"
+        text="Добавить"
+        icon="icon icon-plus-circle"
+        @click="addLanguage"
+        size="medium"
       />
     </div>
   </div>

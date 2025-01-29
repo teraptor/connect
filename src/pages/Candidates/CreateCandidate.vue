@@ -143,14 +143,16 @@ const isFormValid = computed(() => {
       <div class="add-candidates__form-buttons">
         <Button 
           v-if="currentTab > 1"
-          class="btn-secondary" 
+          type="button"
+          button-type="secondary" 
           text="Назад"
           @click="prevStep"
           size="small"
         />
         <Button 
           v-if="currentTab < steps.length"
-          class="btn-primary" 
+          type="button"
+          button-type="primary" 
           text="Далее"
           @click="nextStep"
           size="small"
@@ -159,7 +161,7 @@ const isFormValid = computed(() => {
           v-if="currentTab === steps.length"
           type="submit"
           text="Отправить"
-          class="btn-success" 
+          button-type="success" 
           size="small"
           :disabled="!isFormValid"
         />
