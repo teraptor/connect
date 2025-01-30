@@ -9,12 +9,8 @@ const router = useRouter();
 const store = useCandidatesStore();
 
 const candidateId = route.params.id as string;
-
 onMounted(async () => {
-  if (!store.candidates.length) {
-    await store.getCandidates();
-  }
-  store.selectCandidate(candidateId);
+  await store.selectCandidate(candidateId);
 });
 
 const candidate = computed(() => store.selectedCandidate);

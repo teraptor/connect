@@ -48,12 +48,6 @@ export interface ICandidate {
   pageLimit: number;
 }
 
-export interface ICandidatePagination {
-  total: number;
-  currentPage: number;
-  pageLimit: number;
-}
-
 export interface INewCandidate {
   surname: string;
   name: string;
@@ -128,11 +122,7 @@ export interface ISalary {
 export const useCandidatesStore = defineStore('candidates', {
   state: () => ({
     candidates: [] as ICandidate[],
-    candidatesPagination: {
-      total: 0,
-      currentPage: 1,
-      pageLimit: 10,
-    } as ICandidatePagination,
+    candidatesTotal: 0,
     selectedCandidate: null as ICandidate | null,
     candidateParseJSON: '',
     addCandidateForm: {
@@ -185,31 +175,47 @@ export const useCandidatesStore = defineStore('candidates', {
     } as INewCandidate
   }),
   actions: {
-    async getCandidates(filters: Record<string, any> = {}): Promise<void> {
+    async getCandidates(pagination?: { page: number, limit: number}): Promise<void> {
       try {
-        const { currentPage, pageLimit } = this.candidatesPagination;
+        const { page, limit } = pagination || {};
         const response = await axios.post(GET_CANDIDATES, {
-          ...filters,
-          page: currentPage,
-          limit: pageLimit,
+          page: page,
+          limit: limit,
           sort: {
             param: "date_registration", 
             direction: "desc",
           },
         });
-
+    
         if (response.data && Array.isArray(response.data.items)) {
           this.candidates = response.data.items.filter(
             (item: ICandidate | null) => item !== null
           ) as ICandidate[];
-          this.candidatesPagination.total = response.data.total;
+          this.candidatesTotal = response.data.total;
         }
+        
       } catch (error) {
-        push.error('Ошибка загрузки данных')
+        push.error('Ошибка загрузки данных');
       }
     },
-    selectCandidate(id: string): void {
-      this.selectedCandidate = this.candidates.find(c => c.id === id) || null;
+    async selectCandidate(id: string): Promise<void> {
+      try {
+        const response = await axios.get(`http://5.188.30.192:8081/v1/candidate/${id}`, {
+          headers: {
+            Bearer: localStorage.getItem('authToken'),
+            'Content-Type': 'text/plain',
+          }
+        });
+        if (response.data) {
+          this.selectedCandidate = response.data;
+        } else {
+          this.selectedCandidate = null;
+        }
+      } catch (error) {
+        console.error('Ошибка при загрузке кандидата:', error);
+        this.selectedCandidate = null;
+        push.error('Ошибка загрузки данных о кандидате');
+      }
     },
 
     async sendCandidateParseJSON() {

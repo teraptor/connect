@@ -4,20 +4,30 @@ import { useCandidatesStore } from '@/stores/useCandidatesStore';
 import CandidatesCard from '@/components/CandidatesCard.vue';
 import Pagination from '@/components/ui/Pagination.vue';
 
+const localPagination = reactive({
+  currentPage: 1,
+  pageLimit: 10,
+});
+
 const candidatesStore = useCandidatesStore();
 
 const loadCandidates = async () => {
-  await candidatesStore.getCandidates({
-    page: candidatesStore.candidatesPagination.currentPage,
-    limit: candidatesStore.candidatesPagination.pageLimit,
-  });
+  await candidatesStore.getCandidates(
+    {
+      page: localPagination.currentPage,
+      limit: localPagination.pageLimit
+    }
+  );
 };
 
 onMounted(() => {
   loadCandidates();
 });
 
-watch([() => candidatesStore.candidatesPagination.currentPage, () => candidatesStore.candidatesPagination.pageLimit], loadCandidates);
+watch(
+  [() => localPagination.currentPage, () => localPagination.pageLimit],
+  loadCandidates
+);
 </script>
 
 <template>
@@ -30,11 +40,11 @@ watch([() => candidatesStore.candidatesPagination.currentPage, () => candidatesS
       />
     </div>
     <Pagination
-      :currentPage="candidatesStore.candidatesPagination.currentPage"
-      :totalPages="Math.ceil(candidatesStore.candidatesPagination.total / candidatesStore.candidatesPagination.pageLimit)"
-      :pageLimit="candidatesStore.candidatesPagination.pageLimit"
-      @updatePage="candidatesStore.candidatesPagination.currentPage = $event"
-      @updateLimit="candidatesStore.candidatesPagination.pageLimit = $event"
+      :currentPage="localPagination.currentPage"
+      :totalPages="Math.ceil(candidatesStore.candidatesTotal / localPagination.pageLimit)"
+      :pageLimit="localPagination.pageLimit"
+      @updatePage="localPagination.currentPage = $event"
+      @updateLimit="localPagination.pageLimit = $event"
     />
   </div>
 </template>
