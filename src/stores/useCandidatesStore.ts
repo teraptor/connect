@@ -175,9 +175,17 @@ export const useCandidatesStore = defineStore('candidates', {
     } as INewCandidate
   }),
   actions: {
-    async getCandidates(pagination?: { page: number, limit: number}): Promise<void> {
+    async getCandidates(
+      pagination?: { page: number, limit: number }, 
+      languages?: { id: string, languages: Array<{ id: string, name: string }> },
+      specialization?: { id: string, specializations: string[] },
+      subcategory?: { id: string, subcategories: string[] }
+    ): Promise<void> { 
       try {
         const { page, limit } = pagination || {};
+        const { languages: languageFilter } = languages || {};
+        const { specializations } = specialization || {};
+        const { subcategories } = subcategory || {};
         const response = await axios.post(GET_CANDIDATES, {
           page: page,
           limit: limit,
@@ -185,6 +193,29 @@ export const useCandidatesStore = defineStore('candidates', {
             param: "date_registration", 
             direction: "desc",
           },
+          filters: {
+            id: "filter1",
+            languages: languageFilter ? {
+              id: "languages",
+              languages: languageFilter,
+              name: "Владение языком"
+            } : undefined,
+            specialization: specializations && specializations.length > 0
+            ? {
+                id: "specialization",
+                name: "Специализация",
+                specializations: specializations,
+              }
+            : undefined,
+            subcategory: subcategories && subcategories.length > 0
+            ? {
+                id: "subcategory",
+                name: "Подкатегория",
+                subcategories: subcategories,
+              }
+            : undefined,
+            name: "Основной фильтр"  
+          }
         });
     
         if (response.data && Array.isArray(response.data.items)) {
@@ -197,7 +228,7 @@ export const useCandidatesStore = defineStore('candidates', {
       } catch (error) {
         push.error('Ошибка загрузки данных');
       }
-    },
+    },    
     async selectCandidate(id: string): Promise<void> {
       try {
         const response = await axios.get(`http://5.188.30.192:8081/v1/candidate/${id}`, {
