@@ -103,9 +103,9 @@ const logout = () => {
 
     &-link {
       color: $main-color;
-      &:hover {
-        color: lighten($main-color, 20%)
-      }
+      // &:hover {
+      //   color: lighten($main-color, 20%)
+      // }
     }
 
     &-user {

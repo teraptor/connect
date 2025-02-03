@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <Table v-bind="$props">
     <template #headerCell="{ column }">
       <slot name="headerCell" :column="column" />
@@ -33,4 +33,4 @@ interface IProps {
 defineProps<IProps>()
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped></style> -->
