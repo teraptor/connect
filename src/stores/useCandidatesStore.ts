@@ -176,57 +176,49 @@ export const useCandidatesStore = defineStore('candidates', {
   }),
   actions: {
     async getCandidates(
-      pagination?: { page: number, limit: number }, 
-      languages?: { id: string, languages: Array<{ id: string, name: string }> },
-      specialization?: { id: string, specializations: string[] },
-      subcategory?: { id: string, subcategories: string[] }
+      pagination: { page: number, limit: number }, 
+      filters: {
+        languages: Array<{ id: string, name: string }>,
+        specializations: Array<{ id: string, name: string }>,
+        subcategories: Array<{ id: string, name: string }>
+      }
     ): Promise<void> { 
       try {
-        const { page, limit } = pagination || {};
-        const { languages: languageFilter } = languages || {};
-        const { specializations } = specialization || {};
-        const { subcategories } = subcategory || {};
+        const { page, limit } = pagination;
+    
+        const filterData = {
+          languages: filters.languages.length ? {
+            id: "languages",
+            languages: filters.languages,
+            name: "Владение языком"
+          } : undefined,
+    
+          specialization: filters.specializations.length ? {
+            id: "specialization",
+            name: "Специализация",
+            specializations: filters.specializations.map(spec => spec.id),
+          } : undefined,
+    
+          subcategory: filters.subcategories.length ? {
+            id: "subcategory",
+            name: "Подкатегория",
+            subcategories: filters.subcategories.map(subcat => subcat.id),
+          } : undefined,
+        };
+    
         const response = await axios.post(GET_CANDIDATES, {
-          page: page,
-          limit: limit,
-          sort: {
-            param: "date_registration", 
-            direction: "desc",
-          },
-          filters: {
-            id: "filter1",
-            languages: languageFilter ? {
-              id: "languages",
-              languages: languageFilter,
-              name: "Владение языком"
-            } : undefined,
-            specialization: specializations && specializations.length > 0
-            ? {
-                id: "specialization",
-                name: "Специализация",
-                specializations: specializations,
-              }
-            : undefined,
-            subcategory: subcategories && subcategories.length > 0
-            ? {
-                id: "subcategory",
-                name: "Подкатегория",
-                subcategories: subcategories,
-              }
-            : undefined,
-            name: "Основной фильтр"  
-          }
+          page, limit,
+          sort: { param: "date_registration", direction: "desc" },
+          filters: { id: "filter1", ...filterData, name: "Основной фильтр" }
         });
     
         if (response.data && Array.isArray(response.data.items)) {
-          this.candidates = response.data.items.filter(
-            (item: ICandidate | null) => item !== null
-          ) as ICandidate[];
+          this.candidates = response.data.items.filter((item: ICandidate | null) => item !== null) as ICandidate[];
           this.candidatesTotal = response.data.total;
         }
         
       } catch (error) {
-        push.error('Ошибка загрузки данных');
+        console.error('Ошибка загрузки данных', error);
       }
     },    
     async selectCandidate(id: string): Promise<void> {
