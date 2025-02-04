@@ -5,7 +5,7 @@ import Button from '@/components/ui/Button.vue';
 import { push } from 'notivue';
 import { ref } from 'vue';
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
+pdfjsLib.GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.min.js', import.meta.url).toString();
 
 const fileInput = ref<HTMLInputElement | null>(null);
 const isLoading = ref<boolean>(false);
