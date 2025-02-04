@@ -3,6 +3,7 @@ import { usesidebarStore } from '@/stores/layout/useSidebarStore';
 import { RouterLink } from 'vue-router';
 import { useRoute } from 'vue-router';
 import UserCard from '../UserCard.vue';
+import { ref } from 'vue';
 
 const route = useRoute();
 const { sidebarNav } = usesidebarStore();

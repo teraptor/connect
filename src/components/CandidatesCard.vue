@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 import { RouteNames } from '@/router/routes/routeNames';
+import { ref } from 'vue';
 import Button from './ui/Button.vue';
 
 const isHovered = ref<boolean>(false);

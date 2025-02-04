@@ -5,6 +5,7 @@ import { useUserStore } from '@/stores/useUserStore';
 import { useRouter } from 'vue-router';
 import { RouteNames } from '@/router/routes/routeNames';
 import { onClickOutside } from '@vueuse/core';
+import { ref, computed } from 'vue';
 
 const router = useRouter();
 const { headerNav } = useHeaderStore();

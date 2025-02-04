@@ -1,41 +1,3 @@
-<template>
-  <AuthForm title="Вход" @submit="handleLogin">
-    <InputField
-      v-model="phone"
-      label="Телефон"
-      type="tel"
-      id="phone"
-      placeholder="Введите номер телефона..."
-      required
-      autocomplete="phone"
-      :validators="[isRequired,isPhone]"
-    />
-    <InputField
-      v-model="password"
-      label="Пароль"
-      :type="showPassword ? 'text' : 'password'"
-      id="password"
-      placeholder="Введите пароль..."
-      required
-      autocomplete="current-password"
-      :validators="[isRequired, isPassword]"
-      :icon = "showPassword ? 'icon icon-eye-hidden' : 'icon icon-eye'"
-      @icon-click="togglePassword"
-    />
-    <RouterLink to="/forgot" class="form__link">Забыли пароль ?</RouterLink>
-    <Button 
-      button-type="primary"
-      text="Войти" 
-      :disabled="!isFormValid" 
-      :isLoading="isLoading"
-      :icon="'icon icon-log-in'" 
-      type="submit"
-    />
-    <span> У вас еще нет аккаунта ? <RouterLink class="form__link" to="/register">Зарегистрироваться</RouterLink></span>
-  </AuthForm>
-
-</template>
-
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -83,5 +45,41 @@ const validation = computed(() => ({
 
 const isFormValid = computed(() => !validation.value.phone && !validation.value.password);
 </script>
+<template>
+  <AuthForm title="Вход" @submit="handleLogin">
+    <InputField
+      v-model="phone"
+      label="Телефон"
+      type="tel"
+      id="phone"
+      placeholder="Введите номер телефона..."
+      required
+      autocomplete="phone"
+      :validators="[isRequired,isPhone]"
+    />
+    <InputField
+      v-model="password"
+      label="Пароль"
+      :type="showPassword ? 'text' : 'password'"
+      id="password"
+      placeholder="Введите пароль..."
+      required
+      autocomplete="current-password"
+      :validators="[isRequired, isPassword]"
+      :icon = "showPassword ? 'icon icon-eye-hidden' : 'icon icon-eye'"
+      @icon-click="togglePassword"
+    />
+    <RouterLink to="/forgot" class="form__link">Забыли пароль ?</RouterLink>
+    <Button 
+      button-type="primary"
+      text="Войти" 
+      :disabled="!isFormValid" 
+      :isLoading="isLoading"
+      :icon="'icon icon-log-in'" 
+      type="submit"
+    />
+    <span> У вас еще нет аккаунта ? <RouterLink class="form__link" to="/register">Зарегистрироваться</RouterLink></span>
+  </AuthForm>
+</template>
 
 

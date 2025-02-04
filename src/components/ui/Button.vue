@@ -1,18 +1,6 @@
-<template>
-  <button
-    :type="type"
-    :disabled="disabled || isLoading"
-    :class="['btn', buttonSize, buttonClass, { active: isActive }]"
-  >
-    <span v-if="isLoading" class="icon icon-spinner"></span>
-    <span v-else class="btn-content">
-      {{ text }}
-      <span v-if="icon" :class="icon"></span>
-    </span>
-  </button>
-</template>
-
 <script setup lang="ts">
+import { computed } from 'vue';
+import type { PropType } from 'vue';
 const props = defineProps({
   type: {
     type: String as PropType<'submit' | 'reset' | 'button'>,
@@ -51,6 +39,20 @@ const props = defineProps({
 const buttonSize = computed(() => `btn-${props.size}`);
 const buttonClass = computed(() => `btn-${props.buttonType}`);
 </script>
+
+<template>
+  <button
+    :type="type"
+    :disabled="disabled || isLoading"
+    :class="['btn', buttonSize, buttonClass, { active: isActive }]"
+  >
+    <span v-if="isLoading" class="icon icon-spinner"></span>
+    <span v-else class="btn-content">
+      {{ text }}
+      <span v-if="icon" :class="icon"></span>
+    </span>
+  </button>
+</template>
 
 <style lang="scss" scoped>
 .btn {

@@ -4,6 +4,7 @@
   import Sidebar from '@/components/layout/Sidebar.vue';
   import { Notivue, Notification } from 'notivue'
   import { useUserStore } from '@/stores/useUserStore';
+  import { useRoute } from 'vue-router';
 
   const route = useRoute();
   const userStore = useUserStore();

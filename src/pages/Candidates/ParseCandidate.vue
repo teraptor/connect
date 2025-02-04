@@ -3,6 +3,7 @@ import * as pdfjsLib from 'pdfjs-dist';
 import { useCandidatesStore } from '@/stores/useCandidatesStore';
 import Button from '@/components/ui/Button.vue';
 import { push } from 'notivue';
+import { ref } from 'vue';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
 
