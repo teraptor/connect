@@ -20,6 +20,7 @@ const props = defineProps({
   modelValue: {
     type: Array as PropType<string[]>,
     required: true,
+    default: () => []
   },
 });
 
