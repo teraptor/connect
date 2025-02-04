@@ -1,18 +1,3 @@
-<template>
-  <div class="filter__group">
-    <h3 class="filter__group-title">{{ props.title }}:</h3>
-    <label v-for="item in options" :key="item.id" class="filter__group-item">
-      <input
-        type="checkbox"
-        :value="item.id"
-        v-model="localSelectedItems"
-        @change="updateSelection"
-      />
-      {{ item.name }}
-    </label>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue';
 import type { PropType } from 'vue';
@@ -50,7 +35,20 @@ watchEffect(() => {
   localSelectedItems.value = [...props.modelValue];
 });
 </script>
-
+<template>
+  <div class="filter__group">
+    <h3 class="filter__group-title">{{ props.title }}:</h3>
+    <label v-for="item in options" :key="item.id" class="filter__group-item">
+      <input
+        type="checkbox"
+        :value="item.id"
+        v-model="localSelectedItems"
+        @change="updateSelection"
+      />
+      {{ item.name }}
+    </label>
+  </div>
+</template>
 <style lang="scss" scoped>
 .filter__group {
   display: flex;

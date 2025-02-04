@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits, useAttrs } from 'vue';
+import { useAttrs } from 'vue';
 
 const props = defineProps({
   modelValue: {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, defineEmits } from 'vue';
+import { ref } from 'vue';
 import type { PropType } from 'vue';
 import FilterGroup from './FilterGroup.vue';
 import Button from '@/components/ui/Button.vue';
@@ -12,15 +12,15 @@ interface Option {
 const props = defineProps({
   availableLanguages: {
     type: Array as PropType<Option[]>,
-    default: []
+    default: () => []
   },
   availableSpecializations: {
     type: Array as PropType<Option[]>,
-    default: []
+    default: () => []
   },
   availableSubcategories: {
     type: Array as PropType<Option[]>,
-    default: []
+    default: () => []
   },
   variant: {
     type: String as PropType<'default' | 'table'>,
