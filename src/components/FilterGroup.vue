@@ -15,6 +15,7 @@
 
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue';
+import type { PropType } from 'vue';
 
 interface Option {
   id: string;
