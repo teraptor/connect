@@ -1,4 +1,4 @@
-import { ADD_CANDIDATE } from "@/constants";
+import { ADD_CANDIDATE } from '@/constants'
 
 export const RouteNames = {
   MAIN: {
@@ -14,22 +14,22 @@ export const RouteNames = {
         VACANCIES: 'vacancies',
         BENCHMARK: 'benchmark',
         CANDIDATES: 'candidates',
-        CANDIDATES_DETAIL: 'candidates_detail'
+        CANDIDATES_DETAIL: 'candidates_detail',
       },
     },
     UI_KIT: {
-      name:'UI_Kit',
+      name: 'UI_Kit',
       children: {
-        ICONS: 'icons'
-      }
+        ICONS: 'icons',
+      },
     },
   },
   USER: {
     name: 'user',
     children: {
       ADD_CANDIDATE: 'add_candidate',
-      PARSE_CANDIDATE: 'parse_candidate'
-    }
+      PARSE_CANDIDATE: 'parse_candidate',
+    },
   },
-  NOT_FOUND: '/:pathMatch(.*)'
+  NOT_FOUND: '/:pathMatch(.*)',
 }

@@ -1,6 +1,8 @@
 <template>
   <div class="textarea">
-    <label v-if="label" :for="labelFor" class="textarea__label">{{ label }}</label>
+    <label v-if="label" :for="labelFor" class="textarea__label">{{
+      label
+    }}</label>
     <textarea
       class="textarea__field"
       v-bind="$attrs"
@@ -11,13 +13,13 @@
       :disabled="disabled"
       :id="labelFor"
       @input="updateValue"
-      :class=[size]
+      :class="[size]"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import { useAttrs } from 'vue';
+import { useAttrs } from 'vue'
 
 const props = defineProps({
   modelValue: {
@@ -51,19 +53,19 @@ const props = defineProps({
   size: {
     type: String,
     default: 'large',
-  }
-});
+  },
+})
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue'])
 
-const $attrs = useAttrs();
+const $attrs = useAttrs()
 
 const updateValue = (event: Event) => {
-  const target = event.target as HTMLTextAreaElement | null;
+  const target = event.target as HTMLTextAreaElement | null
   if (target) {
-    emit('update:modelValue', target.value);
+    emit('update:modelValue', target.value)
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

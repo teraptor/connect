@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { useCandidatesStore } from '@/stores/useCandidatesStore';
-import InputField from '../ui/InputField.vue';
-import { CountryEnum, NationalityEnum, SexEnum } from '@/enums/enums';
-import SelectField from '../ui/SelectField.vue';
-import { isRequired } from '@/helpers/validation';
+import { useCandidatesStore } from '@/stores/useCandidatesStore'
+import InputField from '../ui/InputField.vue'
+import { CountryEnum, NationalityEnum, SexEnum } from '@/enums/enums'
+import SelectField from '../ui/SelectField.vue'
+import { isRequired } from '@/helpers/validation'
 
-const candidate = useCandidatesStore();
+const candidate = useCandidatesStore()
 </script>
 <template>
   <div class="input__container">
@@ -132,4 +132,3 @@ const candidate = useCandidatesStore();
   }
 }
 </style>
-

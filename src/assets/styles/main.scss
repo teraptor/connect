@@ -1,160 +1,31 @@
+@use './reset.scss';
 @use './normalize.scss';
 @use './variables.scss';
 @use '../icons/connect-icons.scss';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/**
-root
-**/
-:root {
-  --light: #b5b0ca;
-  --blue: #1a73e8;
-  --accent: #f13939;
-  --white: #ffffff;
-  --dark: #000;
-  --green: #41ba74;
-  --gray: #f3f3f3;
-  --light-gray: #fdfdfd;
-  --tr: 0.2s;
-}
-
 * {
   font-family: 'Roboto', sans-serif;
   font-optical-sizing: auto;
+  font-size: 16px;
+  font-weight: 300;
 }
 
 body {
   background-color: rgba(249 250 251);
 }
 
+ul,
+ol {
+  list-style: none;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+
 main {
   min-height: 100vh;
-}
-a {
-  text-decoration: none;
-  transition: var(--tr);
-}
-
-.container {
-  max-width: 1200px;
-  padding-left: 15px;
-  padding-right: 15px;
-  margin: 0 auto;
-}
-.title-h1 {
-  font-size: 72px;
-  line-height: normal;
-  letter-spacing: -2%;
-}
-.title-h2 {
-  font-size: 64px;
-  line-height: normal;
-  letter-spacing: -2%;
-}
-.main_title {
-  font-size: 64px;
-}
-.text {
-  font-size: 18px;
-  line-height: 1.6;
-}
-
-/***
-===== navigation
-*/
-.header {
-  background-color: var(--light-gray);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 16px;
-  padding-bottom: 16px;
-}
-.header__logo {
-  color: var(--blue);
-  font-size: 900;
-}
-.logo {
-  font-size: 28px;
-  width: 45%;
-}
-.nav {
-  display: flex;
-  gap: 22px;
-  align-items: center;
-  font-size: 15px;
-  font-weight: 300;
-  display: flex;
-  justify-content: space-between; /* Распределение пространства между элементами */
-  align-items: center;
-}
-.nav__link {
-  color: var(--dark);
-  padding: 10px 20px; /* Добавляем отступы для создания области вокруг текста */
-  text-decoration: none; /* Убираем подчеркивание у ссылок */
-  color: inherit; /* Наследуем цвет из родительского элемента */
-  flex-grow: 1; /* Растягиваем каждый пункт меню по всей ширине */
-}
-.nav__link:hover {
-  color: var(--blue);
-}
-.nav__link.current {
-  color: var(--blue);
-}
-.btn {
-  border-radius: 8px;
-  padding: 11px 18px;
-}
-.btn_light {
-  background-color: var(--white);
-  border: 1px solid var(--light);
-}
-.btn_accent {
-  background-color: var(--accent);
-  color: var(--white);
-}
-.btn._ml {
-  margin-left: 16px;
-}
-
-/**
-======= catalog nav
-**/
-.catalog_nav {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-}
-
-/**
-===== main 
-*/
-.main {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.main__cover > img {
-  width: 95%;
-}
-.main_title {
-  margin-top: 0px;
-}
-.main__desc {
-  color: var(--light);
-  max-width: 500px;
-  margin-bottom: 45px;
-}
-.subtitile {
-  margin: 0 auto;
-}
-.main__btn {
-  max-width: 270px;
-  box-sizing: border-box;
-  justify-content: center;
 }
 
 .form__link {

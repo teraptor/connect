@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import Button from './Button.vue';
+import { computed } from 'vue'
+import Button from './Button.vue'
 
 const props = defineProps({
   currentPage: {
@@ -15,76 +15,76 @@ const props = defineProps({
     type: Number,
     required: true,
   },
-});
+})
 
-const emit = defineEmits(['updatePage', 'updateLimit']);
+const emit = defineEmits(['updatePage', 'updateLimit'])
 
 const pageRange = computed(() => {
-  const range = [];
-  const maxPagesToShow = 5;
-  let startPage = props.currentPage - Math.floor(maxPagesToShow / 2);
-  let endPage = props.currentPage + Math.floor(maxPagesToShow / 2);
+  const range = []
+  const maxPagesToShow = 5
+  let startPage = props.currentPage - Math.floor(maxPagesToShow / 2)
+  let endPage = props.currentPage + Math.floor(maxPagesToShow / 2)
 
   if (startPage < 1) {
-    startPage = 1;
-    endPage = Math.min(maxPagesToShow, props.totalPages);
+    startPage = 1
+    endPage = Math.min(maxPagesToShow, props.totalPages)
   }
   if (endPage > props.totalPages) {
-    endPage = props.totalPages;
-    startPage = Math.max(props.totalPages - maxPagesToShow + 1, 1);
+    endPage = props.totalPages
+    startPage = Math.max(props.totalPages - maxPagesToShow + 1, 1)
   }
 
   for (let i = startPage; i <= endPage; i++) {
-    range.push(i);
+    range.push(i)
   }
 
-  return range;
-});
+  return range
+})
 
 const goToNextPage = () => {
   if (props.currentPage < props.totalPages) {
-    emit('updatePage', props.currentPage + 1);
+    emit('updatePage', props.currentPage + 1)
   }
-};
+}
 
 const goToPreviousPage = () => {
   if (props.currentPage > 1) {
-    emit('updatePage', props.currentPage - 1);
+    emit('updatePage', props.currentPage - 1)
   }
-};
+}
 
 const goToPage = (page: number) => {
   if (page >= 1 && page <= props.totalPages) {
-    emit('updatePage', page);
+    emit('updatePage', page)
   }
-};
+}
 
 const changeLimit = (event: Event) => {
-  const target = event.target as HTMLSelectElement;
-  emit('updateLimit', parseInt(target.value, 10));
-};
+  const target = event.target as HTMLSelectElement
+  emit('updateLimit', parseInt(target.value, 10))
+}
 </script>
 
 <template>
   <div class="pagination">
-    <Button 
-      button-type="secondary"  
+    <Button
+      button-type="secondary"
       text="Назад"
-      size="small" 
+      size="small"
       type="button"
       :disabled="currentPage === 1"
       @click="goToPreviousPage"
     />
-    <Button 
+    <Button
       button-type="secondary"
       text="1"
-      size="tab" 
+      size="tab"
       type="button"
       :disabled="currentPage === 1"
       @click="goToPage(1)"
     />
-    <Button 
-      button-type="primary" 
+    <Button
+      button-type="primary"
       :text="page"
       size="tab"
       v-for="page in pageRange"
@@ -93,25 +93,30 @@ const changeLimit = (event: Event) => {
       :isActive="page === currentPage"
     />
     <span v-if="totalPages > pageRange[pageRange.length - 1]">...</span>
-    <Button 
-      button-type="secondary"  
+    <Button
+      button-type="secondary"
       :text="totalPages"
-      size="tab" 
+      size="tab"
       type="button"
       :disabled="currentPage === totalPages"
       @click="goToPage(totalPages)"
     />
-    <Button 
-      button-type="secondary" 
+    <Button
+      button-type="secondary"
       text="Вперед"
-      size="small" 
+      size="small"
       type="button"
       :disabled="currentPage === totalPages"
       @click="goToNextPage"
     />
     <div class="pagination__limit">
       <label for="limit">Элементов на странице:</label>
-      <select id="limit" class="pagination__select" :value="pageLimit" @change="changeLimit">
+      <select
+        id="limit"
+        class="pagination__select"
+        :value="pageLimit"
+        @change="changeLimit"
+      >
         <option value="10">10</option>
         <option value="20">20</option>
         <option value="30">30</option>

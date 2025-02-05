@@ -1,27 +1,30 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
-import { RouteNames } from '@/router/routes/routeNames';
-import { ref } from 'vue';
-import Button from './ui/Button.vue';
+import { useRouter } from 'vue-router'
+import { RouteNames } from '@/router/routes/routeNames'
+import { ref } from 'vue'
+import Button from './ui/Button.vue'
 
-const isHovered = ref<boolean>(false);
+const isHovered = ref<boolean>(false)
 const props = defineProps({
   candidate: {
     type: Object,
     required: true,
   },
-});
-const router = useRouter();
-const changeIsHovered = () => isHovered.value = !isHovered.value;
+})
+const router = useRouter()
+const changeIsHovered = () => (isHovered.value = !isHovered.value)
 const goToCandidateDetail = () => {
-  router.push({ name: RouteNames.MAIN.MAIN_PAGE.children.CANDIDATES_DETAIL, params: { id: props.candidate.id } });
-};
+  router.push({
+    name: RouteNames.MAIN.MAIN_PAGE.children.CANDIDATES_DETAIL,
+    params: { id: props.candidate.id },
+  })
+}
 </script>
 
 <template>
-  <div 
-    class="candidate__card" 
-    @click="goToCandidateDetail"   
+  <div
+    class="candidate__card"
+    @click="goToCandidateDetail"
     @mouseenter="changeIsHovered"
     @mouseleave="changeIsHovered"
   >
@@ -50,22 +53,16 @@ const goToCandidateDetail = () => {
       >
         {{ technology }}
       </li> -->
-      <li class="candidate__card-skills-item">
-        tech
-      </li>
-      <li class="candidate__card-skills-item">
-        tech
-      </li>
-      <li class="candidate__card-skills-item">
-        tech
-      </li>
-      <li class="candidate__card-skills-item">
-        tech
-      </li>
+      <li class="candidate__card-skills-item">tech</li>
+      <li class="candidate__card-skills-item">tech</li>
+      <li class="candidate__card-skills-item">tech</li>
+      <li class="candidate__card-skills-item">tech</li>
     </ul>
-    <div class="candidate__card-about">qwertyqwertyqwertyqwertyqwertyqwertyqwertyqwertyqwertyqwertyqwertyqwertyqwertyqwertyqwertyqwerty </div>
+    <div class="candidate__card-about">
+      qwertyqwertyqwertyqwertyqwertyqwertyqwertyqwertyqwertyqwertyqwertyqwertyqwertyqwertyqwertyqwerty
+    </div>
     <div v-if="isHovered" class="candidate__card-hover">
-      <Button 
+      <Button
         button-type="secondary"
         text="Подробнее"
         @click="goToCandidateDetail"
@@ -78,36 +75,35 @@ const goToCandidateDetail = () => {
 <style scoped lang="scss">
 .candidate__card {
   max-width: 300px;
+  max-height: 300px;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 12px;
   background-color: $bg-card-color;
-  margin: 10px;
   padding: 20px;
   border-radius: 10px;
   cursor: pointer;
   box-shadow: $box-shadow;
   transition: transform 0.2s;
-  font-size: 14px;
+  font-size: 18px;
   &:hover {
     transform: scale(1.04);
   }
 
   &-specialization {
-  font-size: 14px;
-  font-weight: 300;
-  color: $help-color;
-  border-bottom: 1px solid $border-light;
+    font-weight: 300;
+    color: $help-color;
+    border-bottom: 1px solid $border-light;
   }
 
   &-name {
-      font-size: 18px;
-      font-weight: 900;
-      text-transform: uppercase;
-    }
+    font-weight: 900;
+    text-transform: uppercase;
+  }
 
   &-country {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 300;
     color: $help-color;
   }
@@ -115,10 +111,11 @@ const goToCandidateDetail = () => {
   &-position {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     &-grade {
       background-color: $main-color;
-      padding: 2px 16px;
+      padding: 8px 16px;
       color: $light-color;
       border-radius: 4px;
     }
@@ -143,12 +140,12 @@ const goToCandidateDetail = () => {
     gap: 8px;
 
     &-item {
-      padding: 2px 4px;
+      padding: 4px 8px;
       border: 1px solid $main-color;
       color: $main-color;
       border-radius: 4px;
     }
-  } 
+  }
 
   &-about {
     width: 100%;
@@ -158,11 +155,11 @@ const goToCandidateDetail = () => {
     -webkit-box-orient: vertical;
     word-break: break-word;
     overflow: hidden;
-    font-size: 14px;
     font-weight: 300;
     padding-top: 4px;
     color: $help-color;
     border-top: 1px solid $border-light;
+    font-size: 16px;
   }
 
   &-hover {

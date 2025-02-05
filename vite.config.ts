@@ -31,14 +31,7 @@ export default defineConfig({
         additionalData: `
           @use "@/assets/styles/variables.scss" as *; 
           @use 'sass:color' as color;`
-      },
+      }
     }
-  },
-  build: {
-    rollupOptions: {
-      output: {
-        inlineDynamicImports: true
-      },
-    },
   }
 })

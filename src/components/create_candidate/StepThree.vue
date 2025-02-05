@@ -1,21 +1,24 @@
 <script setup lang="ts">
-import { useCandidatesStore } from '@/stores/useCandidatesStore';
-import Button from '../ui/Button.vue';
-import InputField from '../ui/InputField.vue';
-import SelectField from '../ui/SelectField.vue';
-import { LanguageLevelEnum } from '@/enums/enums';
+import { useCandidatesStore } from '@/stores/useCandidatesStore'
+import Button from '../ui/Button.vue'
+import InputField from '../ui/InputField.vue'
+import SelectField from '../ui/SelectField.vue'
+import { LanguageLevelEnum } from '@/enums/enums'
 
-const candidate = useCandidatesStore();
-const addLanguage = () => candidate.addLanguage();
-const removeLanguage = (index: number) => candidate.removeLanguage(index);
-
+const candidate = useCandidatesStore()
+const addLanguage = () => candidate.addLanguage()
+const removeLanguage = (index: number) => candidate.removeLanguage(index)
 </script>
 
 <template>
   <div class="input__container">
     <div class="input__group">
       <h3 class="input__group-title">Язык</h3>
-      <div v-for="(lang, index) in candidate.addCandidateForm.language" :key="index" class="input__group-inputs">
+      <div
+        v-for="(lang, index) in candidate.addCandidateForm.language"
+        :key="index"
+        class="input__group-inputs"
+      >
         <InputField
           v-model="lang.name"
           label="Язык:"
@@ -31,11 +34,8 @@ const removeLanguage = (index: number) => candidate.removeLanguage(index);
           placeholder="Уровень владения"
           size="medium"
         />
-        <button  
-          type="button"           
-          @click="removeLanguage(index)"
-        >
-          <span class="icon icon-bin"/>
+        <button type="button" @click="removeLanguage(index)">
+          <span class="icon icon-bin" />
         </button>
       </div>
       <Button
@@ -82,7 +82,7 @@ const removeLanguage = (index: number) => candidate.removeLanguage(index);
 
       &:hover {
         color: $main-color;
-      };
+      }
     }
   }
 
@@ -93,15 +93,15 @@ const removeLanguage = (index: number) => candidate.removeLanguage(index);
     align-items: flex-end;
     gap: 12px;
 
-  .icon-bin {
-    cursor: pointer;
-    font-size: 28px;
-    color: $icon-gray;
+    .icon-bin {
+      cursor: pointer;
+      font-size: 28px;
+      color: $icon-gray;
 
-    &:hover {
-      color: $main-color;
-    };
-  };
+      &:hover {
+        color: $main-color;
+      }
+    }
   }
 }
 </style>

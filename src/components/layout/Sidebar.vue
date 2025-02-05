@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import { usesidebarStore } from '@/stores/layout/useSidebarStore';
-import { RouterLink } from 'vue-router';
-import { useRoute } from 'vue-router';
-import UserCard from '../UserCard.vue';
-import { ref } from 'vue';
+import { usesidebarStore } from '@/stores/layout/useSidebarStore'
+import { RouterLink } from 'vue-router'
+import { useRoute } from 'vue-router'
+import UserCard from '../UserCard.vue'
+import { ref } from 'vue'
 
-const route = useRoute();
-const { sidebarNav } = usesidebarStore();
-const sidebarState = ref<{ [key: string]: boolean }>({});
+const route = useRoute()
+const { sidebarNav } = usesidebarStore()
+const sidebarState = ref<{ [key: string]: boolean }>({})
 const sidebarToggle = (key: string) => {
-  sidebarState.value[key] = !sidebarState.value[key];
-};
+  sidebarState.value[key] = !sidebarState.value[key]
+}
 
 const isActive = (routeName: string | undefined) => {
-  return route.name === routeName;
-};
+  return route.name === routeName
+}
 </script>
 
 <template>
@@ -25,10 +25,13 @@ const isActive = (routeName: string | undefined) => {
         v-for="item in sidebarNav"
         :key="item.title"
         type="link"
-      > 
-        <div class="sidebar__item-content" :class="{ 'sidebar__item-content--active': isActive(item.routeName) }">
+      >
+        <div
+          class="sidebar__item-content"
+          :class="{ 'sidebar__item-content--active': isActive(item.routeName) }"
+        >
           <div class="sidebar__item-content-main">
-            <span :class="item.icon"/>
+            <span :class="item.icon" />
             <RouterLink v-if="item.routeName" :to="{ name: item.routeName }">
               {{ item.title }}
             </RouterLink>
@@ -36,9 +39,13 @@ const isActive = (routeName: string | undefined) => {
               {{ item.title }}
             </span>
           </div>
-          <span 
+          <span
             v-if="item.items"
-            :class="sidebarState[item.title] ? 'icon icon-chevron-up' : 'icon icon-chevron-down'" 
+            :class="
+              sidebarState[item.title]
+                ? 'icon icon-chevron-up'
+                : 'icon icon-chevron-down'
+            "
             @click="sidebarToggle(item.title)"
           />
         </div>
@@ -48,14 +55,18 @@ const isActive = (routeName: string | undefined) => {
             v-for="subItem in item.items"
             :key="subItem.title"
             type="link"
-            :class="{ 'sidebar__item-sub-item--active': isActive(subItem.routeName) }"
+            :class="{
+              'sidebar__item-sub-item--active': isActive(subItem.routeName),
+            }"
           >
-            <RouterLink :to="{ name: subItem.routeName }">{{ subItem.title }}</RouterLink>
+            <RouterLink :to="{ name: subItem.routeName }">{{
+              subItem.title
+            }}</RouterLink>
           </li>
         </ul>
       </li>
     </ul>
-    <UserCard/>
+    <UserCard />
   </div>
 </template>
 
@@ -137,10 +148,10 @@ const isActive = (routeName: string | undefined) => {
       position: relative;
       border-radius: 10px;
       color: $light-color;
-        &:hover {
-          background-color: #374151;
-          color: $light-color;
-        }
+      &:hover {
+        background-color: #374151;
+        color: $light-color;
+      }
       &--active {
         background-color: $light-color;
         color: $sidebar-background;

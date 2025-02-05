@@ -1,9 +1,7 @@
 <template>
-  <Vacancies />
+  <div>Вакансии</div>
 </template>
 
-<script setup lang="ts">
-import Vacancies from '@/components/pages/Vacancies/Vacancies.vue'
-</script>
+<script setup lang="ts"></script>
 
 <style scoped></style>

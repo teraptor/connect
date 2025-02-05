@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useUserStore } from '@/stores/useUserStore';
-import { computed } from 'vue';
+import { useUserStore } from '@/stores/useUserStore'
+import { computed } from 'vue'
 
 const userStore = useUserStore()
 const user = computed(() => userStore.user)
@@ -10,12 +10,22 @@ const getTGLink = (login: string) => `https://t.me/${login.replace('@', '')}`
   <div class="user__card">
     <div class="user__card-container">
       <div class="user__card-name">{{ user?.Name }}</div>
-      <div>Телефон: <span class="user__card-text">{{ user?.Phone}}</span></div>
-      <div>Должность: <span class="user__card-text">{{ user?.Position}}</span></div>
-      <div>Почта: <span class="user__card-text">{{ user?.Email}} </span></div>
+      <div>
+        Телефон: <span class="user__card-text">{{ user?.Phone }}</span>
+      </div>
+      <div>
+        Должность: <span class="user__card-text">{{ user?.Position }}</span>
+      </div>
+      <div>
+        Почта: <span class="user__card-text">{{ user?.Email }} </span>
+      </div>
       <div class="user__card-social-media">
-        Coциальные сети: 
-        <a v-if="user?.TgAccount" class="icon icon-telegram" :href="getTGLink(user.TgAccount)" />
+        Coциальные сети:
+        <a
+          v-if="user?.TgAccount"
+          class="icon icon-telegram"
+          :href="getTGLink(user.TgAccount)"
+        />
       </div>
     </div>
   </div>
@@ -27,7 +37,7 @@ const getTGLink = (login: string) => `https://t.me/${login.replace('@', '')}`
   align-items: center;
   width: 100%;
   padding: 10px;
-  
+
   &-container {
     display: flex;
     flex-direction: column;

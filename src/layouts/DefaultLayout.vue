@@ -1,14 +1,14 @@
 <script setup lang="ts">
-  import Header from '@/components/layout/Header.vue';
-  import Footer from '@/components/layout/Footer.vue';
-  import Sidebar from '@/components/layout/Sidebar.vue';
-  import { Notivue, Notification } from 'notivue'
-  import { useUserStore } from '@/stores/useUserStore';
-  import { useRoute } from 'vue-router';
+import Header from '@/components/layout/Header.vue'
+import Footer from '@/components/layout/Footer.vue'
+import Sidebar from '@/components/layout/Sidebar.vue'
+import { Notivue, Notification } from 'notivue'
+import { useUserStore } from '@/stores/useUserStore'
+import { useRoute } from 'vue-router'
 
-  const route = useRoute();
-  const userStore = useUserStore();
-  userStore.getUserData();
+const route = useRoute()
+const userStore = useUserStore()
+userStore.getUserData()
 </script>
 
 <template>
@@ -16,14 +16,14 @@
     <Notivue v-slot="item">
       <Notification :item="item" />
     </Notivue>
-    <Header v-if="route.meta.showHeader"/>
+    <Header v-if="route.meta.showHeader" />
     <div class="content-wrapper">
-      <Sidebar class="sidebar" v-if="route.meta.showSidebar"/>
+      <Sidebar class="sidebar" v-if="route.meta.showSidebar" />
       <div class="main-content">
-        <slot/>
+        <slot />
       </div>
     </div>
-    <Footer v-if="route.meta.showFooter"/>
+    <Footer v-if="route.meta.showFooter" />
   </div>
 </template>
 <style lang="scss" scoped>
@@ -41,13 +41,12 @@
     min-height: 300px;
 
     .main-content {
-    width: 80%;
+      width: 80%;
     }
 
     &:not(:has(.sidebar)) .main-content {
-    width: 100%;
+      width: 100%;
     }
   }
 }
 </style>
-

@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { useCandidatesStore } from '@/stores/useCandidatesStore';
-import InputField from '../ui/InputField.vue';
-import SelectField from '../ui/SelectField.vue';
-import { WorkFormatEnum } from '@/enums/enums';
+import { useCandidatesStore } from '@/stores/useCandidatesStore'
+import InputField from '../ui/InputField.vue'
+import SelectField from '../ui/SelectField.vue'
+import { WorkFormatEnum } from '@/enums/enums'
 
-
-const candidate = useCandidatesStore();
+const candidate = useCandidatesStore()
 </script>
 
 <template>
@@ -114,7 +113,7 @@ const candidate = useCandidatesStore();
 
       &:hover {
         color: $main-color;
-      };
+      }
     }
   }
 
@@ -125,15 +124,15 @@ const candidate = useCandidatesStore();
     align-items: flex-end;
     gap: 12px;
 
-  .icon-bin {
-    cursor: pointer;
-    font-size: 28px;
-    color: $icon-gray;
+    .icon-bin {
+      cursor: pointer;
+      font-size: 28px;
+      color: $icon-gray;
 
-    &:hover {
-      color: $main-color;
-    };
-  };
+      &:hover {
+        color: $main-color;
+      }
+    }
   }
 }
 </style>

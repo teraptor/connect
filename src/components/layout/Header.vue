@@ -1,25 +1,25 @@
 <script setup lang="ts">
-import Button from '@/components/ui/Button/Button.vue'
-import { useHeaderStore } from '@/stores/layout/useHeaderStore';
-import { useUserStore } from '@/stores/useUserStore';
-import { useRouter } from 'vue-router';
-import { RouteNames } from '@/router/routes/routeNames';
-import { onClickOutside } from '@vueuse/core';
-import { ref, computed } from 'vue';
+import Button from '@/components/ui/Button.vue'
+import { useHeaderStore } from '@/stores/layout/useHeaderStore'
+import { useUserStore } from '@/stores/useUserStore'
+import { useRouter } from 'vue-router'
+import { RouteNames } from '@/router/routes/routeNames'
+import { onClickOutside } from '@vueuse/core'
+import { ref, computed } from 'vue'
 
-const router = useRouter();
-const { headerNav } = useHeaderStore();
-const userStore = useUserStore();
-const isOpen = ref(false);
-const dropdown:any = ref(null);
+const router = useRouter()
+const { headerNav } = useHeaderStore()
+const userStore = useUserStore()
+const isOpen = ref(false)
+const dropdown: any = ref(null)
 
 const toggle = () => {
-  isOpen.value = !isOpen.value;
-};
+  isOpen.value = !isOpen.value
+}
 
 onClickOutside(dropdown, () => {
-  isOpen.value = false;
-});
+  isOpen.value = false
+})
 
 const moveToLogin = () => router.push({ name: RouteNames.MAIN.LOGIN })
 const moveToRegister = () => router.push({ name: RouteNames.MAIN.REGISTER })
@@ -41,8 +41,8 @@ const logout = () => {
     </div>
     <div class="header__nav">
       <div class="header__nav-links">
-        <RouterLink 
-          class="header__nav-link"        
+        <RouterLink
+          class="header__nav-link"
           v-for="item in headerNav"
           :key="item.title"
           type="link"
@@ -52,23 +52,37 @@ const logout = () => {
         </RouterLink>
       </div>
       <div v-if="user" class="header__nav-user" ref="dropdown">
-        <div @click="toggle"> {{ user?.Name }}</div>
+        <div @click="toggle">{{ user?.Name }}</div>
         <div v-if="isOpen" class="dropdown-menu">
           <ul class="dropdown-menu__items">
             <li class="dropdown-menu__item">
-              <span class="icon icon-user"/>
+              <span class="icon icon-user" />
               <RouterLink to="/user">Личный кабинет</RouterLink>
             </li>
             <li class="dropdown-menu__item logout" @click="logout">
-              <span class="icon icon-log-out"/>
+              <span class="icon icon-log-out" />
               Выйти
             </li>
           </ul>
         </div>
       </div>
       <div v-else class="header__nav-auth">
-        <Button @click="moveToLogin">Вход</Button>
-        <Button type="primary" @click="moveToRegister">Регистрация</Button>
+        <Button
+          type="button"
+          button-type="secondary"
+          text="Вход"
+          @click="moveToLogin"
+          size="small"
+          icon="icon icon-log-in"
+        />
+        <Button
+          type="button"
+          button-type="primary"
+          text="Регистрация"
+          @click="moveToRegister"
+          size="medium"
+          icon="icon icon-check-circle"
+        />
       </div>
     </div>
   </div>
@@ -104,9 +118,9 @@ const logout = () => {
 
     &-link {
       color: $main-color;
-      // &:hover {
-      //   color: lighten($main-color, 20%)
-      // }
+      &:hover {
+        color: color.adjust($main-color, $lightness: 20%);
+      }
     }
 
     &-user {
@@ -138,7 +152,7 @@ const logout = () => {
         }
 
         &__item {
-          padding: 4px;
+          padding: 8px;
           display: flex;
           justify-content: flex-start;
           align-items: center;
@@ -164,5 +178,4 @@ const logout = () => {
     }
   }
 }
-
 </style>

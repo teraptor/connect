@@ -3,6 +3,5 @@
 </template>
 
 <script setup lang="ts">
-import CandidatesList from './Candidates/CandidatesList.vue';
+import CandidatesList from './Candidates/CandidatesList.vue'
 </script>
-

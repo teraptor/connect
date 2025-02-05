@@ -1,28 +1,40 @@
 <script setup lang="ts">
-import { useRoute, useRouter } from 'vue-router';
-import { useCandidatesStore } from '@/stores/useCandidatesStore';
-import { computed, onMounted } from 'vue';
-import Button from '@/components/ui/Button.vue';
+import { useRoute, useRouter } from 'vue-router'
+import { useCandidatesStore } from '@/stores/useCandidatesStore'
+import { computed, onMounted } from 'vue'
+import Button from '@/components/ui/Button.vue'
 
-const route = useRoute();
-const router = useRouter();
-const store = useCandidatesStore();
+const route = useRoute()
+const router = useRouter()
+const store = useCandidatesStore()
 
-const candidateId = route.params.id as string;
+const candidateId = route.params.id as string
 onMounted(async () => {
-  await store.selectCandidate(candidateId);
-});
+  await store.selectCandidate(candidateId)
+})
 
-const candidate = computed(() => store.selectedCandidate);
+const candidate = computed(() => store.selectedCandidate)
 
 const candidateWorkFormat = [
   { label: 'Командировки', value: candidate.value?.work_format.business_trip },
-  { label: 'Работа над иностранными проектами', value: candidate.value?.work_format.foreign_project },
-  { label: 'Релокация за границу', value: candidate.value?.work_format.foreign_relocate },
-  { label: 'Релокация внутри страны', value: candidate.value?.work_format.national_relocate },
-  { label: 'Работа в арендуемой команде', value: candidate.value?.work_format.rent_in_team },
-];
-const goBack = () => router.go(-1);
+  {
+    label: 'Работа над иностранными проектами',
+    value: candidate.value?.work_format.foreign_project,
+  },
+  {
+    label: 'Релокация за границу',
+    value: candidate.value?.work_format.foreign_relocate,
+  },
+  {
+    label: 'Релокация внутри страны',
+    value: candidate.value?.work_format.national_relocate,
+  },
+  {
+    label: 'Работа в арендуемой команде',
+    value: candidate.value?.work_format.rent_in_team,
+  },
+]
+const goBack = () => router.go(-1)
 </script>
 
 <template>
@@ -31,15 +43,21 @@ const goBack = () => router.go(-1);
       @click="goBack"
       type="button"
       text="Назад"
-      button-type="danger" 
+      button-type="danger"
       size="small"
     />
     <div class="candidate__detail" v-if="candidate">
-      <h2 class="candidate__detail-name">{{ candidate.name }} {{ candidate.lastname }} {{ candidate.surname }}</h2>
+      <h2 class="candidate__detail-name">
+        {{ candidate.name }} {{ candidate.lastname }} {{ candidate.surname }}
+      </h2>
       <div class="candidate__detail-salary">
-        <h3 class="candidate__detail-salary-title"> Зарплатные ожидания: </h3>
-        <p class="candidate__detail-salary-hour">{{ candidate.salary.salary_hour }} RUB/час</p> 
-        <p class="candidate__detail-salary-month">{{ candidate.salary.salary_month }} RUB/мес</p> 
+        <h3 class="candidate__detail-salary-title">Зарплатные ожидания:</h3>
+        <p class="candidate__detail-salary-hour">
+          {{ candidate.salary.salary_hour }} RUB/час
+        </p>
+        <p class="candidate__detail-salary-month">
+          {{ candidate.salary.salary_month }} RUB/мес
+        </p>
       </div>
       <div class="candidate__detail-format">
         <h3 class="candidate__detail-format-title">Формат работы:</h3>

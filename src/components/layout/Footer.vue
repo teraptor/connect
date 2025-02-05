@@ -9,6 +9,6 @@
   width: 100%;
   height: 300px;
   background: grey;
-  margin-top: auto
+  margin-top: auto;
 }
 </style>

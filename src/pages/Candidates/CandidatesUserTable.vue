@@ -31,16 +31,16 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import { useCandidatesStore } from '@/stores/useCandidatesStore';
+import { ref, onMounted } from 'vue'
+import { useCandidatesStore } from '@/stores/useCandidatesStore'
 
-const candidatesStore = useCandidatesStore();
-const candidates = ref([]);
+const candidatesStore = useCandidatesStore()
+const candidates = ref([])
 
 onMounted(async () => {
-  await candidatesStore.getCandidates();
-  candidates.value = candidatesStore.candidates;
-});
+  await candidatesStore.getCandidates()
+  candidates.value = candidatesStore.candidates
+})
 </script>
 
 <style scoped>
@@ -50,7 +50,8 @@ table {
   margin-top: 20px;
 }
 
-th, td {
+th,
+td {
   text-align: left;
   padding: 8px;
 }

@@ -6,5 +6,3 @@ export const REGISTRATION: string = `${BASE_URL}/auth/register`
 export const AUTORIZATION: string = `${BASE_URL}/auth/login`
 export const FORGOT: string = `${BASE_URL}/auth/forgot`
 export const USER: string = `${BASE_URL}/employee`
-
-

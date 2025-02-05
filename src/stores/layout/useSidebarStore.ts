@@ -19,7 +19,7 @@ export const usesidebarStore = defineStore('sidebar', {
       {
         title: 'Начало работы',
         routeName: RouteNames.USER.name,
-        icon: 'icon icon-user'
+        icon: 'icon icon-user',
       },
       {
         title: 'Заявки',
@@ -32,8 +32,8 @@ export const usesidebarStore = defineStore('sidebar', {
           {
             title: 'Вкладка 2',
             routeName: RouteNames.MAIN.MAIN_PAGE.children.HOW_IT_WORKS,
-          }
-        ]
+          },
+        ],
       },
       {
         title: 'Специалисты',
@@ -46,14 +46,14 @@ export const usesidebarStore = defineStore('sidebar', {
           {
             title: 'Парсинг специалиста',
             routeName: RouteNames.USER.children.PARSE_CANDIDATE,
-          }
-        ]
+          },
+        ],
       },
       {
         title: 'Команда',
         routeName: RouteNames.MAIN.MAIN_PAGE.children.BENCHMARK,
-        icon: 'icon icon-group'
-      }
-    ]
-  })
+        icon: 'icon icon-group',
+      },
+    ],
+  }),
 })

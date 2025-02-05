@@ -1,9 +1,7 @@
 <template>
-  <Benchmark />
+  <div>Бэнчмарк</div>
 </template>
 
-<script setup lang="ts">
-import Benchmark from '@/components/pages/Benchmark/Benchmark.vue'
-</script>
+<script setup lang="ts"></script>
 
 <style scoped></style>

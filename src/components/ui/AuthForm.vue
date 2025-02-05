@@ -13,23 +13,21 @@
 </template>
 
 <script setup lang="ts">
-
 const props = defineProps({
   title: {
     type: String,
-    default: ''
-  }
-});
+    default: '',
+  },
+})
 const emit = defineEmits<{
-  (e: 'submit'): void;
-}>();
+  (e: 'submit'): void
+}>()
 
 const handleSubmit = (event: Event) => {
-  event.preventDefault();
-  emit('submit');
-};
+  event.preventDefault()
+  emit('submit')
+}
 </script>
-
 
 <style scoped lang="scss">
 .form__container {

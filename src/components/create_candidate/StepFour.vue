@@ -1,27 +1,28 @@
 <script setup lang="ts">
-import { useCandidatesStore } from '@/stores/useCandidatesStore';
-import Button from '../ui/Button.vue';
-import InputField from '../ui/InputField.vue';
-import { isRequired } from '@/helpers/validation';
+import { useCandidatesStore } from '@/stores/useCandidatesStore'
+import Button from '../ui/Button.vue'
+import InputField from '../ui/InputField.vue'
+import { isRequired } from '@/helpers/validation'
 
-const candidate = useCandidatesStore();
-const addCVItem = () => candidate.addCVItem();
-const removeCVItem = (index: number) => candidate.removeCVItem(index);
-const addTechnologyToCV = (index: number) => candidate.addTechnologyToCV(index);
-const removeTechnologyFromCV = (cvIndex: number, techIndex: number) => candidate.removeTechnologyFromCV(cvIndex, techIndex);
+const candidate = useCandidatesStore()
+const addCVItem = () => candidate.addCVItem()
+const removeCVItem = (index: number) => candidate.removeCVItem(index)
+const addTechnologyToCV = (index: number) => candidate.addTechnologyToCV(index)
+const removeTechnologyFromCV = (cvIndex: number, techIndex: number) =>
+  candidate.removeTechnologyFromCV(cvIndex, techIndex)
 </script>
 
 <template>
-  <div v-for="(cvItem, index) in candidate.addCandidateForm.cv_item" :key="index" class="input__container">
+  <div
+    v-for="(cvItem, index) in candidate.addCandidateForm.cv_item"
+    :key="index"
+    class="input__container"
+  >
     <div class="input__group">
       <h3 class="input__group-title">
         Место работы
-        <button  
-          type="button"           
-          v-if="index !== 0"
-          @click="removeCVItem(index)"
-        >
-          <span class="icon icon-bin"/>
+        <button type="button" v-if="index !== 0" @click="removeCVItem(index)">
+          <span class="icon icon-bin" />
         </button>
       </h3>
       <InputField
@@ -67,7 +68,11 @@ const removeTechnologyFromCV = (cvIndex: number, techIndex: number) => candidate
     </div>
     <div class="input__group">
       <h3 class="input__group-title">Технологии</h3>
-      <div v-for="(tech, techIndex) in cvItem.cv_technology" :key="techIndex" class="input__group-inputs">
+      <div
+        v-for="(tech, techIndex) in cvItem.cv_technology"
+        :key="techIndex"
+        class="input__group-inputs"
+      >
         <InputField
           v-model="tech.name"
           label="Технология"
@@ -75,12 +80,12 @@ const removeTechnologyFromCV = (cvIndex: number, techIndex: number) => candidate
           placeholder="Введите технологию..."
           size="medium"
         />
-        <button  
+        <button
           v-if="techIndex !== 0"
-          type="button"           
+          type="button"
           @click="removeTechnologyFromCV(index, techIndex)"
         >
-          <span class="icon icon-bin"/>
+          <span class="icon icon-bin" />
         </button>
       </div>
       <Button
@@ -92,9 +97,9 @@ const removeTechnologyFromCV = (cvIndex: number, techIndex: number) => candidate
         size="medium"
       />
     </div>
-    <Button 
+    <Button
       type="button"
-      button-type="primary" 
+      button-type="primary"
       text="Добавить место работы"
       icon="icon icon-plus"
       @click="addCVItem"
@@ -134,7 +139,7 @@ const removeTechnologyFromCV = (cvIndex: number, techIndex: number) => candidate
 
       &:hover {
         color: $main-color;
-      };
+      }
     }
   }
 
@@ -145,15 +150,15 @@ const removeTechnologyFromCV = (cvIndex: number, techIndex: number) => candidate
     align-items: flex-end;
     gap: 12px;
 
-  .icon-bin {
-    cursor: pointer;
-    font-size: 28px;
-    color: $icon-gray;
+    .icon-bin {
+      cursor: pointer;
+      font-size: 28px;
+      color: $icon-gray;
 
-    &:hover {
-      color: $main-color;
-    };
-  };
+      &:hover {
+        color: $main-color;
+      }
+    }
   }
 }
 </style>

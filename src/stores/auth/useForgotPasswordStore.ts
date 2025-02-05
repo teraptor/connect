@@ -1,9 +1,9 @@
-import { defineStore } from 'pinia';
-import axios from 'axios';
-import { FORGOT } from '@/constants';
-import { push } from 'notivue';
+import { defineStore } from 'pinia'
+import axios from 'axios'
+import { FORGOT } from '@/constants'
+import { push } from 'notivue'
 interface IForgotPasswordState {
-  email: string;
+  email: string
 }
 
 export const useForgotPasswordStore = defineStore('forgotPassword', {
@@ -16,11 +16,11 @@ export const useForgotPasswordStore = defineStore('forgotPassword', {
       try {
         const response = await axios.post(FORGOT, {
           email: this.email,
-        });
-        push.success('Пароль для восстановления отправлен Вам на почту!');
+        })
+        push.success('Пароль для восстановления отправлен Вам на почту!')
       } catch (error: any) {
         push.error('Ошибка')
       }
-    }
-  }
-});
+    },
+  },
+})

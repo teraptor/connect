@@ -1,29 +1,33 @@
-
 <script setup lang="ts">
-import { useCandidatesStore } from '@/stores/useCandidatesStore';
-import Button from '../ui/Button.vue';
-import InputField from '../ui/InputField.vue';
-import { isRequired } from '@/helpers/validation';
+import { useCandidatesStore } from '@/stores/useCandidatesStore'
+import Button from '../ui/Button.vue'
+import InputField from '../ui/InputField.vue'
+import { isRequired } from '@/helpers/validation'
 
-const candidate = useCandidatesStore();
+const candidate = useCandidatesStore()
 
-const addEducation = () => candidate.addEducation();
-const removeEducation = (index: number) => candidate.removeEducation(index);
+const addEducation = () => candidate.addEducation()
+const removeEducation = (index: number) => candidate.removeEducation(index)
 
-const addCertification = () => candidate.addCertification();
-const removeCertification = (index: number) => candidate.removeCertification(index);
+const addCertification = () => candidate.addCertification()
+const removeCertification = (index: number) =>
+  candidate.removeCertification(index)
 </script>
 <template>
   <div class="input__container">
-    <div v-for="(edu, index) in candidate.addCandidateForm.education" :key="index" class="input__group">
+    <div
+      v-for="(edu, index) in candidate.addCandidateForm.education"
+      :key="index"
+      class="input__group"
+    >
       <h3 class="input__group-title">
         Образование
-        <button  
-          type="button"           
+        <button
+          type="button"
           v-if="index !== 0"
           @click="removeEducation(index)"
         >
-          <span class="icon icon-bin"/>
+          <span class="icon icon-bin" />
         </button>
       </h3>
       <InputField
@@ -59,7 +63,7 @@ const removeCertification = (index: number) => candidate.removeCertification(ind
         :validators="[isRequired]"
       />
     </div>
-    <Button 
+    <Button
       type="button"
       button-type="primary"
       text="Добавить образование"
@@ -68,7 +72,11 @@ const removeCertification = (index: number) => candidate.removeCertification(ind
     />
     <div class="input__group">
       <h3 class="input__group-title">Дипломы и сертификаты</h3>
-      <div v-for="(cert, index) in candidate.addCandidateForm.certification" :key="index" class="input__group-inputs">
+      <div
+        v-for="(cert, index) in candidate.addCandidateForm.certification"
+        :key="index"
+        class="input__group-inputs"
+      >
         <InputField
           v-model="cert.title"
           label="Название диплома:"
@@ -91,20 +99,17 @@ const removeCertification = (index: number) => candidate.removeCertification(ind
           placeholder="Введите дату выдачи..."
           size="medium"
         />
-        <button  
-          type="button"           
-          @click="removeCertification(index)"
-        >
-          <span class="icon icon-bin"/>
+        <button type="button" @click="removeCertification(index)">
+          <span class="icon icon-bin" />
         </button>
       </div>
       <Button
-      type="button"
-      button-type="secondary"
-      text="Добавить"
-      icon="icon icon-plus-circle"
-      @click="addCertification"
-      size="medium"
+        type="button"
+        button-type="secondary"
+        text="Добавить"
+        icon="icon icon-plus-circle"
+        @click="addCertification"
+        size="medium"
       />
     </div>
   </div>
@@ -141,7 +146,7 @@ const removeCertification = (index: number) => candidate.removeCertification(ind
 
       &:hover {
         color: $main-color;
-      };
+      }
     }
   }
 
@@ -159,9 +164,8 @@ const removeCertification = (index: number) => candidate.removeCertification(ind
 
       &:hover {
         color: $main-color;
-      };
-    };
+      }
+    }
   }
 }
 </style>
-

@@ -1,43 +1,43 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import type { PropType } from 'vue';
+import { computed } from 'vue'
+import type { PropType } from 'vue'
 const props = defineProps({
   type: {
     type: String as PropType<'submit' | 'reset' | 'button'>,
-    default: 'button'
+    default: 'button',
   },
   disabled: {
     type: Boolean,
-    default: false
+    default: false,
   },
   text: {
     type: [String, Number],
-    default: ''
+    default: '',
   },
   size: {
-    type: String as PropType<'tab'| 'small' | 'medium' | 'large'>,
-    default: 'large'
+    type: String as PropType<'tab' | 'small' | 'medium' | 'large'>,
+    default: 'large',
   },
   icon: {
     type: String,
-    default: ''
+    default: '',
   },
   isLoading: {
     type: Boolean,
-    default: false
+    default: false,
   },
   isActive: {
     type: Boolean,
-    default: false
+    default: false,
   },
   buttonType: {
     type: String,
-    default: 'primary'
-  }
-});
+    default: 'primary',
+  },
+})
 
-const buttonSize = computed(() => `btn-${props.size}`);
-const buttonClass = computed(() => `btn-${props.buttonType}`);
+const buttonSize = computed(() => `btn-${props.size}`)
+const buttonClass = computed(() => `btn-${props.buttonType}`)
 </script>
 
 <template>
@@ -74,9 +74,13 @@ const buttonClass = computed(() => `btn-${props.buttonType}`);
 
   &-small {
     width: 100px;
+    padding: 4px;
+    height: 32px;
   }
   &-medium {
     width: 150px;
+    padding: 4px;
+    height: 32px;
   }
 
   &-large {

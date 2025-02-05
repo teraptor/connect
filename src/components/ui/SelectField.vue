@@ -15,11 +15,7 @@
         @blur="validate"
       >
         <option value="" disabled>{{ placeholder }}</option>
-        <option
-          v-for="(value, key) in enumObject"
-          :key="key"
-          :value="value"
-        >
+        <option v-for="(value, key) in enumObject" :key="key" :value="value">
           {{ value }}
         </option>
       </select>
@@ -29,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch } from 'vue'
 
 const props = defineProps({
   id: {
@@ -58,50 +54,50 @@ const props = defineProps({
   },
   size: {
     type: String,
-    default: 'large'
+    default: 'large',
   },
   validators: {
     type: Array as () => Array<(value: string) => string | false>,
     default: () => [],
   },
-});
+})
 
-const internalValue = ref<string>(props.modelValue);
-const hasError = ref<boolean>(false);
-const errorMessage = ref<string>('');
+const internalValue = ref<string>(props.modelValue)
+const hasError = ref<boolean>(false)
+const errorMessage = ref<string>('')
 
 const emit = defineEmits<{
-  (event: 'update:modelValue', value: string): void;
-}>();
+  (event: 'update:modelValue', value: string): void
+}>()
 
 const handleInput = (event: Event) => {
-  const target = event.target as HTMLSelectElement;
+  const target = event.target as HTMLSelectElement
   if (target) {
-    const value = target.value;
-    internalValue.value = value;
-    emit('update:modelValue', value);
+    const value = target.value
+    internalValue.value = value
+    emit('update:modelValue', value)
   }
-};
+}
 
 const validate = () => {
-  let validationError: string | false = false;
+  let validationError: string | false = false
 
   for (const validator of props.validators) {
-    validationError = validator(internalValue.value!);
+    validationError = validator(internalValue.value!)
     if (validationError) {
-      hasError.value = true;
-      errorMessage.value = validationError;
-      return;
+      hasError.value = true
+      errorMessage.value = validationError
+      return
     }
   }
 
-  hasError.value = false;
-  errorMessage.value = '';
-};
+  hasError.value = false
+  errorMessage.value = ''
+}
 
-watch(internalValue, (newValue) => {
-  emit('update:modelValue', newValue);
-});
+watch(internalValue, newValue => {
+  emit('update:modelValue', newValue)
+})
 </script>
 
 <style lang="scss" scoped>
@@ -127,6 +123,8 @@ watch(internalValue, (newValue) => {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-size: 14px;
+    font-weight: 200;
 
     &::placeholder {
       font-size: 14px;
@@ -163,9 +161,4 @@ watch(internalValue, (newValue) => {
     font-size: 12px;
   }
 }
-
 </style>
-
-
-
-

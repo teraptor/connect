@@ -1,54 +1,66 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import type { PropType } from 'vue';
-import FilterGroup from './FilterGroup.vue';
-import Button from '@/components/ui/Button.vue';
+import { ref } from 'vue'
+import type { PropType } from 'vue'
+import FilterGroup from './FilterGroup.vue'
+import Button from '@/components/ui/Button.vue'
 
 interface Option {
-  id: string;
-  name: string;
+  id: string
+  name: string
 }
 
 const props = defineProps({
   availableLanguages: {
     type: Array as PropType<Option[]>,
-    default: () => []
+    default: () => [],
   },
   availableSpecializations: {
     type: Array as PropType<Option[]>,
-    default: () => []
+    default: () => [],
   },
   availableSubcategories: {
     type: Array as PropType<Option[]>,
-    default: () => []
+    default: () => [],
   },
   variant: {
     type: String as PropType<'default' | 'table'>,
-    default: 'default'
-  }
-});
+    default: 'default',
+  },
+})
 
-const emit = defineEmits(['applyFilter']);
+const emit = defineEmits(['applyFilter'])
 
-const selectedLanguages = ref<string[]>([]);
-const selectedSpecializations = ref<string[]>([]);
-const selectedSubcategories = ref<string[]>([]);
+const selectedLanguages = ref<string[]>([])
+const selectedSpecializations = ref<string[]>([])
+const selectedSubcategories = ref<string[]>([])
 
 const applyFilter = () => {
   emit('applyFilter', {
     languages: selectedLanguages.value,
     specializations: selectedSpecializations.value,
     subcategories: selectedSubcategories.value,
-  });
-};
+  })
+}
 </script>
 
 <template>
   <div :class="variant === 'table' ? 'filter-table' : 'filter'">
-    <FilterGroup title="Языки" v-model="selectedLanguages" :options="availableLanguages" />
-    <FilterGroup title="Должность" v-model="selectedSpecializations" :options="availableSpecializations" />
-    <FilterGroup title="Специализация" v-model="selectedSubcategories" :options="availableSubcategories" />
-    <Button 
+    <FilterGroup
+      title="Языки"
+      v-model="selectedLanguages"
+      :options="availableLanguages"
+    />
+    <FilterGroup
+      title="Должность"
+      v-model="selectedSpecializations"
+      :options="availableSpecializations"
+    />
+    <FilterGroup
+      title="Специализация"
+      v-model="selectedSubcategories"
+      :options="availableSubcategories"
+    />
+    <Button
       type="button"
       button-type="primary"
       text="Поиск"

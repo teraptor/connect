@@ -1,40 +1,40 @@
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue';
-import type { PropType } from 'vue';
+import { ref, watchEffect } from 'vue'
+import type { PropType } from 'vue'
 
 interface Option {
-  id: string;
-  name: string;
+  id: string
+  name: string
 }
 
 const props = defineProps({
   title: {
     type: String,
-    default: ''
+    default: '',
   },
   options: {
     type: Array as PropType<Option[]>,
     required: true,
-    default: () => []
+    default: () => [],
   },
   modelValue: {
     type: Array as PropType<string[]>,
     required: true,
-    default: () => []
+    default: () => [],
   },
-});
+})
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue'])
 
-const localSelectedItems = ref([...props.modelValue]);
+const localSelectedItems = ref([...props.modelValue])
 
 const updateSelection = () => {
-  emit('update:modelValue', localSelectedItems.value);
-};
+  emit('update:modelValue', localSelectedItems.value)
+}
 
 watchEffect(() => {
-  localSelectedItems.value = [...props.modelValue];
-});
+  localSelectedItems.value = [...props.modelValue]
+})
 </script>
 <template>
   <div class="filter__group">

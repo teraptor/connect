@@ -14,7 +14,11 @@
         :placeholder="placeholder"
         :required="required"
         :autocomplete="autocomplete"
-        :class="[size && type !== 'checkbox' ? size : '', { 'input-error': hasError }, { 'checkbox-input': type === 'checkbox' }]"
+        :class="[
+          size && type !== 'checkbox' ? size : '',
+          { 'input-error': hasError },
+          { 'checkbox-input': type === 'checkbox' },
+        ]"
         @blur="validate"
       />
       <span class="form__group-icon" v-if="icon" @click="$emit('icon-click')">
@@ -26,14 +30,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch } from 'vue'
 
 const props = defineProps({
   label: String,
   id: String,
   type: {
     type: String,
-    default: 'text'
+    default: 'text',
   },
   placeholder: String,
   required: {
@@ -54,32 +58,32 @@ const props = defineProps({
     type: Array as () => Array<(value: any) => string | false>,
     default: () => [],
   },
-});
-const internalValue = ref<string | number | boolean>(props.modelValue);
-const hasError = ref<boolean>(false);
-const errorMessage = ref<string>('');
+})
+const internalValue = ref<string | number | boolean>(props.modelValue)
+const hasError = ref<boolean>(false)
+const errorMessage = ref<string>('')
 
-const emit = defineEmits(['update:modelValue', 'icon-click']);
+const emit = defineEmits(['update:modelValue', 'icon-click'])
 
 const validate = () => {
-  let validationError: string | false = false;
+  let validationError: string | false = false
 
   for (const validator of props.validators) {
-    validationError = validator(internalValue.value);
+    validationError = validator(internalValue.value)
     if (validationError) {
-      hasError.value = true;
-      errorMessage.value = validationError;
-      return;
+      hasError.value = true
+      errorMessage.value = validationError
+      return
     }
   }
 
-  hasError.value = false;
-  errorMessage.value = '';
-};
+  hasError.value = false
+  errorMessage.value = ''
+}
 
-watch(internalValue, (newValue) => {
-  emit('update:modelValue', newValue);
-});
+watch(internalValue, newValue => {
+  emit('update:modelValue', newValue)
+})
 </script>
 
 <style lang="scss" scoped>
@@ -105,6 +109,8 @@ watch(internalValue, (newValue) => {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-size: 14px;
+    font-weight: 200;
 
     &::placeholder {
       font-size: 14px;

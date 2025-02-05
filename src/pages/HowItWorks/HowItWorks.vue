@@ -1,9 +1,7 @@
 <template>
-  <HowItWorks />
+  <div>Как это работает</div>
 </template>
 
-<script setup lang="ts">
-import HowItWorks from '@/components/pages/HowItWorks/HowItWorks.vue'
-</script>
+<script setup lang="ts"></script>
 
 <style scoped></style>

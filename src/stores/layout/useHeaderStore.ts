@@ -27,5 +27,5 @@ export const useHeaderStore = defineStore('header', {
         routeName: RouteNames.MAIN.MAIN_PAGE.children.BENCHMARK,
       },
     ],
-  })
+  }),
 })

@@ -4,13 +4,13 @@ import { RouteNames } from './routeNames'
 const defaultMeta = {
   showHeader: true,
   showFooter: true,
-  showSidebar: false
+  showSidebar: false,
 }
 
 const userMeta = {
   showHeader: true,
   showSidebar: true,
-  showFooter: false
+  showFooter: false,
 }
 
 export const MAIN_ROUTES: RouteRecordRaw[] = [
@@ -19,7 +19,7 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
     name: RouteNames.MAIN.LOGIN,
     component: () => import('@/pages/auth/Login.vue'),
     meta: {
-      title: 'Авторизация'
+      title: 'Авторизация',
     },
   },
   {
@@ -27,7 +27,7 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
     name: RouteNames.MAIN.REGISTER,
     component: () => import('@/pages/auth/Register.vue'),
     meta: {
-      title: 'Регистрация'
+      title: 'Регистрация',
     },
   },
   {
@@ -35,14 +35,14 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
     name: RouteNames.MAIN.FORGOT,
     component: () => import('@/pages/auth/Forgot.vue'),
     meta: {
-      title: 'Забыли пароль'
+      title: 'Забыли пароль',
     },
   },
   {
     path: `${RouteNames.MAIN.MAIN_PAGE.name}`,
     meta: {
       title: 'Главная страница',
-      ...defaultMeta
+      ...defaultMeta,
     },
     children: [
       {
@@ -108,12 +108,12 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
         meta: {
           title: 'icons',
         },
-      }
-    ]
+      },
+    ],
   },
   {
     path: `/${RouteNames.USER.name}`,
-    name: RouteNames.USER.name,
+    name: 'testuser',
     meta: {
       title: 'Пользователь',
       ...userMeta,
@@ -142,16 +142,16 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
         meta: {
           title: 'Парсинг кандидата',
         },
-      }
-    ]
+      },
+    ],
   },
   {
-    path:`${RouteNames.NOT_FOUND}`,
+    path: `${RouteNames.NOT_FOUND}`,
     name: RouteNames.NOT_FOUND,
     component: () => import('@/pages/NotFound/NotFound.vue'),
     meta: {
       title: '404',
-      ...defaultMeta
+      ...defaultMeta,
     },
-  }
+  },
 ]
