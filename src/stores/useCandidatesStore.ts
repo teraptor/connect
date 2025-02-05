@@ -341,13 +341,6 @@ export const useCandidatesStore = defineStore('candidates', {
       this.addCandidateForm.certification.splice(index, 1)
     },
 
-    addLanguage() {
-      this.addCandidateForm.language.push({
-        name: '',
-        level: '',
-      })
-    },
-
     removeLanguage(index: number) {
       this.addCandidateForm.language.splice(index, 1)
     },

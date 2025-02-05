@@ -1,51 +1,79 @@
 <script setup lang="ts">
 import { useCandidatesStore } from '@/stores/useCandidatesStore'
 import Button from '../ui/Button.vue'
-import InputField from '../ui/InputField.vue'
 import SelectField from '../ui/SelectField.vue'
-import { LanguageLevelEnum } from '@/enums/enums'
+import { LanguageLevelEnum, LanguagesEnum } from '@/enums/enums'
+import { ref } from 'vue'
 
 const candidate = useCandidatesStore()
-const addLanguage = () => candidate.addLanguage()
-const removeLanguage = (index: number) => candidate.removeLanguage(index)
+
+const languagesInput = ref<string>('')
+const languageLevel = ref<string>('')
+
+const addLanguage = () => {
+    candidate.addCandidateForm.language.push({
+      name: languagesInput.value,
+      level: languageLevel.value,
+    })
+
+    languagesInput.value = ''
+    languageLevel.value = ''
+}
+
+const isFilledLanguage = computed(() => {
+  return languagesInput.value.trim() !== '' && languageLevel.value.trim() !== ''
+})
+
+const removeLanguage = (index: number) => {
+  candidate.removeLanguage(index)
+}
 </script>
 
 <template>
   <div class="input__container">
     <div class="input__group">
-      <h3 class="input__group-title">Язык</h3>
-      <div
-        v-for="(lang, index) in candidate.addCandidateForm.language"
-        :key="index"
-        class="input__group-inputs"
-      >
-        <InputField
-          v-model="lang.name"
-          label="Язык:"
-          type="text"
-          placeholder="Введите язык..."
+      <h3 class="input__group-title">Языки</h3>
+      <div class="input__group-inputs">
+        <SelectField
+          v-model="languagesInput"
+          label="Введите язык"
+          id="languageLevel"
+          :enumObject="LanguagesEnum"
+          placeholder="Выберите язык"
           size="medium"
+          :enableSearch="true"
         />
         <SelectField
-          id="lang.level"
-          v-model="lang.level"
-          label="Уровень владения:"
+          id="newLanguageLevel"
+          v-model="languageLevel"
+          label="Уровень владения"
           :enumObject="LanguageLevelEnum"
-          placeholder="Уровень владения"
+          placeholder="Выберите уровень"
           size="medium"
         />
-        <button type="button" @click="removeLanguage(index)">
-          <span class="icon icon-bin" />
-        </button>
+        <Button
+          type="button"
+          button-type="secondary"
+          text="Добавить"
+          icon="icon icon-plus-circle"
+          @click="addLanguage"
+          size="medium"
+          :disabled="!isFilledLanguage"
+        />
       </div>
-      <Button
-        type="button"
-        button-type="secondary"
-        text="Добавить"
-        icon="icon icon-plus-circle"
-        @click="addLanguage"
-        size="medium"
-      />
+      <div class="input__group-language-items">
+        <div
+          v-for="(lang, index) in candidate.addCandidateForm.language"
+          :key="index"
+          class="input__group-language-item"
+        >
+          <button type="button" @click="removeLanguage(index)">
+            <span class="icon icon-x" />
+          </button>
+          <div>{{ lang.name }}</div>
+          <div>{{ lang.level }}</div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -87,7 +115,6 @@ const removeLanguage = (index: number) => candidate.removeLanguage(index)
   }
 
   &-inputs {
-    width: 100%;
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
@@ -103,5 +130,42 @@ const removeLanguage = (index: number) => candidate.removeLanguage(index)
       }
     }
   }
+  &-language-items {
+    display: flex;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  &-language-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    border: 1px solid $main-color;
+    color: $main-color;
+    padding: 8px 10px;
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 8px;
+    position: relative;
+
+    div:nth-of-type(1) {
+      text-transform: uppercase;
+      padding-top: 4px;
+    }
+
+    div:last-child {
+      font-size: 12px;
+      font-weight: 300;
+    }
+
+    .icon {
+      position: absolute;
+      top: 5%;
+      right: 1%;
+      font-size: 12px;
+    }
+  }
 }
 </style>
+

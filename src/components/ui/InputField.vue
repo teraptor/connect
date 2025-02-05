@@ -59,6 +59,7 @@ const props = defineProps({
     default: () => [],
   },
 })
+
 const internalValue = ref<string | number | boolean>(props.modelValue)
 const hasError = ref<boolean>(false)
 const errorMessage = ref<string>('')
@@ -81,7 +82,11 @@ const validate = () => {
   errorMessage.value = ''
 }
 
-watch(internalValue, newValue => {
+watch(() => props.modelValue, (newValue) => {
+  internalValue.value = newValue
+})
+
+watch(internalValue, (newValue) => {
   emit('update:modelValue', newValue)
 })
 </script>

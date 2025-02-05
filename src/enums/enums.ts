@@ -15,6 +15,12 @@ export enum SexEnum {
   Woman = 'Женский',
 }
 
+export enum LanguagesEnum {
+  English = 'Английский',
+  Russian = 'Русский',
+  Spanich = 'Испанский'
+}
+
 export enum LanguageLevelEnum {
   Elementary = 'Elementary',
   PreIntermediate = 'Pre-Intermediate',

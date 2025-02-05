@@ -153,6 +153,8 @@ watch(internalValue, newValue => {
   font-weight: 300;
   font-size: 14px;
   gap: 4px;
+  z-index: 20;
+  position: relative;
 
   &-label {
     font-weight: 300;
