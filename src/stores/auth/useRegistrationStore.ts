@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import axios from 'axios'
 import { REGISTRATION } from '@/constants'
 import { push } from 'notivue'
+import { AxiosError } from 'axios'
 
 interface IRegistration {
   email: string
@@ -24,13 +25,16 @@ export const useRegistrationStore = defineStore('registration', {
   actions: {
     async registerUser(): Promise<boolean> {
       try {
-        const response = await axios.post(REGISTRATION, this.formData)
-
+        await axios.post(REGISTRATION, this.formData)
         push.success('Регистрация прошла успешно!')
         this.resetForm()
         return true
-      } catch (error: any) {
-        push.error(error.response?.data?.message || 'Ошибка регистрации.')
+      } catch (error) {
+        if (error instanceof AxiosError) {
+          push.error(error.response?.data?.message || 'Ошибка регистрации.')
+        } else {
+          push.error('Неизвестная ошибка.')
+        }
         return false
       }
     },

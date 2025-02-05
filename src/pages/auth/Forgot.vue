@@ -14,7 +14,7 @@ const isLoading = ref<boolean>(false)
 const handleForgotPassword = async (): Promise<void> => {
   isLoading.value = true
   try {
-    const response = await forgotPasswordStore.handleForgotPassword()
+    await forgotPasswordStore.handleForgotPassword()
   } finally {
     setTimeout(() => {
       isLoading.value = false

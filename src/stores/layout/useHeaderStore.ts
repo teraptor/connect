@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-import { useRouter } from 'vue-router'
 import { RouteNames } from '@/router/routes/routeNames'
 
 interface HeaderNav {

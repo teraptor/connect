@@ -90,6 +90,7 @@ watch(internalValue, newValue => {
 .form__group {
   display: flex;
   flex-direction: column;
+  gap: 4px;
   font-weight: 300;
   font-size: 14px;
 
@@ -110,11 +111,12 @@ watch(internalValue, newValue => {
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
-    font-weight: 200;
+    font-weight: 300;
 
     &::placeholder {
       font-size: 14px;
       font-weight: 300;
+      color: $help-color;
     }
 
     &:focus {
@@ -131,16 +133,17 @@ watch(internalValue, newValue => {
 
   .small {
     width: 100px;
-    max-height: 36px;
+    height: 36px;
   }
 
   .medium {
     width: 200px;
-    max-height: 36px;
+    height: 36px;
   }
 
   .large {
     width: 100%;
+    height: 36px;
   }
 
   &-icon {

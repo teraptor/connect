@@ -161,7 +161,7 @@ watch(
 
     &-body {
       font-size: 14px;
-      font-weight: 400;
+      font-weight: 300;
     }
 
     &-data {

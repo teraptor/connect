@@ -21,7 +21,7 @@
 <script setup lang="ts">
 import { useAttrs } from 'vue'
 
-const props = defineProps({
+defineProps({
   modelValue: {
     type: String,
     required: true,
@@ -74,6 +74,7 @@ const updateValue = (event: Event) => {
   flex-direction: column;
   font-weight: 300;
   font-size: 14px;
+  gap: 4px;
 
   &__label {
     font-weight: 300;

@@ -14,11 +14,11 @@ export const useForgotPasswordStore = defineStore('forgotPassword', {
   actions: {
     async handleForgotPassword() {
       try {
-        const response = await axios.post(FORGOT, {
+        await axios.post(FORGOT, {
           email: this.email,
         })
         push.success('Пароль для восстановления отправлен Вам на почту!')
-      } catch (error: any) {
+      } catch {
         push.error('Ошибка')
       }
     },

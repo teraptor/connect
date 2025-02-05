@@ -64,6 +64,7 @@ const candidate = useCandidatesStore()
         placeholder="Выберите гражданство"
         required
         :validators="[isRequired]"
+        :enableSearch="true"
       />
       <SelectField
         v-model="candidate.addCandidateForm.country"
@@ -73,6 +74,7 @@ const candidate = useCandidatesStore()
         placeholder="Выберите страну"
         required
         :validators="[isRequired]"
+        :enableSearch="true"
       />
       <div class="input__group-inputs">
         <InputField

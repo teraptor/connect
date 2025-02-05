@@ -1,5 +1,3 @@
-import { ADD_CANDIDATE } from '@/constants'
-
 export const RouteNames = {
   MAIN: {
     INDEX: 'index',

@@ -9,7 +9,7 @@ interface Option {
   name: string
 }
 
-const props = defineProps({
+defineProps({
   availableLanguages: {
     type: Array as PropType<Option[]>,
     default: () => [],

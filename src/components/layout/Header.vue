@@ -5,13 +5,13 @@ import { useUserStore } from '@/stores/useUserStore'
 import { useRouter } from 'vue-router'
 import { RouteNames } from '@/router/routes/routeNames'
 import { onClickOutside } from '@vueuse/core'
-import { ref, computed } from 'vue'
+import { ref, computed, type Ref } from 'vue'
 
 const router = useRouter()
 const { headerNav } = useHeaderStore()
 const userStore = useUserStore()
-const isOpen = ref(false)
-const dropdown: any = ref(null)
+const isOpen = ref<boolean>(false)
+const dropdown: Ref<HTMLElement | null> = ref(null)
 
 const toggle = () => {
   isOpen.value = !isOpen.value

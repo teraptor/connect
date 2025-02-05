@@ -54,11 +54,13 @@ watchEffect(() => {
 .filter__group {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 8px;
   font-size: 14px;
+  font-weight: 300;
 
   &-title {
-    font-weight: 600;
+    font-weight: 400;
+    font-size: 16px;
   }
 
   &-item {

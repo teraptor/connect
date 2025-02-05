@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
+import { AxiosError } from 'axios'
 import { GET_CANDIDATES, PARSE_CANDIDATE, ADD_CANDIDATE } from '@/constants'
 import { push } from 'notivue'
 import dayjs from 'dayjs'
@@ -254,7 +255,7 @@ export const useCandidatesStore = defineStore('candidates', {
     async sendCandidateParseJSON() {
       if (this.candidateParseJSON) {
         try {
-          const response = await axios.post(
+          await axios.post(
             PARSE_CANDIDATE,
             this.candidateParseJSON,
             {
@@ -265,8 +266,12 @@ export const useCandidatesStore = defineStore('candidates', {
             },
           )
           push.success('Кандидат успешно добавлен')
-        } catch (error: any) {
-          push.error(`Ошибка создания кандидата: ${error}`)
+        } catch (error) {
+          if (error instanceof AxiosError) {
+            push.error(`Ошибка создания кандидата: ${error.response?.data?.message || error.message}`)
+          } else {
+            push.error('Неизвестная ошибка.')
+          }
         } finally {
           this.candidateParseJSON = ''
         }
@@ -294,7 +299,7 @@ export const useCandidatesStore = defineStore('candidates', {
           cv.end_period = dayjs(cv.end_period).toISOString()
         })
 
-        const response = await axios.post(
+        await axios.post(
           ADD_CANDIDATE,
           this.addCandidateForm,
           {
@@ -305,7 +310,7 @@ export const useCandidatesStore = defineStore('candidates', {
         )
         push.success('Сотрудник успешно добавлен')
         this.clearAddCandidateForm()
-      } catch (error) {
+      } catch {
         push.error('Ошибка создания сотрудника')
       }
     },

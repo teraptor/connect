@@ -29,7 +29,7 @@ export const useAuthStore = defineStore('auth', {
         await useUserStore().getUserData()
         push.success('Добро пожаловать!')
         return true
-      } catch (err) {
+      } catch {
         push.error('Неверный телефон или пароль')
         return false
       }
