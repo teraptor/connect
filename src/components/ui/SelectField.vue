@@ -153,8 +153,6 @@ watch(internalValue, newValue => {
   font-weight: 300;
   font-size: 14px;
   gap: 4px;
-  z-index: 20;
-  position: relative;
 
   &-label {
     font-weight: 300;
@@ -206,7 +204,7 @@ watch(internalValue, newValue => {
     overflow-x: hidden;
     overflow-y: auto;
     background-color: white;
-    z-index: 10;
+    z-index: 20;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 

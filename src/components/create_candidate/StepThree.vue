@@ -11,11 +11,8 @@ const languagesInput = ref<string>('')
 const languageLevel = ref<string>('')
 
 const addLanguage = () => {
-    candidate.addCandidateForm.language.push({
-      name: languagesInput.value,
-      level: languageLevel.value,
-    })
-
+    candidate.addLanguage(languagesInput.value, languageLevel.value)
+    
     languagesInput.value = ''
     languageLevel.value = ''
 }
