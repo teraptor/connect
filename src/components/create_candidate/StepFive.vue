@@ -61,6 +61,19 @@ const candidate = useCandidatesStore()
         v-model="candidate.addCandidateForm.work_format.foreign_project"
         label="Работа над зарубежными проектами"
         type="checkbox"
+        v-tippy="{
+          content: `<strong>Убедитесь, что специалист знает
+          английский язык на уровне, достаточном для
+          общения и работы с зарубежными заказчиками </strong>`,
+          appendTo: 'parent',
+          theme: 'help-theme',
+          placement: 'right',
+          offset: [0, 30],
+          arrow: false,
+          delay: [200, 0],
+          duration: [100, 200],
+          allowHTML: true,
+        }"
       />
       <InputField
         v-model="candidate.addCandidateForm.work_format.foreign_relocate"

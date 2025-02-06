@@ -30,6 +30,7 @@ export default defineConfig({
         api: 'modern-compiler',
         additionalData: `
           @use "@/assets/styles/variables.scss" as *; 
+          @use "@/assets/styles/tippy.scss" as *; 
           @use 'sass:color' as color;`
       }
     }

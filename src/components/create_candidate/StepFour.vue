@@ -72,6 +72,21 @@ const isFilledTechology = computed(() => {
         placeholder="Введите описание..."
         required
         :validators="[isRequired]"
+        v-tippy="{
+          content: `<strong>Описывая проект, обязательно:</strong><br>
+            - опишите суть проекта, на котором работал специалист,<br>
+            - укажите обязанности специалиста и выполненные задачи,<br>
+            - для специалиста с грейдом «Lead», при описании обязанностей
+            в проектах, необходимо указать опыт руководства командой`,
+          appendTo: 'parent',
+          theme: 'help-theme',
+          placement: 'right',
+          offset: [0, 30],
+          arrow: false,
+          delay: [200, 0],
+          duration: [100, 200],
+          allowHTML: true,
+        }"
       />
     </div>
     <div class="input__group">

@@ -37,6 +37,18 @@ const removeCertification = (index: number) =>
         placeholder="Введите учреждение..."
         required
         :validators="[isRequired]"
+        v-tippy="{
+          content: `<strong>Если у специалиста есть высшее образование, обязательно укажите это</strong><br>
+          Для некоторых клиентов эта информация является важной`,
+          appendTo: 'parent',
+          theme: 'help-theme',
+          placement: 'right',
+          offset: [0, 30],
+          arrow: false,
+          delay: [200, 0],
+          duration: [100, 200],
+          allowHTML: true,
+        }"
       />
       <InputField
         v-model="edu.degree"

@@ -12,10 +12,13 @@ import 'notivue/animations.css'
 import App from './App.vue'
 import router from './router'
 
+import VueTippy from 'vue-tippy'
+
 const app = createApp(App)
 app.use(createNotivue())
 app.use(createPinia())
 app.use(createHead())
 app.use(router)
+app.use(VueTippy)
 
 app.mount('#app')

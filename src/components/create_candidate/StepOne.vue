@@ -75,6 +75,18 @@ const candidate = useCandidatesStore()
         required
         :validators="[isRequired]"
         :enableSearch="true"
+        v-tippy="{
+          content: `<strong>Укажите фактическое место нахождения специалиста</strong><br>
+          Для некоторых клиентов важно, чтобы специалист находился в конкретной локации`,
+          appendTo: 'parent',
+          theme: 'help-theme',
+          placement: 'right',
+          offset: [0, 30],
+          arrow: false,
+          delay: [200, 0],
+          duration: [100, 200],
+          allowHTML: true,
+        }"
       />
       <div class="input__group-inputs">
         <InputField

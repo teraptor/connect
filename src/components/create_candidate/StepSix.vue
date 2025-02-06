@@ -13,6 +13,22 @@ const candidate = useCandidatesStore()
         id="about"
         v-model="candidate.addCandidateForm.about"
         placeholder="Введите текст"
+        v-tippy="{
+          content: `<strong>Краткое резюме опыта специалиста,
+          которое должно раскрывать его 
+          основные hard и soft-skills</strong><br>
+          Играет роль сопроводительного письма к резюме,
+          т.е. текст должен быть максимально вкусным
+          `,
+          appendTo: 'parent',
+          theme: 'help-theme',
+          placement: 'right',
+          offset: [0, 30],
+          arrow: false,
+          delay: [200, 0],
+          duration: [100, 200],
+          allowHTML: true,
+        }"
       />
     </div>
   </div>
