@@ -13,7 +13,8 @@ const addTechnologyToCV = (index: number) => {
   candidate.addTechnologyToCV(index, technologyInput.value)
   technologyInput.value = ''
 }
-const removeTechnologyFromCV = (cvIndex: number, techIndex: number) => candidate.removeTechnologyFromCV(cvIndex, techIndex)
+const removeTechnologyFromCV = (cvIndex: number, techIndex: number) =>
+  candidate.removeTechnologyFromCV(cvIndex, techIndex)
 const isFilledTechology = computed(() => {
   return technologyInput.value.trim() !== ''
 })
@@ -94,19 +95,19 @@ const isFilledTechology = computed(() => {
         />
       </div>
       <div class="input__group-tech-items">
-      <div
-        v-for="(tech, techIndex) in cvItem.cv_technology"
-        :key="techIndex"
-        class="input__group-tech-item"
-      >
-        <button
-          type="button"
-          @click="removeTechnologyFromCV(index, techIndex)"
+        <div
+          v-for="(tech, techIndex) in cvItem.cv_technology"
+          :key="techIndex"
+          class="input__group-tech-item"
         >
-          <span class="icon icon-bin" />
-        </button>
-        <div>{{ tech.name }}</div>
-      </div>
+          <button
+            type="button"
+            @click="removeTechnologyFromCV(index, techIndex)"
+          >
+            <span class="icon icon-bin" />
+          </button>
+          <div>{{ tech.name }}</div>
+        </div>
       </div>
     </div>
     <Button

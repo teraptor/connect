@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import * as pdfjsLib from 'pdfjs-dist'
-import type { TextItem, TextMarkedContent } from 'pdfjs-dist/types/src/display/api'
+import type {
+  TextItem,
+  TextMarkedContent,
+} from 'pdfjs-dist/types/src/display/api'
 import { useCandidatesStore } from '@/stores/useCandidatesStore'
 import Button from '@/components/ui/Button.vue'
 import { push } from 'notivue'
@@ -37,7 +40,8 @@ const uploadFile = async (event: Event) => {
     await sendFile(file)
   }
 }
-const isTextItem = (item: TextItem | TextMarkedContent): item is TextItem => 'str' in item
+const isTextItem = (item: TextItem | TextMarkedContent): item is TextItem =>
+  'str' in item
 
 const sendFile = async (file: File) => {
   if (file.type === 'application/pdf') {
@@ -52,7 +56,7 @@ const sendFile = async (file: File) => {
         const page = await pdf.getPage(i)
         const textContent = await page.getTextContent()
         const pageText = textContent.items
-          .map((item) => (isTextItem(item) ? item.str.trim() : ''))
+          .map(item => (isTextItem(item) ? item.str.trim() : ''))
           .join(' ')
           .replace(/\n+/g, '\n')
           .replace(/\s+/g, ' ')

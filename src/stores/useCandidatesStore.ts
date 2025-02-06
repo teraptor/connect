@@ -255,20 +255,18 @@ export const useCandidatesStore = defineStore('candidates', {
     async sendCandidateParseJSON() {
       if (this.candidateParseJSON) {
         try {
-          await axios.post(
-            PARSE_CANDIDATE,
-            this.candidateParseJSON,
-            {
-              headers: {
-                Bearer: localStorage.getItem('authToken'),
-                'Content-Type': 'text/plain',
-              },
+          await axios.post(PARSE_CANDIDATE, this.candidateParseJSON, {
+            headers: {
+              Bearer: localStorage.getItem('authToken'),
+              'Content-Type': 'text/plain',
             },
-          )
+          })
           push.success('Кандидат успешно добавлен')
         } catch (error) {
           if (error instanceof AxiosError) {
-            push.error(`Ошибка создания кандидата: ${error.response?.data?.message || error.message}`)
+            push.error(
+              `Ошибка создания кандидата: ${error.response?.data?.message || error.message}`,
+            )
           } else {
             push.error('Неизвестная ошибка.')
           }
@@ -299,15 +297,11 @@ export const useCandidatesStore = defineStore('candidates', {
           cv.end_period = dayjs(cv.end_period).toISOString()
         })
 
-        await axios.post(
-          ADD_CANDIDATE,
-          this.addCandidateForm,
-          {
-            headers: {
-              Bearer: localStorage.getItem('authToken'),
-            },
+        await axios.post(ADD_CANDIDATE, this.addCandidateForm, {
+          headers: {
+            Bearer: localStorage.getItem('authToken'),
           },
-        )
+        })
         push.success('Сотрудник успешно добавлен')
         this.clearAddCandidateForm()
       } catch {
@@ -341,7 +335,7 @@ export const useCandidatesStore = defineStore('candidates', {
       this.addCandidateForm.certification.splice(index, 1)
     },
 
-    addLanguage (name: string, level: string) {
+    addLanguage(name: string, level: string) {
       this.addCandidateForm.language.push({ name, level })
     },
 
@@ -367,7 +361,9 @@ export const useCandidatesStore = defineStore('candidates', {
     },
 
     addTechnologyToCV(index: number, technology: string) {
-      this.addCandidateForm.cv_item[index].cv_technology.push({ name: technology })
+      this.addCandidateForm.cv_item[index].cv_technology.push({
+        name: technology,
+      })
     },
 
     removeTechnologyFromCV(cvIndex: number, techIndex: number) {

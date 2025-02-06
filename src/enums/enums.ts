@@ -18,7 +18,7 @@ export enum SexEnum {
 export enum LanguagesEnum {
   English = 'Английский',
   Russian = 'Русский',
-  Spanich = 'Испанский'
+  Spanich = 'Испанский',
 }
 
 export enum LanguageLevelEnum {

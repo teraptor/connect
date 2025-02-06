@@ -11,10 +11,10 @@ const languagesInput = ref<string>('')
 const languageLevel = ref<string>('')
 
 const addLanguage = () => {
-    candidate.addLanguage(languagesInput.value, languageLevel.value)
-    
-    languagesInput.value = ''
-    languageLevel.value = ''
+  candidate.addLanguage(languagesInput.value, languageLevel.value)
+
+  languagesInput.value = ''
+  languageLevel.value = ''
 }
 
 const isFilledLanguage = computed(() => {
@@ -165,4 +165,3 @@ const removeLanguage = (index: number) => {
   }
 }
 </style>
-

@@ -82,11 +82,14 @@ const validate = () => {
   errorMessage.value = ''
 }
 
-watch(() => props.modelValue, (newValue) => {
-  internalValue.value = newValue
-})
+watch(
+  () => props.modelValue,
+  newValue => {
+    internalValue.value = newValue
+  },
+)
 
-watch(internalValue, (newValue) => {
+watch(internalValue, newValue => {
   emit('update:modelValue', newValue)
 })
 </script>
