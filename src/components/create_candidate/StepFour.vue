@@ -4,12 +4,19 @@ import Button from '../ui/Button.vue'
 import InputField from '../ui/InputField.vue'
 import { isRequired } from '@/helpers/validation'
 
+const technologyInput = ref<string>('')
+
 const candidate = useCandidatesStore()
 const addCVItem = () => candidate.addCVItem()
 const removeCVItem = (index: number) => candidate.removeCVItem(index)
-const addTechnologyToCV = (index: number) => candidate.addTechnologyToCV(index)
-const removeTechnologyFromCV = (cvIndex: number, techIndex: number) =>
-  candidate.removeTechnologyFromCV(cvIndex, techIndex)
+const addTechnologyToCV = (index: number) => {
+  candidate.addTechnologyToCV(index, technologyInput.value)
+  technologyInput.value = ''
+}
+const removeTechnologyFromCV = (cvIndex: number, techIndex: number) => candidate.removeTechnologyFromCV(cvIndex, techIndex)
+const isFilledTechology = computed(() => {
+  return technologyInput.value.trim() !== ''
+})
 </script>
 
 <template>
@@ -68,34 +75,39 @@ const removeTechnologyFromCV = (cvIndex: number, techIndex: number) =>
     </div>
     <div class="input__group">
       <h3 class="input__group-title">Технологии</h3>
-      <div
-        v-for="(tech, techIndex) in cvItem.cv_technology"
-        :key="techIndex"
-        class="input__group-inputs"
-      >
+      <div class="input__group-inputs">
         <InputField
-          v-model="tech.name"
+          v-model="technologyInput"
           label="Технология"
           type="text"
           placeholder="Введите технологию..."
           size="medium"
         />
+        <Button
+          type="button"
+          button-type="secondary"
+          text="Добавить"
+          icon="icon icon-plus-circle"
+          @click="addTechnologyToCV(index)"
+          size="medium"
+          :disabled="!isFilledTechology"
+        />
+      </div>
+      <div class="input__group-tech-items">
+      <div
+        v-for="(tech, techIndex) in cvItem.cv_technology"
+        :key="techIndex"
+        class="input__group-tech-item"
+      >
         <button
-          v-if="techIndex !== 0"
           type="button"
           @click="removeTechnologyFromCV(index, techIndex)"
         >
           <span class="icon icon-bin" />
         </button>
+        <div>{{ tech.name }}</div>
       </div>
-      <Button
-        type="button"
-        button-type="secondary"
-        text="Добавить"
-        icon="icon icon-plus-circle"
-        @click="addTechnologyToCV(index)"
-        size="medium"
-      />
+      </div>
     </div>
     <Button
       type="button"
@@ -158,6 +170,37 @@ const removeTechnologyFromCV = (cvIndex: number, techIndex: number) =>
       &:hover {
         color: $main-color;
       }
+    }
+  }
+  &-tech-items {
+    display: flex;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  &-tech-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    border: 1px solid $main-color;
+    color: $main-color;
+    padding: 8px 10px;
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 8px;
+    position: relative;
+
+    div {
+      text-transform: uppercase;
+      padding-top: 8px;
+    }
+
+    .icon {
+      position: absolute;
+      top: 5%;
+      right: 1%;
+      font-size: 12px;
     }
   }
 }

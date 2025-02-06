@@ -153,7 +153,7 @@ export const useCandidatesStore = defineStore('candidates', {
           start_period: '',
           end_period: '',
           description: '',
-          cv_technology: [{ name: '' }],
+          cv_technology: [],
         },
       ] as ICVItem[],
       work_format: {
@@ -356,7 +356,7 @@ export const useCandidatesStore = defineStore('candidates', {
         start_period: '',
         end_period: '',
         description: '',
-        cv_technology: [{ name: '' }],
+        cv_technology: [],
       })
     },
 
@@ -366,17 +366,12 @@ export const useCandidatesStore = defineStore('candidates', {
       }
     },
 
-    addTechnologyToCV(index: number) {
-      this.addCandidateForm.cv_item[index].cv_technology.push({ name: '' })
+    addTechnologyToCV(index: number, technology: string) {
+      this.addCandidateForm.cv_item[index].cv_technology.push({ name: technology })
     },
 
     removeTechnologyFromCV(cvIndex: number, techIndex: number) {
-      if (this.addCandidateForm.cv_item[cvIndex].cv_technology.length > 1) {
-        this.addCandidateForm.cv_item[cvIndex].cv_technology.splice(
-          techIndex,
-          1,
-        )
-      }
+      this.addCandidateForm.cv_item[cvIndex].cv_technology.splice(techIndex, 1)
     },
 
     clearAddCandidateForm() {
@@ -408,7 +403,7 @@ export const useCandidatesStore = defineStore('candidates', {
             start_period: '',
             end_period: '',
             description: '',
-            cv_technology: [{ name: '' }],
+            cv_technology: [],
           },
         ],
         work_format: {
