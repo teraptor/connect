@@ -113,7 +113,7 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
   },
   {
     path: `/${RouteNames.USER.name}`,
-    name: 'testuser',
+    name: RouteNames.USER.name,
     meta: {
       title: 'Пользователь',
       ...userMeta,
@@ -121,7 +121,7 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
     children: [
       {
         path: '',
-        name: RouteNames.USER.name,
+        name: RouteNames.USER.children.USER,
         component: () => import('@/pages/User/User.vue'),
         meta: {
           title: 'Пользователь',

@@ -23,8 +23,9 @@ export const RouteNames = {
     },
   },
   USER: {
-    name: 'user',
+    name: 'user_parent',
     children: {
+      USER: 'user',
       ADD_CANDIDATE: 'add_candidate',
       PARSE_CANDIDATE: 'parse_candidate',
     },

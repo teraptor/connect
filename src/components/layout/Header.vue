@@ -174,7 +174,6 @@ const logout = () => {
       align-items: center;
       justify-content: center;
       gap: 8px;
-      margin: 8px 16px;
     }
   }
 }
