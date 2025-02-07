@@ -21,7 +21,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        npm ci
+        npm i --global
 
     # Шаг для сборки Vue.js приложения, если необходимо
     - name: Build Vue App
