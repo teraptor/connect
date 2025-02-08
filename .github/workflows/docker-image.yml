@@ -50,7 +50,7 @@ jobs:
 
     - name: Build Docker image for prod
       run: |
-        docker build --target production_stage -t eltanweb/staffconnect:${GITHUB_SHA} .
+        docker build --target production_stage -t eltanweb/staffconnect:latest .
         
     - name: Log in to Docker Hub
       uses: docker/login-action@v1
@@ -60,7 +60,7 @@ jobs:
 
     - name: Push Docker image for prod
       run: |
-        docker push eltanweb/staffconnect:${GITHUB_SHA}
+        docker push eltanweb/staffconnect:latest
 
     - name: SSH and deploy to production server
       uses: appleboy/ssh-action@master
