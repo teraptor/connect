@@ -27,7 +27,7 @@ jobs:
 
     - name: Push Docker image for dev
       run: |
-        docker push eltanweb/staffconnect-dev:${GITHUB_SHA}
+        docker push eltanweb/staffconnect-dev:latest
 
     - name: SSH and deploy to development server
       uses: appleboy/ssh-action@master
