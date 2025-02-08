@@ -35,9 +35,9 @@ jobs:
         host: ${{ secrets.DEV_HOST }}
         username: ${{ secrets.SSH_USERNAME }}
         password: ${{ secrets.SSH_PASSWORD }}
-        script: |
-          docker-compose -f /home/staffconnect/deploy/docker-compose.dev.yml pull staffconnect
-          docker-compose -f /home/staffconnect/deploy/docker-compose.dev.yml up -d --force-recreate
+        # script: |
+          # docker-compose -f /home/staffconnect/deploy/docker-compose.dev.yml pull staffconnect
+          # docker-compose -f /home/staffconnect/deploy/docker-compose.dev.yml up -d --force-recreate
 
   deploy-prod:
     if: github.ref == 'refs/heads/main'
