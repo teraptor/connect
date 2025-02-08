@@ -36,9 +36,8 @@ jobs:
         username: ${{ secrets.DEV_USERNAME }}
         password: ${{ secrets.DEV_PASSWORD }}
         script: |
-          docker pull eltanweb/vue-app-dev:${GITHUB_SHA}
-          docker stop staffconnect-dev || true && docker rm staffconnect-dev || true
-          docker run -d --name staffconnect -p 8081:80 eltanweb/staffconnect-dev:${GITHUB_SHA}
+          docker-compose -f /path/to/docker-compose-prod.yml pull staffconnect
+          docker-compose -f /path/to/docker-compose-prod.yml up -d --force-recreate
 
   deploy-prod:
     if: github.ref == 'refs/heads/main'
@@ -69,6 +68,5 @@ jobs:
         username: ${{ secrets.PROD_USERNAME }}
         password: ${{ secrets.PROD_PASSWORD }}
         script: |
-          docker pull eltanweb/vue-app-prod:${GITHUB_SHA}
-          docker stop vue-app-prod || true && docker rm staffconnect || true
-          docker run -d --name staffconnect -p 8082:80 eltanweb/staffconnect-prod:${GITHUB_SHA}
+          docker-compose -f /path/to/docker-compose-prod.yml pull staffconnect
+          docker-compose -f /path/to/docker-compose-prod.yml up -d --force-recreate
