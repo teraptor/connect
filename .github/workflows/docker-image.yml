@@ -71,4 +71,5 @@ jobs:
         script: |
           export GITHUB_SHA=${{ github.sha }}
           docker-compose -f /home/staffconnect/deploy/docker-compose.prod.yml pull
+          docker-compose -f /home/staffconnect/deploy/docker-compose.prod.yml down
           docker-compose -f /home/staffconnect/deploy/docker-compose.prod.yml up -d --force-recreate
