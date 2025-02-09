@@ -223,7 +223,7 @@ export const useCandidatesStore = defineStore('candidates', {
     },    
     async selectCandidate(id: string): Promise<void> {
       try {
-        const response = await axios.get(`http://connect_core_prod:8081/v1/candidate/${id}`, {
+        const response = await axios.get(`https://staffconnect.ru/v1/candidate/${id}`, {
           headers: {
             Bearer: localStorage.getItem('authToken'),
             'Content-Type': 'text/plain',
