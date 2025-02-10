@@ -1,4 +1,4 @@
-export const BASE_URL: string = 'http://5.188.30.192:8081/v1'
+export const BASE_URL: string = 'https://staffconnect.ru/v1'
 export const GET_CANDIDATES: string = `${BASE_URL}/candidates`
 export const ADD_CANDIDATE: string = `${BASE_URL}/candidate`
 export const PARSE_CANDIDATE: string = `${BASE_URL}/candidate/parse`
