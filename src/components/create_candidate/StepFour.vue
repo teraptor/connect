@@ -3,6 +3,7 @@ import { useCandidatesStore } from '@/stores/useCandidatesStore'
 import Button from '../ui/Button.vue'
 import InputField from '../ui/InputField.vue'
 import { isRequired } from '@/helpers/validation'
+import { ref, computed } from 'vue'
 
 const technologyInput = ref<string>('')
 

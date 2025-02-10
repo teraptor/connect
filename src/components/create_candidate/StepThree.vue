@@ -3,7 +3,7 @@ import { useCandidatesStore } from '@/stores/useCandidatesStore'
 import Button from '../ui/Button.vue'
 import SelectField from '../ui/SelectField.vue'
 import { LanguageLevelEnum, LanguagesEnum } from '@/enums/enums'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 const candidate = useCandidatesStore()
 
