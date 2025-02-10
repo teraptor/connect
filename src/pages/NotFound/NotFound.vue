@@ -9,7 +9,7 @@
       <h2 class="not-found__title">Страница не найдена</h2>
       <img src="@/assets/images/404.png" class="not-found__image" />
       <p class="not-found__description">
-        Страница не найдена, давай попробуем все заново ?
+        Страница не найдена, давайте попробуем все заново ?
         <router-link class="not-found__link" to="/"
           >Вернуться на главную</router-link
         >

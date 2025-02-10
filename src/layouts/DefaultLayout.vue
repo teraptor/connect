@@ -38,7 +38,7 @@ userStore.getUserData()
   .content-wrapper {
     display: flex;
     flex-grow: 1;
-    min-height: 300px;
+    min-height: 250px;
 
     .main-content {
       width: 80%;
