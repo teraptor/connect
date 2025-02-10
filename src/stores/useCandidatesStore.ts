@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
+import { AxiosError } from 'axios';
 import { GET_CANDIDATES, GET_CANDIDATE, PARSE_CANDIDATE, ADD_CANDIDATE } from '@/constants';
 import { push } from 'notivue';
 import dayjs from "dayjs";
