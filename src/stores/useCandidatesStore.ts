@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
-import { GET_CANDIDATES, PARSE_CANDIDATE, ADD_CANDIDATE } from '@/constants';
+import { GET_CANDIDATES, GET_CANDIDATE, PARSE_CANDIDATE, ADD_CANDIDATE } from '@/constants';
 import { push } from 'notivue';
 import dayjs from "dayjs";
 
@@ -223,7 +223,7 @@ export const useCandidatesStore = defineStore('candidates', {
     },    
     async selectCandidate(id: string): Promise<void> {
       try {
-        const response = await axios.get(`https://staffconnect.ru/v1/candidate/${id}`, {
+        const response = await axios.get(`${GET_CANDIDATE}${id}`, {
           headers: {
             Bearer: localStorage.getItem('authToken'),
             'Content-Type': 'text/plain',

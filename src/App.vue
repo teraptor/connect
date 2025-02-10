@@ -20,6 +20,8 @@ const currentRouteTitle = computed(() => route.meta?.title || '')
 useHead({
   title: () => `Staffconnect | ${currentRouteTitle.value}`,
 })
+
+console.log(import.meta.env.VITE_APP_NAME)
 </script>
 
 <style scoped></style>
