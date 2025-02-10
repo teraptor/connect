@@ -112,7 +112,7 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
     ],
   },
   {
-    path: `/${RouteNames.USER.name}`,
+    path: `/${RouteNames.USER.children.USER}`,
     name: RouteNames.USER.name,
     meta: {
       title: 'Пользователь',
