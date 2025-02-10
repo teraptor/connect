@@ -1,9 +1,8 @@
-import { defineStore } from 'pinia'
-import axios from 'axios'
-import { AxiosError } from 'axios'
-import { GET_CANDIDATES, PARSE_CANDIDATE, ADD_CANDIDATE } from '@/constants'
-import { push } from 'notivue'
-import dayjs from 'dayjs'
+import { defineStore } from 'pinia';
+import axios from 'axios';
+import { GET_CANDIDATES, GET_CANDIDATE, PARSE_CANDIDATE, ADD_CANDIDATE } from '@/constants';
+import { push } from 'notivue';
+import dayjs from "dayjs";
 
 export interface ICandidate {
   about: string
@@ -231,15 +230,12 @@ export const useCandidatesStore = defineStore('candidates', {
     },
     async selectCandidate(id: string): Promise<void> {
       try {
-        const response = await axios.get(
-          `http://5.188.30.192:8081/v1/candidate/${id}`,
-          {
-            headers: {
-              Bearer: localStorage.getItem('authToken'),
-              'Content-Type': 'text/plain',
-            },
-          },
-        )
+        const response = await axios.get(`${GET_CANDIDATE}${id}`, {
+          headers: {
+            Bearer: localStorage.getItem('authToken'),
+            'Content-Type': 'text/plain',
+          }
+        });
         if (response.data) {
           this.selectedCandidate = response.data
         } else {
