@@ -151,7 +151,6 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
     component: () => import('@/pages/NotFound/NotFound.vue'),
     meta: {
       title: '404',
-      ...defaultMeta,
     },
   },
 ]

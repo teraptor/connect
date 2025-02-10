@@ -11,7 +11,7 @@ const currentYear: number = dayjs().year()
       <div class="footer__item-logo">
         <div class="footer__logo">
           <RouterLink to="/">
-            <h3>StaffConnect</h3>
+            <img src="/logo.png" alt="logo" />
           </RouterLink>
         </div>
         <p class="footer__description">
@@ -69,7 +69,7 @@ const currentYear: number = dayjs().year()
 <style lang="scss" scoped>
 .footer {
   width: 100%;
-  padding: 40px 20px 20px;
+  padding: 40px 16px 20px;
   background: $footer-background;
   margin-top: auto;
   border-top: 3px solid $border-light-grey;
@@ -78,21 +78,19 @@ const currentYear: number = dayjs().year()
   gap: 36px;
 
   &__logo {
-    max-width: 200px;
-    font-size: 32px;
-    font-weight: 600;
-    color: transparent;
-    background: $main-gradient-color;
-    background-clip: text;
-    -webkit-background-clip: text;
+    max-width: 250px;
   }
 
   &__description {
+    padding-left: 16px;
     font-size: 16px;
     font-weight: 300;
     white-space: normal;
     word-wrap: break-word;
-    color: $help-color;
+    color: transparent;
+    background: $main-gradient-color;
+    background-clip: text;
+    -webkit-background-clip: text;
   }
 
   &__items {

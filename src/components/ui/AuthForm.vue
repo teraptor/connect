@@ -3,7 +3,7 @@
     <form class="form" @submit="handleSubmit">
       <div class="form__logo">
         <RouterLink to="/">
-          <img src="/logo_removebg.png" alt="logo" />
+          <img src="/logo.png" alt="logo" />
         </RouterLink>
       </div>
       <h2 class="form__title">{{ props.title }}</h2>
@@ -42,11 +42,11 @@ const handleSubmit = (event: Event) => {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  max-width: 400px;
+  width: 400px;
   margin-bottom: 30px;
 
   &__logo {
-    width: 50%;
+    max-width: 250px;
     margin-bottom: 20px;
   }
 

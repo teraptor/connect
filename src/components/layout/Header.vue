@@ -36,7 +36,7 @@ const logout = () => {
   <div class="header">
     <div class="header__logo">
       <RouterLink to="/">
-        <img src="/logo_removebg.png" alt="logo" />
+        <img src="/logo.png" alt="logo" />
       </RouterLink>
     </div>
     <div class="header__nav">
