@@ -66,10 +66,11 @@ const buttonClass = computed(() => `btn-${props.buttonType}`)
   color: $light-color;
   font-size: 16px;
   font-weight: 300;
-  max-height: 36px;
+  max-height: 40px;
 
   &-tab {
     width: 50px;
+    height: 32px;
   }
 
   &-small {
@@ -85,6 +86,7 @@ const buttonClass = computed(() => `btn-${props.buttonType}`)
 
   &-large {
     width: 100%;
+    height: 40px;
   }
   &:focus {
     outline: none;

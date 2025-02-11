@@ -15,7 +15,7 @@
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: $icomoon-font-family !important;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 100;
   font-variant: normal;
   text-transform: none;
   line-height: 1;
@@ -400,5 +400,17 @@
 .icon-bin {
   &::before {
     content: $icon-bin;
+  }
+}
+
+.icon-shield {
+  &::before {
+    content: $icon-shield;
+  }
+}
+
+.icon-coin-dollar {
+  &::before {
+    content: $icon-coin-dollar;
   }
 }
