@@ -76,13 +76,52 @@ const moveToLogin = () => router.push({ name: RouteNames.MAIN.LOGIN })
             ]"
           >
             <template v-if="typeof cell === 'object'">
-              <span :class="cell.icon"></span> {{ cell.text }}
+              <span
+                :class="[
+                  cell.icon,
+                  cell.icon.includes('check') ? 'icon--success' : '',
+                  cell.icon.includes('x-circle') ? 'icon--danger' : '',
+                ]"
+              />
+              {{ cell.text }}
             </template>
             <template v-else>
               {{ cell }}
             </template>
           </div>
         </template>
+      </div>
+    </div>
+  </div>
+  <div class="help">
+    <div class="help__inner">
+      <h4 class="help__title">Кому и как мы помогаем ?</h4>
+      <div class="help__items">
+        <div v-for="item in whyWeStore.help" :key="item.id" class="help__item">
+          <h5 class="help__item-title">{{ item.title }}</h5>
+          <ul class="help__item-list">
+            <li
+              v-for="(subItem, index) in item.items"
+              :key="index"
+              class="help__item-list-item"
+            >
+              <span :class="subItem.icon" /> {{ subItem.text }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="questions">
+    <div class="questions__inner">
+      <div class="questions__image">
+        <img src="@/assets/images/question.png" />
+      </div>
+      <div class="questions__content">
+        <h5 class="questions__content-title">Остались вопросы ?</h5>
+        <div class="questions__content-button-container">
+          <Button button-type="primary" text="Напиши нам" type="button" />
+        </div>
       </div>
     </div>
   </div>
@@ -183,7 +222,7 @@ const moveToLogin = () => router.push({ name: RouteNames.MAIN.LOGIN })
 
     .icon {
       font-size: 80px;
-      color: $danger;
+      color: $danger-color;
     }
 
     &-title {
@@ -194,7 +233,7 @@ const moveToLogin = () => router.push({ name: RouteNames.MAIN.LOGIN })
 }
 
 .why-we {
-  margin: 40px 0;
+  padding: 40px 0;
   background-color: $light-color;
 
   &__inner {
@@ -225,7 +264,7 @@ const moveToLogin = () => router.push({ name: RouteNames.MAIN.LOGIN })
       align-items: center;
       justify-content: center;
       font-weight: 500;
-      padding: 16px;
+      padding: 20px;
 
       &:nth-child(2) {
         color: $main-color;
@@ -234,13 +273,25 @@ const moveToLogin = () => router.push({ name: RouteNames.MAIN.LOGIN })
     }
 
     &-cell {
-      padding: 10px;
-      text-align: center;
+      padding: 16px;
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
+      gap: 12px;
       font-size: 16px;
       font-weight: 300;
+
+      .icon {
+        font-size: 14px;
+
+        &--success {
+          color: $success-color;
+        }
+
+        &--danger {
+          color: $danger-color;
+        }
+      }
 
       &--white {
         background-color: $light-color;
@@ -253,6 +304,112 @@ const moveToLogin = () => router.push({ name: RouteNames.MAIN.LOGIN })
       &--bold {
         font-weight: 400;
       }
+    }
+  }
+}
+
+.help {
+  margin: 40px 0;
+
+  &__inner {
+    max-width: 1320px;
+    padding-top: 32px;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+
+  &__title {
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  &__items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    align-items: stretch;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 24px;
+    width: 33%;
+    box-shadow: $box-shadow;
+    padding: 30px;
+    border-radius: 10px;
+    line-height: 1.5;
+
+    &-title {
+      font-weight: 500;
+    }
+
+    &-list {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 8px;
+
+      &-item {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 8px;
+        font-weight: 300;
+        font-size: 14px;
+
+        .icon {
+          font-size: 18px;
+          color: $success-color;
+        }
+      }
+    }
+  }
+}
+
+.questions {
+  margin: 40px 0;
+
+  &__inner {
+    max-width: 1320px;
+    padding-top: 32px;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__image {
+    width: 200px;
+    height: 200px;
+  }
+
+  &__content {
+    max-width: 600px;
+    width: 100%;
+    padding: 24px;
+    box-shadow: $box-shadow;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    align-items: center;
+
+    &-title {
+      font-weight: 600;
+      font-size: 20px;
+      width: 40%;
+    }
+
+    &-button-container {
+      width: 60%;
     }
   }
 }

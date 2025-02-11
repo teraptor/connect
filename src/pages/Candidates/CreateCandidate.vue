@@ -231,8 +231,8 @@ const isFormValid = computed(() => {
       }
 
       &--error {
-        color: $danger;
-        border-color: $danger;
+        color: $danger-color;
+        border-color: $danger-color;
       }
     }
   }

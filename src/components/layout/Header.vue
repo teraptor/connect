@@ -163,7 +163,7 @@ const logout = () => {
           }
 
           &.logout {
-            color: $danger;
+            color: $danger-color;
           }
         }
       }

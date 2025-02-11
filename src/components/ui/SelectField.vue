@@ -158,7 +158,7 @@ watch(internalValue, newValue => {
     font-weight: 300;
 
     span {
-      color: $danger;
+      color: $danger-color;
     }
   }
 
