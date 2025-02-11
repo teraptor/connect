@@ -30,86 +30,86 @@ export const useFooterStore = defineStore('footer', {
         },
         {
           title: 'Системные аналитики',
-          routeName: RouteNames.MAIN.MAIN_PAGE.children.BENCHMARK,
+          routeName: RouteNames.MAIN.IN_DEV,
         },
         {
           title: 'Frontend-разработчики',
-          routeName: RouteNames.MAIN.MAIN_PAGE.children.BENCHMARK,
+          routeName: RouteNames.MAIN.IN_DEV,
         },
         {
           title: 'Backend-разработчики',
-          routeName: RouteNames.MAIN.MAIN_PAGE.children.BENCHMARK,
+          routeName: RouteNames.MAIN.IN_DEV,
         },
         {
           title: 'UX/UI дизайнеры',
-          routeName: RouteNames.MAIN.MAIN_PAGE.children.BENCHMARK,
+          routeName: RouteNames.MAIN.IN_DEV,
         },
         {
           title: 'Ручные тестировщики',
-          routeName: RouteNames.MAIN.MAIN_PAGE.children.BENCHMARK,
+          routeName: RouteNames.MAIN.IN_DEV,
         },
         {
           title: 'Менеджеры проектов',
-          routeName: RouteNames.MAIN.MAIN_PAGE.children.BENCHMARK,
+          routeName: RouteNames.MAIN.IN_DEV,
         },
         {
           title: 'Системные архитекторы',
-          routeName: RouteNames.MAIN.MAIN_PAGE.children.BENCHMARK,
+          routeName: RouteNames.MAIN.IN_DEV,
         },
       ],
       [
         {
           title: 'О платформе',
-          routeName: RouteNames.MAIN.MAIN_PAGE.children.HOW_IT_WORKS,
+          routeName: RouteNames.MAIN.IN_DEV,
         },
         {
           title: 'Стать партнером',
-          routeName: RouteNames.MAIN.MAIN_PAGE.children.BENCHMARK,
+          routeName: RouteNames.MAIN.IN_DEV,
         },
         {
           title: 'Запросы клиентов',
-          routeName: RouteNames.MAIN.MAIN_PAGE.children.BENCHMARK,
+          routeName: RouteNames.MAIN.IN_DEV,
         },
         {
           title: 'FAQ',
-          routeName: RouteNames.MAIN.MAIN_PAGE.children.HOW_IT_WORKS,
+          routeName: RouteNames.MAIN.IN_DEV,
         },
       ],
       [
         {
           title: 'Контакты',
-          routeName: RouteNames.MAIN.MAIN_PAGE.children.BENCHMARK,
+          routeName: RouteNames.MAIN.IN_DEV,
         },
         {
           title: 'Блог',
-          routeName: RouteNames.MAIN.MAIN_PAGE.children.BENCHMARK,
+          routeName: RouteNames.MAIN.IN_DEV,
         },
         {
           title: 'Карьера',
-          routeName: RouteNames.MAIN.MAIN_PAGE.children.HOW_IT_WORKS,
+          routeName: RouteNames.MAIN.IN_DEV,
         },
         {
           title: 'Исследования',
-          routeName: RouteNames.MAIN.MAIN_PAGE.children.BENCHMARK,
+          routeName: RouteNames.MAIN.IN_DEV,
         },
       ],
     ],
     documents: [
       {
         title: 'Политика обработки персональных данных',
-        routeName: RouteNames.MAIN.MAIN_PAGE.children.HOW_IT_WORKS,
+        routeName: RouteNames.MAIN.IN_DEV,
       },
       {
         title: 'Условия использования сайта',
-        routeName: RouteNames.MAIN.MAIN_PAGE.children.BENCHMARK,
+        routeName: RouteNames.MAIN.IN_DEV,
       },
       {
         title: 'Договор присоединения',
-        routeName: RouteNames.MAIN.MAIN_PAGE.children.BENCHMARK,
+        routeName: RouteNames.MAIN.IN_DEV,
       },
       {
         title: 'Согласие на получение информационных и других рассылок',
-        routeName: RouteNames.MAIN.MAIN_PAGE.children.BENCHMARK,
+        routeName: RouteNames.MAIN.IN_DEV,
       },
     ],
     contacts: {

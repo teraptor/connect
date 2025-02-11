@@ -1,16 +1,16 @@
 <template>
-  <div class="not-found">
-    <div class="not-found__inner">
-      <div class="not-found__logo">
+  <div class="in-dev">
+    <div class="in-dev__inner">
+      <div class="in-dev__logo">
         <RouterLink to="/">
           <img src="/logo.png" alt="logo" />
         </RouterLink>
       </div>
-      <h2 class="not-found__title">Страница не найдена</h2>
-      <img src="@/assets/images/404.png" class="not-found__image" />
-      <p class="not-found__description">
-        Страница не найдена, давайте попробуем все заново ?
-        <router-link class="not-found__link" to="/"
+      <h2 class="in-dev__title">Мы строим что-то новое, возвращайтесь позже!</h2>
+      <img src="@/assets/images/indev.png" class="in-dev__image" />
+      <p class="in-dev__description">
+        Мы работаем над чем-то уникальным. Ожидайте, мы скоро вернемся!
+        <router-link class="in-dev__link" to="/"
           >Вернуться на главную</router-link
         >
       </p>
@@ -19,7 +19,7 @@
 </template>
 
 <style lang="scss" scoped>
-.not-found {
+.in-dev {
   display: flex;
   justify-content: center;
   padding-top: 120px;
@@ -46,8 +46,8 @@
   }
 
   &__image {
-    height: 250px;
-    width: 250px;
+    height: 150px;
+    width: 150px;
   }
 
   &__description {

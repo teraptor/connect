@@ -18,23 +18,23 @@ export const usesidebarStore = defineStore('sidebar', {
     sidebarNav: [
       {
         title: 'Начало работы',
-        routeName: RouteNames.USER.name,
+        routeName: RouteNames.USER.children.USER,
         icon: 'icon icon-user',
       },
-      {
-        title: 'Заявки',
-        icon: 'icon icon-book-open',
-        items: [
-          {
-            title: 'Вкладка 1',
-            routeName: RouteNames.MAIN.MAIN_PAGE.children.HOW_IT_WORKS,
-          },
-          {
-            title: 'Вкладка 2',
-            routeName: RouteNames.MAIN.MAIN_PAGE.children.HOW_IT_WORKS,
-          },
-        ],
-      },
+      // {
+      //   title: 'Заявки',
+      //   icon: 'icon icon-book-open',
+      //   items: [
+      //     {
+      //       title: 'Вкладка 1',
+      //       routeName: RouteNames.MAIN.IN_DEV,
+      //     },
+      //     {
+      //       title: 'Вкладка 2',
+      //       routeName: RouteNames.MAIN.IN_DEV,
+      //     },
+      //   ],
+      // },
       {
         title: 'Специалисты',
         icon: 'icon icon-users',
@@ -49,11 +49,11 @@ export const usesidebarStore = defineStore('sidebar', {
           },
         ],
       },
-      {
-        title: 'Команда',
-        routeName: RouteNames.MAIN.MAIN_PAGE.children.BENCHMARK,
-        icon: 'icon icon-group',
-      },
+      // {
+      //   title: 'Команда',
+      //   routeName: RouteNames.MAIN.IN_DEV,
+      //   icon: 'icon icon-group',
+      // },
     ],
   }),
 })

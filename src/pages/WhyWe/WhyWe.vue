@@ -8,6 +8,7 @@ const whyWeStore = useWhyWeStore()
 
 const router = useRouter()
 const moveToLogin = () => router.push({ name: RouteNames.MAIN.LOGIN })
+const moveToInDev = () => router.push({ name: RouteNames.MAIN.IN_DEV })
 </script>
 <template>
   <div class="intro">
@@ -35,7 +36,7 @@ const moveToLogin = () => router.push({ name: RouteNames.MAIN.LOGIN })
   </div>
   <div class="advantages">
     <div class="advantages__inner">
-      <h2 class="advantages__title">Преимущества StaffConnect ?</h2>
+      <h2 class="advantages__title">Преимущества StaffConnect</h2>
       <div class="advantages__items">
         <div
           class="advantages__item"
@@ -120,7 +121,12 @@ const moveToLogin = () => router.push({ name: RouteNames.MAIN.LOGIN })
       <div class="questions__content">
         <h5 class="questions__content-title">Остались вопросы ?</h5>
         <div class="questions__content-button-container">
-          <Button button-type="primary" text="Напиши нам" type="button" />
+          <Button 
+            button-type="primary"
+            text="Напиши нам" 
+            type="button" 
+            @click="moveToInDev"
+          />
         </div>
       </div>
     </div>

@@ -146,6 +146,14 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
     ],
   },
   {
+    path: `/${RouteNames.MAIN.IN_DEV}`,
+    name: RouteNames.MAIN.IN_DEV,
+    component: () => import('@/pages/InDev/InDev.vue'),
+    meta: {
+      title: 'В разработке',
+    },
+  },
+  {
     path: `${RouteNames.NOT_FOUND}`,
     name: RouteNames.NOT_FOUND,
     component: () => import('@/pages/NotFound/NotFound.vue'),
