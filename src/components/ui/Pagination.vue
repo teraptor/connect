@@ -69,19 +69,19 @@ const changeLimit = (event: Event) => {
   <div class="pagination">
     <Button
       button-type="secondary"
-      text="Назад"
-      size="small"
-      type="button"
-      :disabled="currentPage === 1"
-      @click="goToPreviousPage"
-    />
-    <Button
-      button-type="secondary"
-      text="1"
+      icon="icon icon-chevrons-left"
       size="tab"
       type="button"
       :disabled="currentPage === 1"
       @click="goToPage(1)"
+    />
+    <Button
+      button-type="secondary"
+      icon="icon icon-chevron-left"
+      size="tab"
+      type="button"
+      :disabled="currentPage === 1"
+      @click="goToPreviousPage"
     />
     <Button
       button-type="primary"
@@ -95,19 +95,19 @@ const changeLimit = (event: Event) => {
     <span v-if="totalPages > pageRange[pageRange.length - 1]">...</span>
     <Button
       button-type="secondary"
-      :text="totalPages"
+      icon="icon icon-chevron-right"
+      size="tab"
+      type="button"
+      :disabled="currentPage === totalPages"
+      @click="goToNextPage"
+    />
+    <Button
+      button-type="secondary"
+      icon="icon icon-chevrons-right"
       size="tab"
       type="button"
       :disabled="currentPage === totalPages"
       @click="goToPage(totalPages)"
-    />
-    <Button
-      button-type="secondary"
-      text="Вперед"
-      size="small"
-      type="button"
-      :disabled="currentPage === totalPages"
-      @click="goToNextPage"
     />
     <div class="pagination__limit">
       <label for="limit">Элементов на странице:</label>
@@ -144,11 +144,22 @@ const changeLimit = (event: Event) => {
     padding: 8px;
     font-size: 16px;
     outline: none;
+    border: none;
 
     &:focus {
       outline: none;
       border: none;
     }
+  }
+
+    &__select option {
+    font-size: 14px;
+    color: #333;
+    background-color: $light-color;
+  }
+
+  &__select option:checked {
+    background-color: $border-light-grey;
   }
 }
 </style>
