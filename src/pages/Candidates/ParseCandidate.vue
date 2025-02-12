@@ -8,6 +8,7 @@ import { useCandidatesStore } from '@/stores/useCandidatesStore'
 import Button from '@/components/ui/Button.vue'
 import { push } from 'notivue'
 import { ref } from 'vue'
+import Tesseract from 'tesseract.js'
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
   'pdfjs-dist/build/pdf.worker.min.mjs',
@@ -17,6 +18,7 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
 const fileInput = ref<HTMLInputElement | null>(null)
 const isLoading = ref<boolean>(false)
 const addCandidate = useCandidatesStore()
+const text = ref<string>('')
 
 const handleDragOver = (event: DragEvent) => {
   event.preventDefault()
@@ -40,48 +42,84 @@ const uploadFile = async (event: Event) => {
     await sendFile(file)
   }
 }
+
 const isTextItem = (item: TextItem | TextMarkedContent): item is TextItem =>
   'str' in item
 
-const sendFile = async (file: File) => {
+const sendFile = (file: File) => {
   if (file.type === 'application/pdf') {
-    try {
-      const arrayBuffer: ArrayBuffer = await file.arrayBuffer()
-      const uint8Array = new Uint8Array(arrayBuffer)
-      const loadingTask = pdfjsLib.getDocument({ data: uint8Array })
-      const pdf = await loadingTask.promise
-
-      const content: string[] = []
-      for (let i = 1; i <= pdf.numPages; i++) {
-        const page = await pdf.getPage(i)
-        const textContent = await page.getTextContent()
-        const pageText = textContent.items
-          .map(item => (isTextItem(item) ? item.str.trim() : ''))
-          .join(' ')
-          .replace(/\n+/g, '\n')
-          .replace(/\s+/g, ' ')
-
-        content.push(pageText)
-      }
-      isLoading.value = true
-      addCandidate.setCandidateParseJSON(content.join(''))
-      await addCandidate.sendCandidateParseJSON()
-    } catch (error) {
-      push.error(`Ошибка при парсинге PDF: ${error}`)
-    } finally {
-      setTimeout(() => {
-        isLoading.value = false
-      }, 200)
-      if (fileInput.value) fileInput.value.value = ''
-    }
+    sendPdfFile(file)
+  } else if (file.type.startsWith('image/')) {
+    sendImageFile(file)
   } else {
-    push.warning('Добавьте PDF-файл')
+    push.warning('Неподдерживаемый формат файла')
   }
 }
+
+const sendPdfFile = async (file: File) => {
+  isLoading.value = true
+  try {
+    const content = await parsePdf(file)
+    addCandidate.setCandidateParseJSON(content.join(''))
+    await addCandidate.sendCandidateParseJSON()
+  } catch {
+    push.error('Ошибка при парсинге PDF')
+  } finally {
+    setTimeout(() => {
+      isLoading.value = false
+    }, 200)
+    if (fileInput.value) fileInput.value.value = ''
+  }
+}
+
+const sendImageFile = async (file: File) => {
+  isLoading.value = true
+  try {
+    const {
+      data: { text: recognizedText },
+    } = await Tesseract.recognize(file, 'eng+rus')
+    text.value = recognizedText
+    addCandidate.setCandidateParseJSON(recognizedText)
+    await addCandidate.sendCandidateParseJSON()
+  } catch {
+    push.error('Ошибка распознавания текста')
+  } finally {
+    setTimeout(() => {
+      isLoading.value = false
+    }, 200)
+    if (fileInput.value) fileInput.value.value = ''
+  }
+}
+
+const parsePdf = async (file: File): Promise<string[]> => {
+  const arrayBuffer: ArrayBuffer = await file.arrayBuffer()
+  const uint8Array = new Uint8Array(arrayBuffer)
+  const loadingTask = pdfjsLib.getDocument({ data: uint8Array })
+  const pdf = await loadingTask.promise
+
+  const content: string[] = []
+  for (let i = 1; i <= pdf.numPages; i++) {
+    const page = await pdf.getPage(i)
+    const textContent = await page.getTextContent()
+    const pageText = textContent.items
+      .map(item => (isTextItem(item) ? item.str.trim() : ''))
+      .join(' ')
+      .replace(/\n+/g, '\n')
+      .replace(/\s+/g, ' ')
+
+    content.push(pageText)
+  }
+  return content
+}
 </script>
+
 <template>
   <div class="parse-candidate">
-    <h3 class="parse-candidate__title">Загрузить специалиста через PDF файл</h3>
+    <h3 class="parse-candidate__title">Парсинг специалиста</h3>
+    <p class="parse-candidate__description">
+      Загружайте резюме специалистов в формате PDF или изображений для их
+      дальнейшей обработки.
+    </p>
     <div
       class="parse-candidate__drop-zone"
       @dragover="handleDragOver"
@@ -110,14 +148,20 @@ const sendFile = async (file: File) => {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 20px 30px 0;
+  padding: 30px 30px 0;
   gap: 16px;
 
   &__title {
-    font-size: 26px;
-    font-weight: 700;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
     color: $dark-color;
     width: 100%;
+  }
+
+  &__description {
+    font-weight: 300;
+    color: $help-color;
   }
 
   &__drop-zone {

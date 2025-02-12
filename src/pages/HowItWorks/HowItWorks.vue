@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useWhyWeStore } from '@/stores/useWhyWeStore'
-import Questions from '@/components/Questions.vue';
+import Questions from '@/components/Questions.vue'
 
 const whyWeStore = useWhyWeStore()
 </script>

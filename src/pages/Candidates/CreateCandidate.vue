@@ -186,7 +186,7 @@ const isFormValid = computed(() => {
 
 <style scoped lang="scss">
 .add-candidates {
-  padding: 20px 30px 0;
+  padding: 30px 30px 0;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -194,16 +194,17 @@ const isFormValid = computed(() => {
   flex-direction: column;
 
   &__title {
-    font-size: 26px;
-    font-weight: 700;
+    font-size: 24px;
+    font-weight: 600;
     color: $dark-color;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 16px;
     align-items: center;
 
     .icon {
       cursor: pointer;
-      font-size: 26px;
+      font-size: 20px;
 
       &:hover {
         color: $main-color;
