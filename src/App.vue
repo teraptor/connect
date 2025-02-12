@@ -19,6 +19,25 @@ const currentRouteTitle = computed(() => route.meta?.title || '')
 
 useHead({
   title: () => `Staffconnect | ${currentRouteTitle.value}`,
+  meta: [
+    {
+      name: 'description',
+      content:
+        'StaffConnect — Сервис быстрого и эффективного подбора профессионалов в сфере ИТ',
+    },
+    { property: 'og:title', content: 'StaffConnect' },
+    {
+      property: 'og:description',
+      content:
+        'StaffConnect — Сервис быстрого и эффективного подбора профессионалов в сфере ИТ',
+    },
+    { property: 'og:image', content: `${window.location.origin}/logo.png` },
+    { property: 'og:url', content: 'https://staffconnect.ru/' },
+  ],
+  link: [
+    { rel: 'icon', href: '/favicon.ico', type: 'image/x-icon' },
+    { rel: 'apple-touch-icon', href: '/logo.png' },
+  ],
 })
 
 console.log(import.meta.env.VITE_APP_NAME)

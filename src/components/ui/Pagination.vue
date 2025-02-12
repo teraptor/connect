@@ -152,7 +152,7 @@ const changeLimit = (event: Event) => {
     }
   }
 
-    &__select option {
+  &__select option {
     font-size: 14px;
     color: #333;
     background-color: $light-color;

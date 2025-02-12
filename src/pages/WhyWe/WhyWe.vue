@@ -121,10 +121,10 @@ const moveToInDev = () => router.push({ name: RouteNames.MAIN.IN_DEV })
       <div class="questions__content">
         <h5 class="questions__content-title">Остались вопросы ?</h5>
         <div class="questions__content-button-container">
-          <Button 
+          <Button
             button-type="primary"
-            text="Напиши нам" 
-            type="button" 
+            text="Напиши нам"
+            type="button"
             @click="moveToInDev"
           />
         </div>

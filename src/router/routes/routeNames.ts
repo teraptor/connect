@@ -21,7 +21,7 @@ export const RouteNames = {
         ICONS: 'icons',
       },
     },
-    IN_DEV: 'in_dev'
+    IN_DEV: 'in_dev',
   },
   USER: {
     name: 'user_parent',

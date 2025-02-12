@@ -6,7 +6,7 @@ import Button from './ui/Button.vue'
 import { useUserStore } from '@/stores/useUserStore'
 
 const isHovered = ref<boolean>(false)
-const userStore = useUserStore();
+const userStore = useUserStore()
 const user = computed(() => userStore.user)
 const props = defineProps({
   candidate: {
@@ -18,19 +18,18 @@ const router = useRouter()
 const changeIsHovered = () => (isHovered.value = !isHovered.value)
 
 const goToCandidateDetail = () => {
-  if(user.value) {
+  if (user.value) {
     router.push({
       name: RouteNames.MAIN.MAIN_PAGE.children.CANDIDATES_DETAIL,
       params: { id: props.candidate.id },
     })
-  }
-  else {
-    router.push({name: RouteNames.MAIN.LOGIN})
+  } else {
+    router.push({ name: RouteNames.MAIN.LOGIN })
   }
 }
 
-const womanImage = new URL('@/assets/images/woman.png', import.meta.url).href;
-const manImage = new URL('@/assets/images/man.png', import.meta.url).href;
+const womanImage = new URL('@/assets/images/woman.png', import.meta.url).href
+const manImage = new URL('@/assets/images/man.png', import.meta.url).href
 </script>
 
 <template>
@@ -42,19 +41,21 @@ const manImage = new URL('@/assets/images/man.png', import.meta.url).href;
   >
     <div class="candidate-card__inner">
       <div class="candidate-card__specialization">MedTech && EdTech</div>
-        <div class="candidate-card__wrapper">
-          <div class="candidate-card__image">
-            <img :src="candidate.sex === 'Женский' ? womanImage : manImage" />
-          </div>
-          <div class="candidate-card__details">
-            <h3 class="candidate-card__name">
-              {{ candidate.name }}
-              {{ candidate.lastname.slice(0, 1) ? `${candidate.lastname[0]}.` : '' }}
-            </h3>
-            <p class="candidate-card__country">Россия</p>
-            <p class="candidate-card__position-name">Frontend Developer</p>
-            <p class="candidate-card__position-grade">Middle</p>
-          </div>
+      <div class="candidate-card__wrapper">
+        <div class="candidate-card__image">
+          <img :src="candidate.sex === 'Женский' ? womanImage : manImage" />
+        </div>
+        <div class="candidate-card__details">
+          <h3 class="candidate-card__name">
+            {{ candidate.name }}
+            {{
+              candidate.lastname.slice(0, 1) ? `${candidate.lastname[0]}.` : ''
+            }}
+          </h3>
+          <p class="candidate-card__country">Россия</p>
+          <p class="candidate-card__position-name">Frontend Developer</p>
+          <p class="candidate-card__position-grade">Middle</p>
+        </div>
       </div>
       <div class="candidate-card__salary">
         <div class="candidate-card__salary-hour">
@@ -127,12 +128,12 @@ const manImage = new URL('@/assets/images/man.png', import.meta.url).href;
     gap: 8px;
   }
   &__details {
-      width: 70%;
-      display: flex;
-      align-items: flex-start;
-      flex-direction: column;
-      gap: 8px;
-    }
+    width: 70%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
   &__image {
     width: 30%;
     max-width: 70px;

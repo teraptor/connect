@@ -6,7 +6,9 @@
           <img src="/logo.png" alt="logo" />
         </RouterLink>
       </div>
-      <h2 class="in-dev__title">Мы строим что-то новое, возвращайтесь позже!</h2>
+      <h2 class="in-dev__title">
+        Мы строим что-то новое, возвращайтесь позже!
+      </h2>
       <img src="@/assets/images/indev.png" class="in-dev__image" />
       <p class="in-dev__description">
         Мы работаем над чем-то уникальным. Ожидайте, мы скоро вернемся!
