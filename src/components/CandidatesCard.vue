@@ -94,8 +94,8 @@ const manImage = new URL('@/assets/images/man.png', import.meta.url).href
 
 <style scoped lang="scss">
 .candidate-card {
-  max-width: 350px;
-  max-height: 350px;
+  width: 325px;
+  height: 325px;
   background-color: $bg-card-color;
   border-radius: 10px;
   cursor: pointer;

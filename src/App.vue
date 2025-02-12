@@ -39,8 +39,6 @@ useHead({
     { rel: 'apple-touch-icon', href: '/logo.png' },
   ],
 })
-
-console.log(import.meta.env.VITE_APP_NAME)
 </script>
 
 <style scoped></style>

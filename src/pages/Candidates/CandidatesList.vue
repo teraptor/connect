@@ -112,7 +112,7 @@ watch(
   &__items {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
+    gap: 30px;
     padding: 20px;
   }
 }

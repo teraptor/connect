@@ -1,31 +1,39 @@
 import { defineStore } from 'pinia'
 
-interface advantagesItem {
+interface IAdvantagesItem {
   id: number
   icon: string
   text: string
 }
 
-interface TableItem {
+interface ITableItem {
   headers: string[]
   rows: (string | { icon: string; text: string })[][]
 }
 
-interface helpItem {
+interface IHelpItem {
   icon: string
   text: string
 }
 
-interface HelpSection {
+interface IHowItWorkItem {
+  id: number
+  icon: string
+  title: string
+  description: string
+}
+
+interface IHelpSection {
   id: number
   title: string
-  items: helpItem[]
+  items: IHelpItem[]
 }
 
 interface State {
-  items: advantagesItem[]
-  table: TableItem
-  help: HelpSection[]
+  items: IAdvantagesItem[]
+  table: ITableItem
+  help: IHelpSection[]
+  howItWork: IHowItWorkItem[]
 }
 
 export const useWhyWeStore = defineStore('whyWe', {
@@ -180,5 +188,37 @@ export const useWhyWeStore = defineStore('whyWe', {
         ],
       },
     ],
+    howItWork: [
+      {
+        id: 1,
+        icon: 'icon-edit',
+        title: 'Заключаете 1 договор',
+        description: 'Договор не подразумевает какую‑либо оплату до того, как вы арендовали специалиста. Ставки в каталоге являются конечными.Использование платформы — бесплатно для вас'
+      },
+      {
+        id: 2,
+        icon: 'icon-search1',
+        title: 'Персональный менеджер SkillStaff вместе с вами подберёт подходящих специалистов и организует собеседования',
+        description: 'Оперативная обратная связь по резюме кандидатов — залог быстрого подбора наиболее релевантных ИТ‑специалистов'
+      },
+      {
+        id: 3,
+        icon: 'icon-edit-3',
+        title: 'Утверждаете ИТ‑специалиста и подписываете дополнительное соглашение на период работ',
+        description: 'Оплата за специалиста рассчитывается с первого дня, указанного в дополнительном соглашении'
+      },
+      {
+        id: 4,
+        icon: 'icon-group',
+        title: 'Подключаете ИТ‑специалиста к команде, ставите задачи, контролируете результат',
+        description: 'Персональный менеджер SkillStaff регулярно запрашивает обратную связь по работе специалиста'
+      },
+      {
+        id: 5,
+        icon: 'icon-clipboard',
+        title: 'Ежемесячно производим взаиморасчёты за работы специалистов и предоставляем полный комплект закрывающих документов',
+        description: 'Предварительно согласование отчётов происходит прямо в Личном кабинете платформы'
+      },
+    ]
   }),
 })
