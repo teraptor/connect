@@ -37,3 +37,82 @@ main {
   text-align: center;
   margin-top: 10px;
 }
+
+//privacy
+
+.privacy {
+  h4 {
+    font-weight: 600;
+    font-size: 24px;
+  }
+
+  &__list {
+    counter-reset: main-counter;
+    list-style: none;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    > li {
+      counter-increment: main-counter;
+      position: relative;
+
+      &:before {
+        content: counter(main-counter) '. ';
+        font-weight: 600;
+        position: absolute;
+        left: -40px;
+      }
+    }
+  }
+
+  &__sublist {
+    counter-reset: sub-counter;
+    list-style: none;
+    padding-left: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    > li {
+      counter-increment: sub-counter;
+      position: relative;
+
+      &:before {
+        content: counter(main-counter) '.' counter(sub-counter) ' ';
+        position: absolute;
+        left: -45px;
+      }
+    }
+  }
+
+  &__sub-sublist {
+    counter-reset: sub-sub-counter;
+    list-style: none;
+    padding-left: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    > li {
+      counter-increment: sub-sub-counter;
+      position: relative;
+
+      &:before {
+        content: counter(main-counter) '.' counter(sub-counter) '.'
+          counter(sub-sub-counter) ' ';
+        position: absolute;
+        left: -60px;
+      }
+    }
+  }
+  ul {
+    list-style: disc;
+    padding-left: 20px;
+  }
+
+  a {
+    color: $main-color;
+  }
+}

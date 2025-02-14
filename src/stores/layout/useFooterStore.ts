@@ -9,6 +9,7 @@ interface FooterNav {
 interface Contacts {
   mail: string
   phone: string
+  address: string
 }
 
 interface DocumentsNav {
@@ -96,25 +97,30 @@ export const useFooterStore = defineStore('footer', {
     ],
     documents: [
       {
+        title: 'Конфиденциальность и защита данных',
+        routeName: RouteNames.MAIN.MAIN_PAGE.children.PRIVACY,
+      },
+      {
         title: 'Политика обработки персональных данных',
-        routeName: RouteNames.MAIN.IN_DEV,
+        routeName: RouteNames.MAIN.MAIN_PAGE.children.AGREEMENT,
       },
       {
         title: 'Условия использования сайта',
-        routeName: RouteNames.MAIN.IN_DEV,
+        routeName: RouteNames.MAIN.MAIN_PAGE.children.RULES,
       },
       {
         title: 'Договор присоединения',
-        routeName: RouteNames.MAIN.IN_DEV,
+        routeName: RouteNames.MAIN.MAIN_PAGE.children.CONTRACT,
       },
       {
         title: 'Согласие на получение информационных и других рассылок',
-        routeName: RouteNames.MAIN.IN_DEV,
+        routeName: RouteNames.MAIN.MAIN_PAGE.children.MAILINGCONSENT,
       },
     ],
     contacts: {
       mail: 'help@staffconnect.ru',
-      phone: '+7 (800) 000-00-00',
+      phone: '+7 (495) 260-12-90',
+      address: 'г. Москва, ул. Ялтинская, 10, к.1',
     },
   }),
 })

@@ -38,6 +38,7 @@ const currentYear: number = dayjs().year()
       <div class="footer__item-сontacts">
         <div>{{ contacts.mail }}</div>
         <div>{{ contacts.phone }}</div>
+        <div>{{ contacts.address }}</div>
         <div class="footer__item-сontacts-telegram">
           Связаться в:
           <a
@@ -130,6 +131,12 @@ const currentYear: number = dayjs().year()
     display: flex;
     flex-direction: column;
     gap: 16px;
+
+    div:nth-child(2),
+    div:nth-child(3) {
+      font-weight: 400;
+      font-size: 14px;
+    }
 
     &-telegram {
       font-size: 12px;

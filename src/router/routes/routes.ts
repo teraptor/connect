@@ -102,6 +102,47 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
         },
       },
       {
+        path: RouteNames.MAIN.MAIN_PAGE.children.PRIVACY,
+        name: RouteNames.MAIN.MAIN_PAGE.children.PRIVACY,
+        component: () => import('@/pages/privacy/Privacy.vue'),
+        meta: {
+          title: 'Политика конфиденциальности',
+        },
+      },
+      {
+        path: RouteNames.MAIN.MAIN_PAGE.children.AGREEMENT,
+        name: RouteNames.MAIN.MAIN_PAGE.children.AGREEMENT,
+        component: () => import('@/pages/privacy/Agreement.vue'),
+        meta: {
+          title:
+            'Политика обработки и обеспечения безопасности персональных данных',
+        },
+      },
+      {
+        path: RouteNames.MAIN.MAIN_PAGE.children.RULES,
+        name: RouteNames.MAIN.MAIN_PAGE.children.RULES,
+        component: () => import('@/pages/privacy/Rules.vue'),
+        meta: {
+          title: 'Условия использования сайта',
+        },
+      },
+      {
+        path: RouteNames.MAIN.MAIN_PAGE.children.MAILINGCONSENT,
+        name: RouteNames.MAIN.MAIN_PAGE.children.MAILINGCONSENT,
+        component: () => import('@/pages/privacy/MailingConsent.vue'),
+        meta: {
+          title: 'Согласие на получение информационной и рекламной рассылки',
+        },
+      },
+      {
+        path: RouteNames.MAIN.MAIN_PAGE.children.CONTRACT,
+        name: RouteNames.MAIN.MAIN_PAGE.children.CONTRACT,
+        component: () => import('@/pages/privacy/Contract.vue'),
+        meta: {
+          title: 'Договор присоединения',
+        },
+      },
+      {
         path: RouteNames.MAIN.UI_KIT.children.ICONS,
         name: RouteNames.MAIN.UI_KIT.children.ICONS,
         component: () => import('@/pages/UIKit/Icons.vue'),

@@ -13,6 +13,11 @@ export const RouteNames = {
         BENCHMARK: 'benchmark',
         CANDIDATES: 'candidates',
         CANDIDATES_DETAIL: 'candidates_detail',
+        PRIVACY: 'privacy',
+        AGREEMENT: 'agreement',
+        RULES: 'rules',
+        MAILINGCONSENT: 'mailing_consent',
+        CONTRACT: 'contract',
       },
     },
     UI_KIT: {
