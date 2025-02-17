@@ -184,6 +184,14 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
           title: 'Парсинг кандидата',
         },
       },
+      {
+        path: RouteNames.USER.children.HELP_CHAT,
+        name: RouteNames.USER.children.HELP_CHAT,
+        component: () => import('@/pages/HelpChat/HelpChat.vue'),
+        meta: {
+          title: 'Поддержка пользователей',
+        },
+      },
     ],
   },
   {

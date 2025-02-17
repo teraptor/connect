@@ -34,6 +34,7 @@ export const RouteNames = {
       USER: 'user',
       ADD_CANDIDATE: 'add_candidate',
       PARSE_CANDIDATE: 'parse_candidate',
+      HELP_CHAT: 'help_chat'
     },
   },
   NOT_FOUND: '/:pathMatch(.*)',

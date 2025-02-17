@@ -86,7 +86,7 @@ const buttonClass = computed(() => `btn-${props.buttonType}`)
 
   &-large {
     width: 100%;
-    height: 40px;
+    height: 36px;
   }
   &:focus {
     outline: none;

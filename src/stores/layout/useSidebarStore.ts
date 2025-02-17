@@ -49,11 +49,11 @@ export const usesidebarStore = defineStore('sidebar', {
           },
         ],
       },
-      // {
-      //   title: 'Команда',
-      //   routeName: RouteNames.MAIN.IN_DEV,
-      //   icon: 'icon icon-group',
-      // },
+      {
+        title: 'Чат с поддержкой',
+        routeName: RouteNames.USER.children.HELP_CHAT,
+        icon: 'icon icon-mail',
+      },
     ],
   }),
 })
