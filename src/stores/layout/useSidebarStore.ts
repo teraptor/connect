@@ -50,9 +50,9 @@ export const usesidebarStore = defineStore('sidebar', {
         ],
       },
       {
-        title: 'Чат с поддержкой',
+        title: 'AI-account manager',
         routeName: RouteNames.USER.children.HELP_CHAT,
-        icon: 'icon icon-mail',
+        icon: 'icon icon-activity',
       },
     ],
   }),

@@ -23,7 +23,7 @@ onBeforeUnmount(() => {
 <template>
   <div class="help">
     <div class="help__chat">
-      <h2 class="help__chat-title">Связь с поддержкой</h2>
+      <h2 class="help__chat-title">Чат с AI-account manager</h2>
       <div class="help__chat-messages">
         <div v-for="(message, index) in messages" :key="index" class="message" :class="{'message--right': message.sender === 'Вы', 'message--left': message.sender !== 'Вы'}">
           <p class="message__sender">{{ message.sender }}:</p>
