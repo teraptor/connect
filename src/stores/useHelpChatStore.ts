@@ -10,9 +10,9 @@ interface Message {
 }
 
 interface SockerResponse {
-  chatId: string,
-  text?: string,
-  type: string,
+  chatId: string
+  text?: string
+  type: string
   createdAt: string
 }
 
@@ -28,12 +28,12 @@ export const useHelpChatStore = defineStore('helpChat', {
   state: (): HelpChatState => ({
     socket: null,
     userId: null,
-    messages: [    
-        {
+    messages: [
+      {
         text: `Добрый день! Чем могу помочь?`,
         sender: 'Поддержка',
         createdAt: new Date().toISOString(),
-      }
+      },
     ],
     newMessage: '',
     isTyping: false,
@@ -45,18 +45,17 @@ export const useHelpChatStore = defineStore('helpChat', {
 
       this.socket.onmessage = (event: MessageEvent) => {
         this.isTyping = false
-      
+
         let response: SockerResponse | null = null
-      
+
         try {
           response = JSON.parse(event.data)
         } catch (e) {
           push.error('Ошибка при получении сообщения от сервера')
           return
         }
-      
-        if (response) {
 
+        if (response) {
           const { text, createdAt, type, chatId } = response
 
           if (type === 'init') {
@@ -64,11 +63,11 @@ export const useHelpChatStore = defineStore('helpChat', {
           }
 
           this.userId = chatId
-      
+
           let sender: 'Вы' | 'Поддержка' = 'Поддержка'
-      
+
           if (type === 'message') sender = 'Поддержка'
-      
+
           if (text && createdAt) this.addMessage(text, sender)
         }
       }
@@ -86,11 +85,13 @@ export const useHelpChatStore = defineStore('helpChat', {
 
       this.socket.onclose = (event: CloseEvent) => {
         this.isTyping = false
-        this.messages.push(        {
-          text: 'Чат завершен',
-          sender: 'Поддержка',
-          createdAt: new Date().toISOString(),
-        })
+        if (this.messages.length > 1) {
+          this.messages.push({
+            text: 'Чат завершен',
+            sender: 'Поддержка',
+            createdAt: new Date().toISOString(),
+          })
+        }
       }
     },
 
