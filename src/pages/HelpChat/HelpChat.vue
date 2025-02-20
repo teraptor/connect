@@ -46,6 +46,7 @@ onBeforeUnmount(() => {
           v-model="newMessage"
           placeholder="Напишите сообщение ..."
           size="large"
+          @keyup.enter="sendMessage"
         />
         <Button
           button-type="primary"
