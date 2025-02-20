@@ -13,7 +13,7 @@ interface SockerResponse {
   chatId: string,
   text?: string,
   type: string,
-  createAt: string
+  createdAt: string
 }
 
 interface HelpChatState {
@@ -28,7 +28,13 @@ export const useHelpChatStore = defineStore('helpChat', {
   state: (): HelpChatState => ({
     socket: null,
     userId: null,
-    messages: loadMessagesFromLocalStorage(),
+    messages: [    
+        {
+        text: `Добрый день! Чем могу помочь?`,
+        sender: 'Поддержка',
+        createdAt: new Date().toISOString(),
+      }
+    ],
     newMessage: '',
     isTyping: false,
   }),
@@ -40,7 +46,7 @@ export const useHelpChatStore = defineStore('helpChat', {
       this.socket.onmessage = (event: MessageEvent) => {
         this.isTyping = false
       
-        let response: { text: string; createdAt: string; chatId: string; type: string } | null = null
+        let response: SockerResponse | null = null
       
         try {
           response = JSON.parse(event.data)
@@ -105,13 +111,7 @@ export const useHelpChatStore = defineStore('helpChat', {
         createdAt: new Date().toISOString(),
       }
 
-      const twoHoursAgo = new Date().getTime() - 2 * 60 * 60 * 1000
-      this.messages = this.messages.filter(
-        msg => new Date(msg.createdAt).getTime() >= twoHoursAgo,
-      )
       this.messages.push(newMessage)
-
-      saveMessagesToLocalStorage(this.messages)
     },
 
     closeWebSocket() {
@@ -125,25 +125,3 @@ export const useHelpChatStore = defineStore('helpChat', {
     },
   },
 })
-
-function loadMessagesFromLocalStorage(): Message[] {
-  const savedMessages = localStorage.getItem('chatMessages')
-  if (savedMessages) {
-    const messages: Message[] = JSON.parse(savedMessages)
-    const twoHoursAgo = new Date().getTime() - 2 * 60 * 60 * 1000
-    return messages.filter(
-      msg => new Date(msg.createdAt).getTime() >= twoHoursAgo,
-    )
-  }
-  return [
-    {
-      text: `Добрый день! Чем могу помочь?`,
-      sender: 'Поддержка',
-      createdAt: new Date().toISOString(),
-    },
-  ]
-}
-
-function saveMessagesToLocalStorage(messages: Message[]) {
-  localStorage.setItem('chatMessages', JSON.stringify(messages))
-}
