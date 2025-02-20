@@ -59,12 +59,11 @@ export const useHelpChatStore = defineStore('helpChat', {
 
           const { text, createdAt, type, chatId } = response
 
-
           if (type === 'init') {
             return
           }
-          console.log(this.userId, response)
-          if(chatId) this.userId = chatId
+
+          this.userId = chatId
       
           let sender: 'Вы' | 'Поддержка' = 'Поддержка'
       
@@ -83,6 +82,15 @@ export const useHelpChatStore = defineStore('helpChat', {
             : 'Проверьте интернет или попробуйте позже'
 
         push.error(`Ошибка соединения: ${errorMessage}`)
+      }
+
+      this.socket.onclose = (event: CloseEvent) => {
+        this.isTyping = false
+        this.messages.push(        {
+          text: 'Чат завершен',
+          sender: 'Поддержка',
+          createdAt: new Date().toISOString(),
+        })
       }
     },
 

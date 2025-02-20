@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { useHelpChatStore } from '@/stores/useHelpChatStore'
-import { onMounted, onBeforeUnmount, ref, nextTick, watch } from 'vue'
+import { onMounted, onBeforeUnmount } from 'vue'
 import Button from '@/components/ui/Button.vue'
 import InputField from '@/components/ui/InputField.vue'
 
 const helpChatStore = useHelpChatStore()
 const { messages, newMessage } = storeToRefs(helpChatStore)
-const messagesContainer = ref<HTMLElement | null>(null)
 
 const sendMessage = () => {
   helpChatStore.sendMessage()
@@ -20,24 +19,12 @@ onMounted(() => {
 onBeforeUnmount(() => {
   helpChatStore.closeWebSocket()
 })
-
-const scrollToBottom = () => {
-  nextTick(() => {
-    if (messagesContainer.value) {
-      messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight
-    }
-  })
-}
-
-watch(messages, () => {
-  scrollToBottom()
-})
 </script>
 <template>
   <div class="help">
     <div class="help__chat">
       <h2 class="help__chat-title">Чат с AI-account manager</h2>
-      <div class="help__chat-messages" ref="messagesContainer">
+      <div class="help__chat-messages">
         <div
           v-for="(message, index) in messages"
           :key="index"
