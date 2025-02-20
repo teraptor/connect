@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
 import dayjs from 'dayjs'
 import { push } from 'notivue'
-import { useUserStore } from './useUserStore'
 import { HELP_CHAT } from '@/constants/websocket'
 
 interface Message {
@@ -43,14 +42,10 @@ export const useHelpChatStore = defineStore('helpChat', {
     },
 
     sendMessage() {
-      const userStore = useUserStore()
-      const userId = userStore.getUserId()
-
-      if (!userId) push.error('Пользователь не найден')
 
       if (this.newMessage.trim()) {
         const messageData = {
-          UserID: `user${userId}`,
+          UserID: 'user1',
           OperatorID: 'operator1',
           Text: this.newMessage,
           CreatedAt: new Date().toISOString(),
