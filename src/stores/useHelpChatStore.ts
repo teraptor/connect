@@ -9,24 +9,26 @@ interface Message {
   createdAt: string
 }
 
+interface SockerResponse {
+  chatId: string,
+  text?: string,
+  type: string,
+  createAt: string
+}
+
 interface HelpChatState {
   socket: WebSocket | null
+  userId: string | null
   messages: Message[]
   newMessage: string
   isTyping: boolean
 }
 
-interface AIResponse {
-  type: string,
-  text?: string | undefined,
-  chatId: string,
-  createdAt: string
-}
-
 export const useHelpChatStore = defineStore('helpChat', {
   state: (): HelpChatState => ({
     socket: null,
-    messages: [],
+    userId: null,
+    messages: loadMessagesFromLocalStorage(),
     newMessage: '',
     isTyping: false,
   }),
@@ -37,9 +39,33 @@ export const useHelpChatStore = defineStore('helpChat', {
 
       this.socket.onmessage = (event: MessageEvent) => {
         this.isTyping = false
+      
+        let response: { text: string; createdAt: string; chatId: string; type: string } | null = null
+      
+        try {
+          response = JSON.parse(event.data)
+        } catch (e) {
+          push.error('Ошибка при получении сообщения от сервера')
+          return
+        }
+      
+        if (response) {
 
-        const response: AIResponse = event.data
-        if (response.type === 'message' && response.text !== undefined) this.addMessage(response.text, 'Поддержка');
+          const { text, createdAt, type, chatId } = response
+
+
+          if (type === 'init') {
+            return
+          }
+          console.log(this.userId, response)
+          if(chatId) this.userId = chatId
+      
+          let sender: 'Вы' | 'Поддержка' = 'Поддержка'
+      
+          if (type === 'message') sender = 'Поддержка'
+      
+          if (text && createdAt) this.addMessage(text, sender)
+        }
       }
 
       this.socket.onerror = (event: Event) => {
@@ -57,7 +83,7 @@ export const useHelpChatStore = defineStore('helpChat', {
     sendMessage() {
       if (this.newMessage.trim()) {
         const messageData = {
-          UserID: 'user1',
+          UserID: this.userId,
           OperatorID: 'operator1',
           Text: this.newMessage,
           CreatedAt: new Date().toISOString(),
@@ -79,7 +105,13 @@ export const useHelpChatStore = defineStore('helpChat', {
         createdAt: new Date().toISOString(),
       }
 
+      const twoHoursAgo = new Date().getTime() - 2 * 60 * 60 * 1000
+      this.messages = this.messages.filter(
+        msg => new Date(msg.createdAt).getTime() >= twoHoursAgo,
+      )
       this.messages.push(newMessage)
+
+      saveMessagesToLocalStorage(this.messages)
     },
 
     closeWebSocket() {
@@ -93,3 +125,25 @@ export const useHelpChatStore = defineStore('helpChat', {
     },
   },
 })
+
+function loadMessagesFromLocalStorage(): Message[] {
+  const savedMessages = localStorage.getItem('chatMessages')
+  if (savedMessages) {
+    const messages: Message[] = JSON.parse(savedMessages)
+    const twoHoursAgo = new Date().getTime() - 2 * 60 * 60 * 1000
+    return messages.filter(
+      msg => new Date(msg.createdAt).getTime() >= twoHoursAgo,
+    )
+  }
+  return [
+    {
+      text: `Добрый день! Чем могу помочь?`,
+      sender: 'Поддержка',
+      createdAt: new Date().toISOString(),
+    },
+  ]
+}
+
+function saveMessagesToLocalStorage(messages: Message[]) {
+  localStorage.setItem('chatMessages', JSON.stringify(messages))
+}
