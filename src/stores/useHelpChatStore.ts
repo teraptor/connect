@@ -27,14 +27,18 @@ export const useHelpChatStore = defineStore('helpChat', {
     connectWebSocket() {
       this.socket = new WebSocket(HELP_CHAT)
 
-      this.socket.onerror = (event: Event) => {
-        const errorMessage = event instanceof ErrorEvent ? event.message : 'Проверьте интернет или попробуйте позже'
-        
-        push.error(`Ошибка соединения: ${errorMessage}`)
+      this.socket.onmessage = (event: MessageEvent) => {
+        const response: string = event.data
+        this.addMessage(response, 'Поддержка')
       }
 
-      this.socket.onerror = () => {
-        push.error('Произошла ошибка соединения с сервером')
+      this.socket.onerror = (event: Event) => {
+        const errorMessage =
+          event instanceof ErrorEvent
+            ? event.message
+            : 'Проверьте интернет или попробуйте позже'
+
+        push.error(`Ошибка соединения: ${errorMessage}`)
       }
     },
 
