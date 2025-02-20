@@ -16,10 +16,17 @@ interface HelpChatState {
   isTyping: boolean
 }
 
+interface AIResponse {
+  type: string,
+  text?: string | undefined,
+  chatId: string,
+  createdAt: string
+}
+
 export const useHelpChatStore = defineStore('helpChat', {
   state: (): HelpChatState => ({
     socket: null,
-    messages: loadMessagesFromLocalStorage(),
+    messages: [],
     newMessage: '',
     isTyping: false,
   }),
@@ -31,8 +38,8 @@ export const useHelpChatStore = defineStore('helpChat', {
       this.socket.onmessage = (event: MessageEvent) => {
         this.isTyping = false
 
-        const response: string = event.data
-        this.addMessage(response, 'Поддержка')
+        const response: AIResponse = event.data
+        if (response.type === 'message' && response.text !== undefined) this.addMessage(response.text, 'Поддержка');
       }
 
       this.socket.onerror = (event: Event) => {
@@ -72,13 +79,7 @@ export const useHelpChatStore = defineStore('helpChat', {
         createdAt: new Date().toISOString(),
       }
 
-      const twoHoursAgo = new Date().getTime() - 2 * 60 * 60 * 1000
-      this.messages = this.messages.filter(
-        msg => new Date(msg.createdAt).getTime() >= twoHoursAgo,
-      )
       this.messages.push(newMessage)
-
-      saveMessagesToLocalStorage(this.messages)
     },
 
     closeWebSocket() {
@@ -92,25 +93,3 @@ export const useHelpChatStore = defineStore('helpChat', {
     },
   },
 })
-
-function loadMessagesFromLocalStorage(): Message[] {
-  const savedMessages = localStorage.getItem('chatMessages')
-  if (savedMessages) {
-    const messages: Message[] = JSON.parse(savedMessages)
-    const twoHoursAgo = new Date().getTime() - 2 * 60 * 60 * 1000
-    return messages.filter(
-      msg => new Date(msg.createdAt).getTime() >= twoHoursAgo,
-    )
-  }
-  return [
-    {
-      text: `Добрый день! Чем могу помочь?`,
-      sender: 'Поддержка',
-      createdAt: new Date().toISOString(),
-    },
-  ]
-}
-
-function saveMessagesToLocalStorage(messages: Message[]) {
-  localStorage.setItem('chatMessages', JSON.stringify(messages))
-}
