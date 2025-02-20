@@ -13,6 +13,7 @@ interface HelpChatState {
   socket: WebSocket | null
   messages: Message[]
   newMessage: string
+  isTyping: boolean
 }
 
 export const useHelpChatStore = defineStore('helpChat', {
@@ -20,6 +21,7 @@ export const useHelpChatStore = defineStore('helpChat', {
     socket: null,
     messages: loadMessagesFromLocalStorage(),
     newMessage: '',
+    isTyping: false,
   }),
 
   actions: {
@@ -27,11 +29,15 @@ export const useHelpChatStore = defineStore('helpChat', {
       this.socket = new WebSocket(HELP_CHAT)
 
       this.socket.onmessage = (event: MessageEvent) => {
+        this.isTyping = false
+
         const response: string = event.data
         this.addMessage(response, 'Поддержка')
       }
 
       this.socket.onerror = (event: Event) => {
+        this.isTyping = false
+
         const errorMessage =
           event instanceof ErrorEvent
             ? event.message
@@ -42,7 +48,6 @@ export const useHelpChatStore = defineStore('helpChat', {
     },
 
     sendMessage() {
-
       if (this.newMessage.trim()) {
         const messageData = {
           UserID: 'user1',
@@ -55,6 +60,8 @@ export const useHelpChatStore = defineStore('helpChat', {
         this.socket?.send(messageString)
         this.addMessage(this.newMessage, 'Вы')
         this.newMessage = ''
+
+        this.isTyping = true
       }
     },
 

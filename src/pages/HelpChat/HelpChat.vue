@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { useHelpChatStore } from '@/stores/useHelpChatStore'
-import { onMounted, onBeforeUnmount } from 'vue'
+import { onMounted, onBeforeUnmount, ref, nextTick, watch } from 'vue'
 import Button from '@/components/ui/Button.vue'
 import InputField from '@/components/ui/InputField.vue'
 
 const helpChatStore = useHelpChatStore()
 const { messages, newMessage } = storeToRefs(helpChatStore)
+const messagesContainer = ref<HTMLElement | null>(null)
 
 const sendMessage = () => {
   helpChatStore.sendMessage()
@@ -19,12 +20,24 @@ onMounted(() => {
 onBeforeUnmount(() => {
   helpChatStore.closeWebSocket()
 })
+
+const scrollToBottom = () => {
+  nextTick(() => {
+    if (messagesContainer.value) {
+      messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight
+    }
+  })
+}
+
+watch(messages, () => {
+  scrollToBottom()
+})
 </script>
 <template>
   <div class="help">
     <div class="help__chat">
       <h2 class="help__chat-title">Чат с AI-account manager</h2>
-      <div class="help__chat-messages">
+      <div class="help__chat-messages" ref="messagesContainer">
         <div
           v-for="(message, index) in messages"
           :key="index"
@@ -39,6 +52,9 @@ onBeforeUnmount(() => {
           <p class="message__time">
             {{ helpChatStore.formatDate(message.createdAt) }}
           </p>
+        </div>
+        <div class="help__chat-typing" v-if="helpChatStore.isTyping">
+          Печатает сообщение
         </div>
       </div>
       <div class="help__chat-button-group">
@@ -148,6 +164,36 @@ onBeforeUnmount(() => {
         color: $help-color;
       }
     }
+
+    &-typing {
+      display: flex;
+      align-items: center;
+      font-weight: 300;
+      color: $help-color;
+      gap: 4px;
+
+      &::after {
+        content: ' .';
+        display: inline-block;
+        animation: typing-dots 1s infinite steps(3);
+      }
+    }
+
+    @keyframes typing-dots {
+      0% {
+        content: ' ';
+      }
+      30% {
+        content: ' .';
+      }
+      60% {
+        content: ' ..';
+      }
+      100% {
+        content: ' ...';
+      }
+    }
+
     &-button-group {
       display: flex;
       align-items: flex-end;
