@@ -99,6 +99,7 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
         component: () => import('@/pages/Candidates/CandidateDetail.vue'),
         meta: {
           title: 'Кандидат описание',
+          requiresAuth: true,
         },
       },
       {
@@ -158,6 +159,7 @@ export const MAIN_ROUTES: RouteRecordRaw[] = [
     meta: {
       title: 'Пользователь',
       ...userMeta,
+      requiresAuth: true,
     },
     children: [
       {

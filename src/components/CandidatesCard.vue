@@ -18,14 +18,10 @@ const router = useRouter()
 const changeIsHovered = () => (isHovered.value = !isHovered.value)
 
 const goToCandidateDetail = () => {
-  if (user.value) {
-    router.push({
-      name: RouteNames.MAIN.MAIN_PAGE.children.CANDIDATES_DETAIL,
-      params: { id: props.candidate.id },
-    })
-  } else {
-    router.push({ name: RouteNames.MAIN.LOGIN })
-  }
+  router.push({
+    name: RouteNames.MAIN.MAIN_PAGE.children.CANDIDATES_DETAIL,
+    params: { id: props.candidate.id },
+  })
 }
 
 const womanImage = new URL('@/assets/images/woman.png', import.meta.url).href
