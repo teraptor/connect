@@ -14,7 +14,17 @@ const sendMessage = () => {
 
 const formattedText = (text: string) => text.replace(/\n/g, '<br />')
 
-const newChat = () => helpChatStore.connectWebSocket()
+const newChat = () => {
+  helpChatStore.messages = [
+    {
+      text: `Добрый день! Чем могу помочь?`,
+      sender: 'Поддержка',
+      createdAt: new Date().toISOString(),
+    },
+  ],
+  helpChatStore.connectWebSocket()
+}
+
 
 onMounted(() => {
   helpChatStore.connectWebSocket()
