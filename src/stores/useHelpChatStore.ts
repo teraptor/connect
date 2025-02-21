@@ -45,6 +45,8 @@ export const useHelpChatStore = defineStore('helpChat', {
     connectWebSocket() {
       this.socket = new WebSocket(HELP_CHAT)
 
+      this.isWebSocketClosed = false
+
       this.socket.onmessage = (event: MessageEvent) => {
         this.isTyping = false
 
