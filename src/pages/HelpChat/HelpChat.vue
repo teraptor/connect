@@ -12,6 +12,8 @@ const sendMessage = () => {
   helpChatStore.sendMessage()
 }
 
+const formattedText = (text: string) => text.replace(/\n/g, '<br />')
+
 onMounted(() => {
   helpChatStore.connectWebSocket()
 })
@@ -35,7 +37,7 @@ onBeforeUnmount(() => {
           }"
         >
           <p class="message__sender">{{ message.sender }}:</p>
-          <p class="message__text">{{ message.text }}</p>
+          <p class="message__text" v-html="formattedText(message.text)"></p>
           <p class="message__time">
             {{ helpChatStore.formatDate(message.createdAt) }}
           </p>
