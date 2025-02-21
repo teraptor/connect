@@ -9,10 +9,12 @@ const helpChatStore = useHelpChatStore()
 const { messages, newMessage } = storeToRefs(helpChatStore)
 
 const sendMessage = () => {
-  helpChatStore.sendMessage()
+  if(!helpChatStore.isWebSocketClosed) helpChatStore.sendMessage()
 }
 
 const formattedText = (text: string) => text.replace(/\n/g, '<br />')
+
+const newChat = () => helpChatStore.connectWebSocket()
 
 onMounted(() => {
   helpChatStore.connectWebSocket()
@@ -54,7 +56,16 @@ onBeforeUnmount(() => {
           @keyup.enter="sendMessage"
         />
         <Button
+          v-if="helpChatStore.isWebSocketClosed"
           button-type="primary"
+          text="Новый чат"
+          @click="newChat"
+          type="button"
+          size="large"
+        />
+        <Button
+          v-else
+          button-type="success"
           text="Отправить"
           @click="sendMessage"
           type="button"

@@ -22,6 +22,7 @@ interface HelpChatState {
   messages: Message[]
   newMessage: string
   isTyping: boolean
+  isWebSocketClosed: boolean
 }
 
 export const useHelpChatStore = defineStore('helpChat', {
@@ -37,6 +38,7 @@ export const useHelpChatStore = defineStore('helpChat', {
     ],
     newMessage: '',
     isTyping: false,
+    isWebSocketClosed: false
   }),
 
   actions: {
@@ -85,6 +87,7 @@ export const useHelpChatStore = defineStore('helpChat', {
 
       this.socket.onclose = (event: CloseEvent) => {
         this.isTyping = false
+        this.isWebSocketClosed = true
         if (this.messages.length > 1) {
           this.messages.push({
             text: 'Чат завершен',
@@ -126,6 +129,7 @@ export const useHelpChatStore = defineStore('helpChat', {
     closeWebSocket() {
       if (this.socket) {
         this.socket.close()
+        this.isWebSocketClosed = true
       }
     },
 
