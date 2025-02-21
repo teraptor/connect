@@ -8,8 +8,13 @@ const router = createRouter({
   routes: [...MAIN_ROUTES],
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const userStore = useUserStore()
+
+  if (!userStore.user) {
+    await userStore.getUserData()
+  }
+
   const isAuthenticated = !!userStore.user
 
   if (to.meta?.requiresAuth && !isAuthenticated) {
