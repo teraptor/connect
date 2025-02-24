@@ -62,7 +62,7 @@ onBeforeUnmount(() => {
         <div class="help__chat-typing" v-if="helpChatStore.isTyping">
           Печатает сообщение
         </div>
-        <div class="message__suggestions" v-if="helpChatStore.suggestions.length > 0">
+        <div class="message__suggestions" v-if="helpChatStore.areSuggestionsLoaded && helpChatStore.suggestions.length > 0">
           <ul class="message__suggestions-items">
             <li
               v-for="(suggestion, index) in helpChatStore.suggestions"
@@ -207,7 +207,7 @@ onBeforeUnmount(() => {
         }
 
         &-item {
-          width: 20%;
+          width: 30%;
           padding: 10px;
           text-align: center;
           background-color: $bg-card-color;

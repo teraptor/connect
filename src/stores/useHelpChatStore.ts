@@ -36,6 +36,7 @@ interface HelpChatState {
   isTyping: boolean
   isWebSocketClosed: boolean
   suggestions: Suggestion[]
+  areSuggestionsLoaded: boolean
 }
 
 export const useHelpChatStore = defineStore('helpChat', {
@@ -53,6 +54,7 @@ export const useHelpChatStore = defineStore('helpChat', {
     isTyping: false,
     isWebSocketClosed: false,
     suggestions: [],
+    areSuggestionsLoaded: false
   }),
 
   actions: {
@@ -89,7 +91,7 @@ export const useHelpChatStore = defineStore('helpChat', {
           if (text && createdAt) {
             const answer = text.answer || 'Без ответа'
             this.addMessage(answer, sender)
-
+            this.areSuggestionsLoaded = true
           
             if (text.suggestions && text.suggestions.length > 0) {
               this.suggestions = text.suggestions
@@ -100,6 +102,7 @@ export const useHelpChatStore = defineStore('helpChat', {
 
       this.socket.onerror = (event: Event) => {
         this.isTyping = false
+        this.areSuggestionsLoaded = false
 
         const errorMessage =
           event instanceof ErrorEvent
@@ -111,6 +114,7 @@ export const useHelpChatStore = defineStore('helpChat', {
 
       this.socket.onclose = (event: CloseEvent) => {
         this.isTyping = false
+        this.areSuggestionsLoaded = false
         this.isWebSocketClosed = true
         if (this.messages.length > 1) {
           this.messages.push({
@@ -124,6 +128,8 @@ export const useHelpChatStore = defineStore('helpChat', {
 
     sendMessage() {
       if (this.newMessage.trim()) {
+        this.areSuggestionsLoaded = false
+
         const messageData = {
           UserID: this.userId,
           OperatorID: 'operator1',
