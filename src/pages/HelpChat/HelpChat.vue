@@ -22,7 +22,7 @@ const sendSuggestionMessage = (suggestionText: string) => {
 const formattedText = (text: string) => text.replace(/\n/g, '<br />')
 
 const newChat = () => {
-  helpChatStore.messages = [
+  messages.value = [
     {
       text: `Добрый день! Чем могу помочь?`,
       sender: 'Поддержка',
