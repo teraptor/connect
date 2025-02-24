@@ -105,7 +105,10 @@ export const useHelpChatStore = defineStore('helpChat', {
         const messageData = {
           UserID: this.userId,
           OperatorID: 'operator1',
-          Text: this.newMessage,
+          Text: {
+            chatInput: this.newMessage,
+            sessionID: this.userId
+          },
           CreatedAt: new Date().toISOString(),
         }
 
