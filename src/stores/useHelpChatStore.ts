@@ -48,7 +48,7 @@ export const useHelpChatStore = defineStore('helpChat', {
         text: `Добрый день! Чем могу помочь?`,
         sender: 'Поддержка',
         createdAt: new Date().toISOString(),
-      },
+      }
     ],
     newMessage: '',
     isTyping: false,

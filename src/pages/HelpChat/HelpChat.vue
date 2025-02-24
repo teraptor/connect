@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { useHelpChatStore } from '@/stores/useHelpChatStore'
-import { onMounted, onBeforeUnmount, ref, watch } from 'vue'
+import { onMounted, onBeforeUnmount, ref, watch, nextTick } from 'vue'
 import Button from '@/components/ui/Button.vue'
 import InputField from '@/components/ui/InputField.vue'
 
@@ -42,9 +42,11 @@ onBeforeUnmount(() => {
 })
 
 watch(messages, () => {
-  if (messagesContainer.value) {
-    messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight
-  }
+  nextTick(() => {
+    if (messagesContainer.value) {
+      messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight
+    }
+  })
 })
 </script>
 <template>
@@ -140,7 +142,7 @@ watch(messages, () => {
 
     &-messages {
       overflow-y: auto;
-      height: 100vh;
+      height: 500px;
       padding: 20px;
       background: rgba(249, 250, 251, 1);
       border-radius: 10px;
