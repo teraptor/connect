@@ -12,9 +12,6 @@ const { messages, newMessage } = storeToRefs(helpChatStore)
 
 const sendMessage = () => {
   if(!helpChatStore.isWebSocketClosed) helpChatStore.sendMessage()
-  if(messagesContainer.value) {
-    messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight
-  }
 }
 
 const sendSuggestionMessage = (suggestionText: string) => {
@@ -44,17 +41,14 @@ onBeforeUnmount(() => {
   helpChatStore.closeWebSocket()
 })
 
-watch(messages, () => {
-  console.log(messages)
-  console.log(messages.value)
+watch(messages.value, () => {
   nextTick(() => {
     if (messagesContainer.value) {
-      console.log('scrollHeight:', messagesContainer.value.scrollHeight)
-      console.log('scrollTop:', messagesContainer.value.scrollTop)
       messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight
     }
   })
 })
+console.log(messages.value)
 </script>
 <template>
   <div class="help">
