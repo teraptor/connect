@@ -5,6 +5,8 @@ import { onMounted, onBeforeUnmount } from 'vue'
 import Button from '@/components/ui/Button.vue'
 import InputField from '@/components/ui/InputField.vue'
 
+const messagesContainer = ref<HTMLElement | null>(null)
+
 const helpChatStore = useHelpChatStore()
 const { messages, newMessage } = storeToRefs(helpChatStore)
 
@@ -38,12 +40,18 @@ onMounted(() => {
 onBeforeUnmount(() => {
   helpChatStore.closeWebSocket()
 })
+
+watch(messages, () => {
+  if (messagesContainer.value) {
+    messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight
+  }
+})
 </script>
 <template>
   <div class="help">
     <div class="help__chat">
       <h2 class="help__chat-title">Чат с AI-account manager</h2>
-      <div class="help__chat-messages">
+      <div class="help__chat-messages" ref="messagesContainer">
         <div
           v-for="(message, index) in messages"
           :key="index"
