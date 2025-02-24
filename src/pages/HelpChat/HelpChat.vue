@@ -22,13 +22,11 @@ const sendSuggestionMessage = (suggestionText: string) => {
 const formattedText = (text: string) => text.replace(/\n/g, '<br />')
 
 const newChat = () => {
-  messages.value = [
-    {
-      text: `Добрый день! Чем могу помочь?`,
-      sender: 'Поддержка',
-      createdAt: new Date().toISOString(),
-    },
-  ],
+  messages.value.splice(0, messages.value.length, {
+    text: `Добрый день! Чем могу помочь?`,
+    sender: 'Поддержка',
+    createdAt: new Date().toISOString(),
+  })
   helpChatStore.connectWebSocket()
 }
 
