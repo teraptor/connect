@@ -48,7 +48,6 @@ watch(messages.value, () => {
     }
   })
 })
-console.log(messages.value)
 </script>
 <template>
   <div class="help">
@@ -143,7 +142,7 @@ console.log(messages.value)
 
     &-messages {
       overflow-y: auto;
-      height: 500px;
+      flex-grow: 1;
       padding: 20px;
       background: rgba(249, 250, 251, 1);
       border-radius: 10px;
