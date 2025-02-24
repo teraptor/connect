@@ -4,6 +4,9 @@ import { useHelpChatStore } from '@/stores/useHelpChatStore'
 import { onMounted, onBeforeUnmount, ref, watch, nextTick } from 'vue'
 import Button from '@/components/ui/Button.vue'
 import InputField from '@/components/ui/InputField.vue'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import 'swiper/css'
+import 'swiper/css/pagination'
 
 const messagesContainer = ref<HTMLElement | null>(null)
 
@@ -11,7 +14,7 @@ const helpChatStore = useHelpChatStore()
 const { messages, newMessage } = storeToRefs(helpChatStore)
 
 const sendMessage = () => {
-  if(!helpChatStore.isWebSocketClosed) helpChatStore.sendMessage()
+  if (!helpChatStore.isWebSocketClosed) helpChatStore.sendMessage()
 }
 
 const sendSuggestionMessage = (suggestionText: string) => {
@@ -29,7 +32,6 @@ const newChat = () => {
   })
   helpChatStore.connectWebSocket()
 }
-
 
 onMounted(() => {
   helpChatStore.connectWebSocket()
@@ -70,17 +72,32 @@ watch(messages.value, () => {
         <div class="help__chat-typing" v-if="helpChatStore.isTyping">
           Печатает сообщение
         </div>
-        <div class="message__suggestions" v-if="helpChatStore.areSuggestionsLoaded && helpChatStore.suggestions.length > 0">
-          <ul class="message__suggestions-items">
-            <li
+        <div
+          class="message__suggestions"
+          v-if="
+            helpChatStore.areSuggestionsLoaded &&
+            helpChatStore.suggestions.length > 0
+          "
+        >
+          <swiper
+            class="message__suggestions-items"
+            :slides-per-view="2"
+            :space-between="20"
+            :pagination="{
+              clickable: true,
+            }"
+          >
+            <swiper-slide
+              class="message__suggestions-item"
               v-for="(suggestion, index) in helpChatStore.suggestions"
               :key="index"
-              class="message__suggestions-item"
               @click="sendSuggestionMessage(suggestion.answer)"
             >
-              {{ suggestion.answer }}
-            </li>
-          </ul>
+              <p class="message__suggestions-item-answer">
+                {{ suggestion.answer }}
+              </p>
+            </swiper-slide>
+          </swiper>
         </div>
       </div>
       <div class="help__chat-button-group">
@@ -204,25 +221,35 @@ watch(messages.value, () => {
         margin-top: auto;
         padding: 10px;
         width: 100%;
+        height: 60px;
+        text-align: center;
 
         &-items {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: wrap;
           width: 100%;
-          gap: 16px;
+          height: 60px;
         }
 
         &-item {
-          width: 30%;
+          height: 30px;
+          font-size: 14px;
           padding: 10px;
-          text-align: center;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           background-color: $bg-card-color;
           border-radius: 10px;
           cursor: pointer;
           box-shadow: $box-shadow;
           transition: transform 0.2s;
+
+          &-answer {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+            white-space: normal;
+            box-sizing: border-box;
+            max-width: 100%;
+          }
         }
       }
     }

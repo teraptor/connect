@@ -48,13 +48,13 @@ export const useHelpChatStore = defineStore('helpChat', {
         text: `Добрый день! Чем могу помочь?`,
         sender: 'Поддержка',
         createdAt: new Date().toISOString(),
-      }
+      },
     ],
     newMessage: '',
     isTyping: false,
     isWebSocketClosed: false,
     suggestions: [],
-    areSuggestionsLoaded: false
+    areSuggestionsLoaded: false,
   }),
 
   actions: {
@@ -92,7 +92,7 @@ export const useHelpChatStore = defineStore('helpChat', {
             const answer = text.answer || 'Без ответа'
             this.addMessage(answer, sender)
             this.areSuggestionsLoaded = true
-          
+
             if (text.suggestions && text.suggestions.length > 0) {
               this.suggestions = text.suggestions
             }
@@ -135,7 +135,7 @@ export const useHelpChatStore = defineStore('helpChat', {
           OperatorID: 'operator1',
           Text: {
             chatInput: this.newMessage,
-            sessionID: this.userId
+            sessionID: this.userId,
           },
           CreatedAt: new Date().toISOString(),
         }

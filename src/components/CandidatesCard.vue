@@ -1,13 +1,10 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { RouteNames } from '@/router/routes/routeNames'
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import Button from './ui/Button.vue'
-import { useUserStore } from '@/stores/useUserStore'
 
 const isHovered = ref<boolean>(false)
-const userStore = useUserStore()
-const user = computed(() => userStore.user)
 const props = defineProps({
   candidate: {
     type: Object,

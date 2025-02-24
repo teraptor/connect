@@ -5,6 +5,7 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import { createHead } from '@unhead/vue'
 import { createNotivue } from 'notivue'
+import { register } from 'swiper/element/bundle'
 
 import 'notivue/notification.css'
 import 'notivue/animations.css'
@@ -20,5 +21,6 @@ app.use(createPinia())
 app.use(createHead())
 app.use(router)
 app.use(VueTippy)
+register()
 
 app.mount('#app')
