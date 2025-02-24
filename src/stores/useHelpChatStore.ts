@@ -3,6 +3,18 @@ import dayjs from 'dayjs'
 import { push } from 'notivue'
 import { HELP_CHAT } from '@/constants/websocket'
 
+interface Suggestion {
+  suggestID: string
+  answer: string
+}
+
+interface TextResponse {
+  chatID: string
+  answer: string
+  transferToOperator: boolean
+  suggestions: Suggestion[]
+}
+
 interface Message {
   text: string
   sender: 'Вы' | 'Поддержка'
@@ -11,7 +23,7 @@ interface Message {
 
 interface SockerResponse {
   chatId: string
-  text?: string
+  text?: TextResponse
   type: string
   createdAt: string
 }
@@ -72,7 +84,10 @@ export const useHelpChatStore = defineStore('helpChat', {
 
           if (type === 'message') sender = 'Поддержка'
 
-          if (text && createdAt) this.addMessage(text, sender)
+          if (text && createdAt) {
+            const answer = text.answer || 'Без ответа'
+            this.addMessage(answer, sender)
+          }
         }
       }
 
