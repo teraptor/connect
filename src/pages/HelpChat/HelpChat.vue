@@ -57,6 +57,17 @@ onBeforeUnmount(() => {
         <div class="help__chat-typing" v-if="helpChatStore.isTyping">
           Печатает сообщение
         </div>
+        <div class="message__suggestions" v-if="helpChatStore.suggestions.length > 0">
+          <ul class="message__suggestions-items">
+            <li
+              v-for="(suggestion, index) in helpChatStore.suggestions"
+              :key="index"
+              class="message__suggestions-item"
+            >
+              {{ suggestion.answer }}
+            </li>
+          </ul>
+        </div>
       </div>
       <div class="help__chat-button-group">
         <InputField
@@ -121,6 +132,7 @@ onBeforeUnmount(() => {
       border-radius: 10px;
       display: flex;
       flex-direction: column;
+      justify-content: flex-start;
       gap: 8px;
 
       &::-webkit-scrollbar {
@@ -172,6 +184,32 @@ onBeforeUnmount(() => {
         font-weight: 300;
         font-size: 10px;
         color: $help-color;
+      }
+
+      &__suggestions {
+        margin-top: auto;
+        padding: 10px;
+        width: 100%;
+
+        &-items {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-wrap: wrap;
+          width: 100%;
+          gap: 16px;
+        }
+
+        &-item {
+          width: 20%;
+          padding: 10px;
+          text-align: center;
+          background-color: $bg-card-color;
+          border-radius: 10px;
+          cursor: pointer;
+          box-shadow: $box-shadow;
+          transition: transform 0.2s;
+        }
       }
     }
 

@@ -35,6 +35,7 @@ interface HelpChatState {
   newMessage: string
   isTyping: boolean
   isWebSocketClosed: boolean
+  suggestions: Suggestion[]
 }
 
 export const useHelpChatStore = defineStore('helpChat', {
@@ -50,7 +51,8 @@ export const useHelpChatStore = defineStore('helpChat', {
     ],
     newMessage: '',
     isTyping: false,
-    isWebSocketClosed: false
+    isWebSocketClosed: false,
+    suggestions: [],
   }),
 
   actions: {
@@ -87,6 +89,11 @@ export const useHelpChatStore = defineStore('helpChat', {
           if (text && createdAt) {
             const answer = text.answer || 'Без ответа'
             this.addMessage(answer, sender)
+
+          
+            if (text.suggestions && text.suggestions.length > 0) {
+              this.suggestions = text.suggestions
+            }
           }
         }
       }
