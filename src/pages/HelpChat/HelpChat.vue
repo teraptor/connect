@@ -12,6 +12,11 @@ const sendMessage = () => {
   if(!helpChatStore.isWebSocketClosed) helpChatStore.sendMessage()
 }
 
+const sendSuggestionMessage = (suggestionText: string) => {
+  newMessage.value = suggestionText
+  sendMessage()
+}
+
 const formattedText = (text: string) => text.replace(/\n/g, '<br />')
 
 const newChat = () => {
@@ -63,6 +68,7 @@ onBeforeUnmount(() => {
               v-for="(suggestion, index) in helpChatStore.suggestions"
               :key="index"
               class="message__suggestions-item"
+              @click="sendSuggestionMessage(suggestion.answer)"
             >
               {{ suggestion.answer }}
             </li>
