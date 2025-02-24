@@ -13,8 +13,7 @@ const { messages, newMessage } = storeToRefs(helpChatStore)
 const sendMessage = () => {
   if(!helpChatStore.isWebSocketClosed) helpChatStore.sendMessage()
   if(messagesContainer.value) {
-    console.log('scrollHeight1:', messagesContainer.value.scrollHeight)
-    console.log('scrollTop1:', messagesContainer.value.scrollTop)
+    messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight
   }
 }
 
@@ -46,6 +45,8 @@ onBeforeUnmount(() => {
 })
 
 watch(messages, () => {
+  console.log(messages)
+  console.log(messages.value)
   nextTick(() => {
     if (messagesContainer.value) {
       console.log('scrollHeight:', messagesContainer.value.scrollHeight)
