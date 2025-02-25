@@ -5,8 +5,9 @@ import { onMounted, onBeforeUnmount, ref, watch, nextTick } from 'vue'
 import Button from '@/components/ui/Button.vue'
 import InputField from '@/components/ui/InputField.vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Navigation } from 'swiper/modules'
 import 'swiper/css'
-import 'swiper/css/pagination'
+import 'swiper/css/navigation'
 
 const messagesContainer = ref<HTMLElement | null>(null)
 
@@ -73,7 +74,7 @@ watch(messages.value, () => {
           Печатает сообщение
         </div>
         <div
-          class="message__suggestions"
+          class="message__suggestions"          
           v-if="
             helpChatStore.areSuggestionsLoaded &&
             helpChatStore.suggestions.length > 0
@@ -83,21 +84,20 @@ watch(messages.value, () => {
             class="message__suggestions-items"
             :slides-per-view="2"
             :space-between="20"
-            :pagination="{
-              clickable: true,
-            }"
+            :navigation="true"
+            :modules="[Navigation]"
           >
-            <swiper-slide
-              class="message__suggestions-item"
-              v-for="(suggestion, index) in helpChatStore.suggestions"
-              :key="index"
-              @click="sendSuggestionMessage(suggestion.answer)"
-            >
-              <p class="message__suggestions-item-answer">
-                {{ suggestion.answer }}
-              </p>
-            </swiper-slide>
-          </swiper>
+      <swiper-slide
+        class="message__suggestions-item"
+        v-for="(suggestion, index) in helpChatStore.suggestions"
+        :key="index"
+        @click="sendSuggestionMessage(suggestion.answer)"
+      >
+        <p class="message__suggestions-item-answer">
+          {{ suggestion.answer }}
+        </p>
+      </swiper-slide>
+    </swiper>
         </div>
       </div>
       <div class="help__chat-button-group">
@@ -221,16 +221,16 @@ watch(messages.value, () => {
         margin-top: auto;
         padding: 10px;
         width: 100%;
-        height: 60px;
+        height: 40px;
         text-align: center;
 
         &-items {
           width: 100%;
-          height: 60px;
+          height: 40px;
         }
 
         &-item {
-          height: 30px;
+          height: 40px;
           font-size: 14px;
           padding: 10px;
           display: flex;
@@ -239,8 +239,7 @@ watch(messages.value, () => {
           background-color: $bg-card-color;
           border-radius: 10px;
           cursor: pointer;
-          box-shadow: $box-shadow;
-          transition: transform 0.2s;
+          border: 2px solid rgba($help-color, 0.2);
 
           &-answer {
             word-wrap: break-word;
@@ -248,7 +247,7 @@ watch(messages.value, () => {
             hyphens: auto;
             white-space: normal;
             box-sizing: border-box;
-            max-width: 100%;
+            max-width: 80%;
           }
         }
       }
@@ -297,6 +296,25 @@ watch(messages.value, () => {
       & > *:nth-child(2) {
         flex-basis: 20%;
       }
+    }
+  }
+
+  :deep(.swiper-button-prev),
+  :deep(.swiper-button-next) {
+    color: $main-color;
+    background-color: $light-color;
+    border: 2px solid $main-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    transform: translateY(40%);
+
+    &::after {
+      font-size: 14px;
+      font-weight: 900;
     }
   }
 }
